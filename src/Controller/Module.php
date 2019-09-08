@@ -45,13 +45,13 @@ class Module {
     
     public function getModules() {
         $moduleDir = __DIR__.'/../../'.$_ENV['MODULES_DIR'];
-        $modulesFiles = glob($moduleDir.'/*.php');
+        $modulesFiles = glob($moduleDir.'*.php');
         $modules = [];
         foreach($modulesFiles as $moduleFile) {
             $className = "App\\Modules\\".basename($moduleFile, '.php');
             $module = new $className();
             $module->className = $className;
-            if ($this->config->modules === true || in_array($module->className, $this->config->modules)) {
+            if ($this->config->modules === true || in_array(basename($moduleFile, '.php'), $this->config->modules)) {
                 $modules[] = $module;
             }
         }

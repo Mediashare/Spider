@@ -123,6 +123,9 @@
     "league/uri-schemes": {
         "version": "1.2.1"
     },
+    "monolog/monolog": {
+        "version": "1.25.1"
+    },
     "nikic/php-parser": {
         "version": "v4.2.2"
     },
@@ -304,6 +307,23 @@
     },
     "symfony/mime": {
         "version": "v4.3.2"
+    },
+    "symfony/monolog-bridge": {
+        "version": "v4.3.4"
+    },
+    "symfony/monolog-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "6240c6d43e8237a32452f057f81816820fd56ab6"
+        },
+        "files": [
+            "config/packages/dev/monolog.yaml",
+            "config/packages/prod/monolog.yaml",
+            "config/packages/test/monolog.yaml"
+        ]
     },
     "symfony/options-resolver": {
         "version": "v4.3.4"

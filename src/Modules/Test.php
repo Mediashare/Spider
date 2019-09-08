@@ -10,5 +10,5 @@ class Test {
     public $variables = [""]; // Variables injected
     public $errors; // Output errors
     
-     public function run() { return "Hello Webspider!"; } 
+     public function run() { return "Hello Webspider!"; } qsd
 }

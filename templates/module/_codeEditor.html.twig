@@ -1,0 +1,32 @@
+{# CodeEditor #}
+<textarea id="textarea-function" name="function" required class="hidden">{{ boilerplate }}</textarea>
+<div class="w-100" style="height:50vh;" id="editor">
+    {{ boilerplate }}
+</div>
+<script src="https://pagecdn.io/lib/ace/1.4.5/ace.js"></script>
+<script src="https://pagecdn.io/lib/ace/1.4.5/theme-dracula.js"></script>
+<script src="https://pagecdn.io/lib/ace/1.4.5/mode-php.js"></script>
+<script src="https://pagecdn.io/lib/ace/1.4.5/ext-language_tools.js"></script>
+<script>
+    
+    var editor = ace.edit("editor");
+    {# Theme #}
+    editor.setTheme("ace/theme/dracula");
+    {# Synthax #}
+    var PhpMode = ace.require("ace/mode/php").Mode;
+    editor.session.setMode(new PhpMode());
+    {# Options #}
+    editor.setOptions({
+        enableBasicAutocompletion: true,
+        enableSnippets: true,
+        enableLiveAutocompletion: true
+    });
+    editor.session.on('change', function(delta) {
+        var textarea = $("#textarea-function");
+        textarea.text(editor.getSession().getValue());
+    });
+    {% if readOnly is defined %}
+        $('.ace_text-input').first().attr('disabled', true);
+    {% endif %}
+
+</script>

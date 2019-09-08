@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WebSpider | {% trans %}Modules{% endtrans %}{% endblock %}
+{% block description %}{% endblock %}
+{% block og_title %}WebSpider | {% trans %}Modules{% endtrans %}{% endblock %}
+{% block og_description %}{% endblock %}
+
+{% block breadcrumb %}
+    {% set breadcrumb = 
+        {'0': {
+            'name': 'Modules',
+            'path': null,
+            'icon': 'fa fa-cubes'
+        }} 
+    %}
+    {% include '_breadcrumb.html.twig' with breadcrumb %}
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block content %}
+    <!-- Content -->
+    <div class="row">
+        <div class="col-xl-4 col-md-6">
+            <a class="card border-info text-center bg-transparent"
+                href="{{ path('module_new') }}">
+                <div class="card-body">
+                    <h4 class="card-title m-0"><i class="fa fa-cube"></i>New Module</h4>
+                </div>
+            </a>
+        </div>
+        {% for module in modules %}
+            <div class="col-xl-4 col-md-6">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <h4 class="card-title mb-1"><i class="fa fa-cube"></i> {{ module.name }}</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <p class="card-text">
+                                {{ module.description }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <!--/ Content -->
+    
+{% endblock %}
+
+{% block javascripts %}  
+{% endblock %}

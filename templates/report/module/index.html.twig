@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Report | {{ report.website.domain }}{% endblock %}
+{% block description %}{% endblock %}
+{% block og_title %}Report | {{ report.website.domain }}{% endblock %}
+{% block og_description %}{% endblock %}
+
+{% block breadcrumb %}
+    {% set breadcrumb = 
+        {'0': {
+            'name': 'Reports'|trans({}),
+            'path': path('report'),
+            'icon': 'fa fa-files-o'
+        },
+        '1': {
+            'name': report.website.domain,
+            'path': path('report', {'website': report.website.domain}),
+            'icon': 'fa fa-files-o'
+        },
+        '2': {
+            'name': report.config.id,
+            'path': path('report_show', {'website': report.website.domain, 'id': report.config.id}),
+            'icon': 'feather icon-globe'
+        },
+        '3': {
+            'name': module.name,
+            'path': null,
+            'icon': 'fa fa-cube'
+        }} 
+    %}
+    {% include '_breadcrumb.html.twig' with breadcrumb %}
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block content %}
+    <!-- Content -->
+        <div class="row">
+            <div class="col-12 col-xs-12">
+                 <div role="tablist" aria-multiselectable="true">
+                    <div class="card collapse-icon accordion-icon-rotate">
+                        <ul class="nav nav-tabs nav-justified" role="tablist">
+                            {% for item in report.modules %}
+                                    <li class="nav-item">
+                                        <a class="nav-link {% if item.name == module.name %}active{% endif %}" href="{{ path('report_module', {'website': report.website.domain, 'id': report.config.id, 'module': item.name}) }}" role="tab" aria-controls="{{ loop.index }}-just" aria-selected="{% if item.name == module.name %}true{% else %}false{% endif %}">
+                                            <i class="fa fa-cube"></i>
+                                            {{ item.name }} ({% if item.results is defined %}{{ item.results|length }}{% else %}0{% endif %})
+                                        </a>
+                                    </li>
+                            {% endfor %}
+                        </ul>
+                        <div class="card-header pt-0 pb-1">
+                            <h4 class="card-title">
+                                <i class="fa fa-cube"></i> 
+                                {{ module.name }}
+                                ({% if module.results is defined %}{{ module.results|length }}{% else %}0{% endif %})
+                            </h4>
+                        </div>
+                        <div class="card-content" style="max-height: 50vh;overflow:scroll;">
+                            <div class="card-body">
+                                <p class="m-0">{{ module.description}}</p>
+                            </div>
+                            <ul id="listCard-{{ module.name }}" class="list-group">
+                                {% if module.results is defined %}
+                                    {% for url, results in module.results %}
+                                        <li class="list-group-item list-group-item-action" onclick="document.getElementById('form-{{ loop.index }}').submit();">
+                                            <form id="form-{{ loop.index }}" action="{{ path('report_show_url_module', {'website': report.website.domain, 'id': report.config.id}) }}" method="POST">
+                                                <input type="hidden" name="url" value="{{ url }}">
+                                                <input type="hidden" name="module" value="{{ module.name }}">
+                                                <button type="submit" class="badge badge-primary" data-toggle="tooltip" data-placement="top" data-original-title="{{ url }}">
+                                                    {{ url }} 
+                                                </button>
+                                            </form> 
+                                        </li>
+                                    {% endfor %}
+                                {% else %}
+                                    <li>
+                                        <p class="pt-1 pl-1">No results for {{ module.name }} Module.</p>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <div class="card-footer text-center">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="input-addon-search"><i class="fa fa-search"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="inputSearch-{{ module.name }}" aria-describedby="input-addon-search"
+                                    onkeyup="searchInCard('{{ module.name }}')" placeholder="Search...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!--/ Content -->
+{% endblock %}

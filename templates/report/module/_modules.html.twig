@@ -1,0 +1,16 @@
+<div class="card">
+    <div class="card-header pb-1">
+        <h4 class="card-title"><i class="fa fa-cubes"></i> Modules</h4>
+    </div>
+    <div class="card-body p-0">
+        <div class="list-group">
+            {% for module in modules %}
+                <a  href="{{ path('report_module', {'website': website, 'id': id, 'module': module.name}) }}" 
+                    data-toggle="tooltip" data-placement="bottom" data-original-title="{{ module.description }}"
+                    class="list-group-item list-group-item-action">
+                    <i class="fa fa-cube"></i> {{ module.name }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+{% if variablesInjected %}
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title pb-1"><i class="feather icon-codepen"></i> Variables</h4>
+        </div>
+        <div class="card-body p-0">
+            <ul class="list-group">
+                {% for module, variables in variablesInjected %}
+                    <li class="list-group-item list-group-item-action">
+                        <i class="fa fa-cube"></i> {{ module }} 
+                        <hr>
+                        <ul class="list-group pl-1">
+                            {% for variable in variables %}
+                                    {% if variable|is_array %}
+                                        {% set countVariable = variable|length %}
+                                        {% for key, value in variable %}
+                                            <li>
+                                                <span class="badge badge-info">{{ key }} | {{ value|join(', ') }}</span>
+                                            </li>
+                                        {% endfor %}
+                                    {% else %}
+                                        <li>
+                                            {{ variable|join(', ') }}
+                                        </li>
+                                    {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>  
+        </div>
+    </div>
+{% endif %}

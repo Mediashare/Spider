@@ -1,0 +1,76 @@
+<!-- BEGIN: Main Menu-->
+<div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
+    <div class="navbar-header">
+        <ul class="nav navbar-nav flex-row">
+            <li class="nav-item mr-auto"><a class="navbar-brand" href="{{ path('app') }}">
+                    <div class="brand-logo"></div>
+                    <h2 class="brand-text mb-0">WebSpider</h2>
+                </a>
+            </li>
+            <li class="nav-item nav-toggle">
+                <a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse">
+                    <i class="icon-x d-block d-xl-none font-medium-4 primary toggle-icon feather icon-disc"></i>
+                    <i class="toggle-icon font-medium-4 d-none d-xl-block collapse-toggle-icon primary feather icon-disc" data-ticon="icon-disc"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="shadow-bottom"></div>
+    <div class="main-menu-content">
+        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+            <li class="{% if app.request.get('_route') == 'app' %}active{% endif %} nav-item">
+                <a href="{{ path('app') }}">
+                    <i class="fa fa-home"></i>
+                    <span class="menu-title">{% trans %}Acceuil{% endtrans %}</span>
+                </a>
+            </li>
+            <li class="{% if app.request.get('_route') starts with 'webspider' %}active{% endif %} nav-item">
+                <a href="{{ path('webspider') }}">
+                    <i class="fa fa-play-circle-o"></i>
+                    <span class="menu-title">{% trans %}WebSpider{% endtrans %}</span>
+                </a>
+            </li>
+            <li class="{% if app.request.get('_route') starts with 'report' %}active{% endif %} nav-item">
+                <a href="{{ path('report') }}">
+                    <i class="fa fa-files-o"></i>
+                    <span class="menu-title">{% trans %}Reports{% endtrans %}</span>
+                </a>
+            </li>
+            <li class="{% if app.request.get('_route') starts with 'module' %}active{% endif %} nav-item">
+                <a href="{{ path('module') }}">
+                    <i class="fa fa-cubes"></i>
+                    <span class="menu-title">{% trans %}Modules{% endtrans %}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="https://github.com/Mediashare/WebSpider" target="_blank">
+                    <i class="fa fa-github"></i>
+                    <span class="menu-title">Gihub</span>
+                </a>
+            </li>
+            {% if app.user %}
+                <li class="nav-item">
+                    <a href="{{ path('app_logout') }}">
+                        <i class="fa fa-power-off"></i>
+                        <span class="menu-title">{% trans %}Logout{% endtrans %}</span>
+                    </a>
+                </li>
+            {% else %}
+                <li class="{% if app.request.get('_route') starts with 'app_login' %}active{% endif %} nav-item">
+                    <a href="{{ path('app_login') }}">
+                        <i class="fa fa-user"></i>
+                        <span class="menu-title">{% trans %}Login{% endtrans %}</span>
+                    </a>
+                </li>
+                <li class="{% if app.request.get('_route') starts with 'app_register' %}active{% endif %} nav-item">
+                    <a href="{{ path('app_register') }}">
+                        <i class="fa fa-user-plus"></i>
+                        <span class="menu-title">{% trans %}Registration{% endtrans %}</span>
+                    </a>
+                </li>
+            {% endif %}
+            
+        </ul>
+    </div>
+</div>
+<!-- END: Main Menu-->

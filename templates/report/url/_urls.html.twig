@@ -1,0 +1,62 @@
+<div class="card">
+    <div class="card-header mb-1">
+        <h4 class="card-title"><i class="fa fa-link"></i> Urls ({{ urls|length }})</h4>
+    </div>
+    <div class="card-content w-100" style="overflow:scroll;max-height: 33vh;">
+        <table id="table-urls" class="table table-striped table-hover p-0 text-right">
+            <thead>
+                <tr>
+                    <th class="text-left">Url</th>
+                    <th>Status</th>
+                    <th>Size</th>
+                    <th>Time</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for url in urls %}
+                    <tr>
+                        <td class="text-left">
+                            {{ url.url }}
+                        </td>
+                        <td>
+                            {% if url.header.httpCode is defined %}
+                                <div class="badge {% if url.color is defined %}badge-{{ url.color }}{% endif %}">
+                                    {{ url.header.httpCode }}
+                                </div>
+                            {% endif %}
+                            
+                        </td>
+                        <td>
+                            {% if url.header.downloadSize is defined %}
+                                {{ url.header.downloadSize }}Kb
+                            {% endif %}
+                            
+                        </td>
+                        <td>
+                            {% if url.header.transferTime is defined %}
+                                {{ url.header.transferTime }}ms
+                            {% endif %}
+                        </td>
+                        <td>
+                            <form action="{{ path('report_show_url', {'website': website, 'id': id}) }}" method="POST">
+                                <input type="hidden" name="url" value="{{ url.url }}">
+                                <button type="submit" class="btn btn-icon btn-outline-info waves-effect waves-light">
+                                    <i class="feather icon-eye"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer text-right">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="input-addon-search"><i class="fa fa-search"></i></span>
+            </div>
+            <input type="text" class="form-control" id="inputSearch-urls" aria-describedby="input-addon-search" onkeyup="searchInTable('urls')" placeholder="Search...">
+        </div>
+    </div>
+</div>

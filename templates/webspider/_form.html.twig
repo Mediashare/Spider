@@ -1,0 +1,129 @@
+<section id="validation">
+    <div class="card">
+        <div class="card-header border-bottom">
+            <h4 class="card-title mb-1"><i class="fa fa-play-circle-o"></i> Run WebSpider</h4>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <form action="{{ path('webspider_run') }}" method="POST" class="steps-validation wizard-circle">
+                    <!-- Step 1 -->
+                    <h6><i class="step-icon feather icon-globe"></i> Website</h6>
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="url">
+                                        Url
+                                    </label>
+                                    <div class="input-group">
+                                        <input onblur="writeStatusHeader('url');" required="true" type="url" class="form-control" id="url" name="url" aria-label="Url website" placeholder="http://exemple.com">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                <div class="vs-checkbox-con">
+                                                    <input type="checkbox" checked="" value="true" name="webspider">
+                                                    <span class="vs-checkbox">
+                                                        <span class="vs-checkbox--check">
+                                                            <i class="vs-icon feather icon-check"></i>
+                                                        </span>
+                                                    </span>
+                                                    <span class="pl-1">Crawl all website</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <label id="url-error" class="danger" for="url"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <!-- Step 2 -->
+                    <h6><i class="step-icon feather icon-crosshair"></i> Exceptions & Requires</h6>
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div id="input-pathException" class="form-group">
+                                    <label for="pathException">
+                                        Path Exceptions
+                                    </label>
+                                    <input type="text" class="form-control" id="pathException" name="pathException[]">
+                                </div>
+                                <button type="button" class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light" onclick="addSimpleInput('pathException');">
+                                    <i class="feather icon-plus"></i> Add Exceptions
+                                </button>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="input-pathRequired" class="form-group">
+                                    <label for="pathRequired">
+                                        Path Required
+                                    </label>
+                                    <input type="text" class="form-control" id="pathRequired" name="pathRequired[]">
+                                </div>
+                                <button type="button" class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light" onclick="addSimpleInput('pathRequired');">
+                                    <i class="feather icon-plus"></i> Add Required
+                                </button>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <!-- Step 3 -->
+                    <h6><i class="step-icon fa fa-cubes"></i> Modules</h6>
+                    <fieldset>
+                        <div class="row">
+                            {% for module in modules %}
+                                <div class="col-lg-4">
+                                    <div class="card border">
+                                        <div class="card-header border-bottom">
+                                            <h4 class="card-title mb-1"><i class="fa fa-cube"></i> {{ module.name }} </h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="m-0">{{ module.description }}</p>
+                                            <div class="form-group row m-0" id="variables-injection-{{ module.name }}"></div>
+                                            {% if module.variables %}
+                                                <a class="btn btn-outline-success w-100 mt-1" onclick="addDoubleInput('{{module.name}}');">
+                                                    <i class="fa fa-plus"></i> Inject a variable
+                                                </a>
+                                            {% endif %}
+                                        </div>
+                                        <div class="card-footer text-right">
+                                            <div class="d-inline-block" data-toggle="tooltip" data-placement="top" data-original-title="{{ module.description }}">
+                                                <div class="vs-checkbox-con vs-checkbox-primary">
+                                                    <input type="checkbox" checked value="true" name="module[{{ module.name }}]">
+                                                    <span class="vs-checkbox">
+                                                        <span class="vs-checkbox--check">
+                                                            <i class="vs-icon feather icon-check"></i>
+                                                        </span>
+                                                    </span>
+                                                    <span class="">Enable</span>
+                                                </div>
+                                            </div>          
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    function addSimpleInput(name) {
+        var input = '<input type="text" class="form-control mt-1" id="'+name+'" name="'+name+'[]">';
+        $("#input-"+name).append(input); 
+    }
+    {# Variables Injection #}
+    function addDoubleInput(name) {
+        var target = $("#variables-injection-"+name);
+        //var inputKey = '<div class="col-lg-6"><div class="input-group mt-1"><div class="input-group-prepend"><span class="input-group-text" id="'+name+'-var-key">Key</span></div><input type="text" class="form-control" id="'+name+'-var-key" name="variablesInjection['+name+'][keys][]" aria-describedby="Variable key"></div></div>';
+        var inputValue = '<div class="col-lg-12"><div class="input-group mt-1"><div class="input-group-prepend"><span class="input-group-text" id="'+name+'-var-value">Value</span></div><input type="text" class="form-control" id="'+name+'-var-value" name="variablesInjection['+name+'][values][]" aria-describedby="Variable value"></div></div>';
+        target.append(inputValue); 
+    }
+    function writeStatusHeader(input) {
+        value = $('#'+input).val();
+        var headerStatus = $("#target-url");
+        headerStatus.text(value);
+        console.log("url: "+value)
+    }
+</script>

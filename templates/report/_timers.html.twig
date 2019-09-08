@@ -1,0 +1,101 @@
+<div class="card">
+    <div class="card-header border-bottom">
+        <h4 class="card-title mb-1"><i class="fa fa-hourglass-start"></i> Time Response</h4>
+    </div>
+    <div class="card-content">
+        <div class="card-body">
+            <div id="scatter-chart" class="w-100"></div>
+        </div>
+    </div>
+</div>
+
+{% block javascripts %}
+    <script src="{{ asset('app-assets/vendors/js/charts/apexcharts.min.js') }}"></script>
+    <script>
+        var $primary = '#7367F0',
+            $success = '#28C76F',
+            $danger = '#EA5455',
+            $warning = '#FF9F43',
+            $info = '#00cfe8',
+            $label_color_light = '#dae1e7';
+
+        var themeColors = [
+            {% for serie in urls %}
+                ${{ serie.color }},
+            {% endfor %}
+        ];
+        const series = [
+            {% for serie in urls %}
+                {{ serie|json_encode|raw }},
+            {% endfor %}
+        ];
+        var scatterChartOptions = {
+            chart: {
+                height: 350,
+                type: 'scatter',
+                events: {
+                    dataPointSelection: function(event, chartContext, config) {
+                        var marker = series[config.seriesIndex].data[config.dataPointIndex];
+                            url = marker[2].url;
+                        setClipboardText(url);
+                    }
+                },
+                zoom: {
+                    enabled: true,
+                    type: 'xy'
+                },
+            },
+            colors: themeColors,
+            series: series,
+            legend: {
+                offsetY: -10
+            },
+            xaxis: {
+                tickAmount: 10,
+                title: {
+                    text: "Transfer Time (ms)"
+                },
+                labels: {
+                    formatter: function(value) {
+                        return value.toFixed() + ' ms'
+                    }
+                }
+            },
+            yaxis: {
+                tickAmount: 10,
+                title: {
+                    text: "Size (kb)"
+                },
+                labels: {
+                    formatter: function(value) {
+                        return value.toFixed() + ' kb'
+                    }
+                }
+            },
+            zaxis: {
+                show: true,
+            },
+            tooltip: {
+                intersect: true,
+                followCursor: true,
+                y: {
+                    formatter: function (value) {
+                        return value + " kb"
+                    },
+                    title: 'Size: '
+                },
+                z: {
+                    formatter: function (value) {
+                        return value.url
+                    },
+                    title: 'Url: '
+                },
+            }
+        }
+        var scatterChart = new ApexCharts(
+            document.querySelector("#scatter-chart"),
+            scatterChartOptions
+        );
+        scatterChart.render();
+    </script>
+{% endblock %}

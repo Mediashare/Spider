@@ -1,0 +1,14 @@
+<?php
+namespace App\Modules;
+
+class %$className% {
+    public $name = "%$name%";
+    public $description = "%$description%";
+    public $config;
+    public $webpage; // Headers & Body
+    public $dom; // Dom for crawl in webpage
+    public $variables = %$variables%; // Variables injected
+    public $errors; // Output errors
+    
+    %$function%
+}

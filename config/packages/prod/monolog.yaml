@@ -21,8 +21,9 @@ monolog:
             handler: deprecation
             max_level: info
             channels: ["php"]
-        syslog_handler:
-            type: syslog
-            # log error-level messages and higher
-            level: debug
+        file_log:
+            type: stream
+            # log to var/log/(environment).log
             path: "%kernel.logs_dir%/debug.log"
+            # log *all* messages (debug is lowest level)
+            level: debug

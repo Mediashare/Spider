@@ -60,7 +60,7 @@ class InjectVariables {
 }
 ```
 ```bash
-php bin/console webspider:run http://exemple.com --inject-variables '{"InjectVariables":{"varName": "value"}}'
+php bin/console spider:run http://exemple.com --inject-variables '{"InjectVariables":{"varName": "value"}}'
 ```
 
 ## Use DomCrawler

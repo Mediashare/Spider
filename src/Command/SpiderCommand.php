@@ -15,9 +15,9 @@ use App\Entity\Url;
 use App\Entity\Website;
 
 
-class WebSpiderCommand extends Command
+class SpiderCommand extends Command
 {
-    protected static $defaultName = 'webspider:run';
+    protected static $defaultName = 'spider:run';
 
     private $output;
     private $webspider;

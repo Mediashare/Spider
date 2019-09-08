@@ -22,11 +22,11 @@ composer install
 ```
 ### Run
 ```bash
-php bin/console webspider:run http://exemple.com -w
+php bin/console spider:run http://exemple.com -w
 ```
 ##### Php - Allowed memory size
 ```bash
-php -d memory_limit=3000M bin/console webspider:run http://exemple.com -w # Php memory limit
+php -d memory_limit=3000M bin/console spider:run http://exemple.com -w # Php memory limit
 ```
 [Commands](src/Command/)
 ## Module
@@ -37,15 +37,15 @@ php bin/console webspider:module:list
 ```
 #### Disable all modules
 ```bash
-php bin/console webspider:run http://exemple.com -w -m
+php bin/console spider:run http://exemple.com -w -m
 ```
 #### Enable specific modules
 ```bash
-php bin/console webspider:run http://exemple.com -w -m Links -m Search -m NewModule
+php bin/console spider:run http://exemple.com -w -m Links -m Search -m NewModule
 ```
 #### Inject variables in module
 ```bash
-php bin/console webspider:run http://exemple.com -i '{"Search":{"value search"}}' -i '{"Search":{"value search 2"}}'
+php bin/console spider:run http://exemple.com -i '{"Search":{"value search"}}' -i '{"Search":{"value search 2"}}'
 ```
 #### Creation module
 ```
@@ -102,7 +102,7 @@ Report is write in `` public/reports/exemple.com/report.json ``
 
 ## Helper
 ```bash
-bin/console webspider:run -h
+bin/console spider:run -h
 ______________________________________________
 |                                             |
 |                  WebSpider                  |
@@ -115,7 +115,7 @@ Description:
   Execute Web Crawler
 
 Usage:
-  webspider:run [options] [--] <url>...
+  spider:run [options] [--] <url>...
 
 Arguments:
   url                                      Website url

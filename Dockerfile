@@ -5,5 +5,6 @@ RUN apk add composer git
 WORKDIR /home
 RUN git clone https://github.com/Mediashare/Spider spider
 WORKDIR /home/spider
+RUN cp .env.exemple .env
 RUN composer install
 EXPOSE 80 443

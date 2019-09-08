@@ -5,7 +5,6 @@ monolog:
             action_level: error
             handler: nested
             excluded_http_codes: [404, 405]
-            path: "%kernel.logs_dir%/debug.log"
         nested:
             type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.log"
@@ -14,7 +13,6 @@ monolog:
             type: console
             process_psr_3_messages: false
             channels: ["!event", "!doctrine"]
-            path: "%kernel.logs_dir%/debug.console.log"
         deprecation:
             type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.deprecations.log"

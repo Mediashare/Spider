@@ -8,11 +8,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use App\Service\Output;
-use App\Service\Webspider;
-use App\Webspider\Config;
-use App\Webspider\Url;
-use App\Webspider\Website;
+use App\Controller\Output;
+use App\Controller\Webspider;
+use App\Entity\Config;
+use App\Entity\Url;
+use App\Entity\Website;
 
 
 class WebSpiderCommand extends Command

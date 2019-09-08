@@ -23,12 +23,9 @@
         "symfony/options-resolver": "4.3.*",
         "symfony/process": "4.3.*",
         "symfony/property-access": "4.3.*",
-        "symfony/security-bundle": "4.3.*",
         "symfony/serializer": "4.3.*",
-        "symfony/swiftmailer-bundle": "^3.2",
         "symfony/validator": "4.3.*",
-        "symfony/yaml": "4.3.*",
-        "twig/extensions": "^1.5"
+        "symfony/yaml": "4.3.*"
     },
     "require-dev": {
         "symfony/maker-bundle": "^1.12",

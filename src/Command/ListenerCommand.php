@@ -7,9 +7,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use App\Service\Output;
-use App\Service\FileSystem;
-use App\Webspider\Config;
+use App\Controller\Output;
+use App\Controller\FileSystem;
+use App\Entity\Config;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 // Command
 use Symfony\Bundle\FrameworkBundle\Console\Application;

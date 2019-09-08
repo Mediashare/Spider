@@ -10,8 +10,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
-use App\Service\Output;
-use App\Webspider\Config;
+use App\Controller\Output;
+use App\Entity\Config;
 
 
 class ModuleCreateCommand extends Command

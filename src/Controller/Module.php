@@ -23,8 +23,8 @@ class Module {
             $variables = $module->variables;
             if ($variables) {
                 $module->variables = [];
-                if (isset($this->config->variables[$name])) {
-                    $module->variables = (array) $this->getVariables($this->config->variables[$name]);
+                if (isset($this->config->variables[$module->className])) {
+                    $module->variables = (array) $this->getVariables($this->config->variables[$module->className]);
                 }
             }
 
@@ -49,6 +49,7 @@ class Module {
         foreach($modulesFiles as $moduleFile) {
             $className = "App\\Modules\\".basename($moduleFile, '.php');
             $module = new $className();
+            $module->className = $className;
             if ($this->config === null || $this->config->modules === true || in_array($module->name, $this->config->modules)) {
                 $modules[] = $module;
             }

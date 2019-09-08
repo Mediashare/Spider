@@ -55,15 +55,6 @@ class Module {
         }
         return $modules;
     }
-    
-    public function getModule(string $className) {
-        $filesystem = new FileSystem();
-        $moduleDir = __DIR__.'/../../'.$_ENV['MODULES_DIR'];
-        $modulesFile = $moduleDir.'/'.$className.'.php';
-        $module = $filesystem->getFile($modulesFile);
-        
-        return $module;
-    }
 
 
     public function getVariables(array $tabVariables) {

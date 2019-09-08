@@ -30,6 +30,7 @@ class Module {
 
             // Execute this Module
             $result = $module->run();
+            
             // Report
             $this->website->modules[$name]['name'] = $name;
             $this->website->modules[$name]['description'] = $description;

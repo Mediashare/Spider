@@ -51,7 +51,7 @@ class Module {
             $className = "App\\Modules\\".basename($moduleFile, '.php');
             $module = new $className();
             $module->className = $className;
-            if ($this->config === null || $this->config->modules === true || in_array($module->name, $this->config->modules)) {
+            if ($this->config->modules === true || in_array($module->className, $this->config->modules)) {
                 $modules[] = $module;
             }
         }

@@ -5,6 +5,7 @@ monolog:
             action_level: error
             handler: nested
             excluded_http_codes: [404, 405]
+            path: "%kernel.logs_dir%/debug.log"
         nested:
             type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.log"
@@ -22,9 +23,3 @@ monolog:
             handler: deprecation
             max_level: info
             channels: ["php"]
-        file_log:
-            type: stream
-            # log to var/log/(environment).log
-            path: "%kernel.logs_dir%/debug.log"
-            # log *all* messages (debug is lowest level)
-            level: debug

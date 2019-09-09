@@ -14,7 +14,7 @@ class Module {
         $modules = $this->getModules();
         $results = [];
         foreach ($modules as $module) {
-			// Set required Object in Module
+            // Set required Object in Module
             $module->config = $this->config;
 			$module->webpage = $this->webpage;
             $module->dom = $this->dom;
@@ -50,7 +50,7 @@ class Module {
         foreach($modulesFiles as $moduleFile) {
             $className = "App\\Modules\\".basename($moduleFile, '.php');
             $module = new $className();
-            $module->className = $className;
+            $module->className = basename($moduleFile, '.php');
             if ($this->config->modules === true || in_array(basename($moduleFile, '.php'), $this->config->modules)) {
                 $modules[] = $module;
             }

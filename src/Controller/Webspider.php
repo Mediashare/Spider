@@ -41,7 +41,7 @@ class Webspider
 							$counter++;
 							if ($webPage) {$requestTime = $webPage->getHeader()->getTransferTime()."ms";} else {$requestTime = null;}
 							if ($config->html) {
-								$message = "--- (".$counter.") URL: [".$url->getUrl()."] ".$requestTime." --- \n";
+								$message = "--- (".$counter.") URL: [".$url->getUrl()."] ".$requestTime." --- <br/> \n";
 								echo $message;
 							} else {
 								$message = $this->output->echoColor("--- (".$counter.") URL: [".$url->getUrl()."] ".$requestTime." ---", 'cyan');

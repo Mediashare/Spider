@@ -66,9 +66,9 @@ class SpiderCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output) {
         $io = new SymfonyStyle($input, $output);
         $_SESSION['outputCli'] = $io;
-        $this->output->banner();
-
+        
         $config = $this->initConfig($input);
+        if (!$config->html) {$this->output->banner();}
         $this->webspider->run($config);
     }
 

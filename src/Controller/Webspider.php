@@ -23,7 +23,7 @@ class Webspider
 		$websites = $config->getWebsites();
 		foreach ($websites as $website) {
 			$counter = 0;
-			$this->output->progressBar($counter, count($website->getUrlsNotCrawled()));
+			if (!$config->html) {$this->output->progressBar($counter, count($website->getUrlsNotCrawled()));}
 			while (count($website->getUrlsNotCrawled())) {
 				foreach ($website->getUrlsNotCrawled() as $url) {
 					// Check if have pathException & pathRequire
@@ -40,8 +40,13 @@ class Webspider
 							// ProgressBar
 							$counter++;
 							if ($webPage) {$requestTime = $webPage->getHeader()->getTransferTime()."ms";} else {$requestTime = null;}
-							$message = $this->output->echoColor("--- (".$counter.") URL: [".$url->getUrl()."] ".$requestTime." ---", 'cyan');
-							$this->output->progressBar($counter, count($website->getUrls()), $message);
+							if ($config->html) {
+								$message = "--- (".$counter.") URL: [".$url->getUrl()."] ".$requestTime." --- \n";
+								echo $message;
+							} else {
+								$message = $this->output->echoColor("--- (".$counter.") URL: [".$url->getUrl()."] ".$requestTime." ---", 'cyan');
+								$this->output->progressBar($counter, count($website->getUrls()), $message);
+							}
 							if (($counter % 100) === 0 || $counter === 1) {
 								$this->report->create($website);
 							}

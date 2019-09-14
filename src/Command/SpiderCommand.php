@@ -57,6 +57,8 @@ class SpiderCommand extends Command
             // Inject modules variables 
             ->addOption('inject-variable', 'i', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 
                 'Inject input variables in specific module. (-i \'{"moduleName":["foo","bar"]}\')')
+            ->addOption('html', null, InputOption::VALUE_NONE, 
+                    'Html output')
             
         ;
     }
@@ -99,6 +101,7 @@ class SpiderCommand extends Command
         $config->modulesDir = $this->container->getParameter('modules_dir');
         $config->json = $input->getOption('json');
         $config->output = $input->getOption('output');
+        $config->html = $input->getOption('html');
         // Modules
         $config->modules = $input->getOption('modules');
         if (empty($config->modules)) {$config->modules = true;} // Enable Modules by default

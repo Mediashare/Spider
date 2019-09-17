@@ -1,4 +1,6 @@
 # Modules
+Modules are tools created by the community to add features when crawling a website.
+Adding a module to a crawler allows the automation of code execution on one or more pages of a website. Modules are executed when crawling a page.
 Create your own Module for execute php code for webpage crawled and get output result in your json report file.
 #### Create module
 ```

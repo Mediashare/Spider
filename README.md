@@ -1,13 +1,24 @@
 # Spider
 :dizzy: Spider is a php command line tool that allows you to crawl a website for informations scraping.
+Spider is a crawler of website modulable write in Php.
+The tool allows you to retrieve information and execute code on website pages. It can be useful for SEO or security audit purposes.
+Users have the possibility to use the modules created by the community or to create their own modules (written in Php via a web interface).
+### What is a Crawler?
+A crawler is an indexing robot, it automatically explores the pages of a website.
 
-## Features
+Using a crawler can have several interests:
+- Information search & retrieval
+- Validation of the SEO of your website
+- Integration test
+- Execution of PHP code on several pages in an automated way
+
+### Features
   - Get all links from website
   - Check HTTP response
   - Create your own [**Modules**](src/Modules/) (Crawl & execute your php code)
   - No database, Pure PHP & Symfony
   - Output json file
-### Soon features
+#### Soon features
   - Sitemap managment
 
 I would be happy to receive your ideas and contributions to the project :smiley:
@@ -29,6 +40,8 @@ php -d memory_limit=3000M bin/console spider:run http://exemple.com -w # Php mem
 ```
 [Commands](src/Command/)
 ## Module
+Modules are tools created by the community to add features when crawling a website.
+Adding a module to a crawler allows the automation of code execution on one or more pages of a website. Modules are executed when crawling a page.
 ### Commands
 #### Module list
 ```bash

@@ -16,7 +16,7 @@ use App\Entity\Config;
 
 class ModuleCreateCommand extends Command
 {
-    protected static $defaultName = 'webspider:module:create';
+    protected static $defaultName = 'spider:module:create';
 
     private $output;
     public function __construct(ContainerInterface $container, Output $output) {
@@ -30,7 +30,7 @@ class ModuleCreateCommand extends Command
         $this
         	// Helper
 	        ->setDescription('Create new Module.')
-	        ->setHelp('Operating Module System for WebSpider')
+	        ->setHelp('Operating Module System for Spider')
 	        // Arguments
         	->addArgument('name', InputArgument::REQUIRED, 'Name of module')
         	->addOption('variables', '-i', InputOption::VALUE_NONE, 

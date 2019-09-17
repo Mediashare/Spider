@@ -5,7 +5,6 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     reports_dir:  '%kernel.project_dir%/var/reports/'
-    queue_dir:  '%kernel.project_dir%/var/queue/'
     modules_dir:  '%kernel.project_dir%/src/Modules/' 
 services:
     # default configuration for services in *this* file

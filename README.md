@@ -1,5 +1,5 @@
-# WebSpider
-:dizzy: WebSpider is a php command line tool that allows you to crawl a website for informations scraping.
+# Spider
+:dizzy: Spider is a php command line tool that allows you to crawl a website for informations scraping.
 
 ## Features
   - Get all links from website
@@ -7,7 +7,6 @@
   - Create your own [**Modules**](src/Modules/) (Crawl & execute your php code)
   - No database, Pure PHP & Symfony
   - Output json file
-  - Front-End Dashboard
 ### Soon features
   - Sitemap managment
 
@@ -16,8 +15,8 @@ I would be happy to receive your ideas and contributions to the project :smiley:
 ## Getting start
 ### Installation
 ```bash
-git clone https://github.com/Mediashare/WebSpider
-cd WebSpider
+git clone https://github.com/Mediashare/Spider
+cd Spider
 composer install
 ```
 ### Run
@@ -33,7 +32,7 @@ php -d memory_limit=3000M bin/console spider:run http://exemple.com -w # Php mem
 ### Commands
 #### Module list
 ```bash
-php bin/console webspider:module:list
+php bin/console spider:module:list
 ```
 #### Disable all modules
 ```bash
@@ -49,56 +48,9 @@ php bin/console spider:run http://exemple.com -i '{"Search":{"value search"}}' -
 ```
 #### Creation module
 ```
-php bin/console webspider:module:create "Module Name"
+php bin/console spider:module:create "Module Name"
 ```
 [Commands](src/Command/) | [Module Documentation](src/Modules/)
-
-## Output
-Report is write in `` public/reports/exemple.com/report.json ``
-```JavaScript
-{
-  "website": {
-    "domain": "exemple.com",
-    "scheme": "http"
-  },
-  "config": {
-    "webspider": false,
-    "pathRequire": {...},
-    "pathException": {...},
-    "json": false,
-    "output": null,
-    "variables-injected": {
-      "moduleName": {
-        "varName": "foo bar",
-        ...
-      },
-      ...
-    }
-  }
-  "urls": {
-    "http://exemple.com": {
-      "header": {
-        "httpCode": 200,
-        "transferTime": 0.125422,
-        "downloadSize": 38296,
-        "headers": {...} // Other data header
-      }
-    }
-    ...
-  },
-  "modules": {
-    "Module Name": {
-      "http://exemple.com": {
-        "name": "Module 1",
-        "results": {...}
-      },
-      ...
-    },
-    ...
-  "errors": {...}
-  }
-}
-```
 
 ## Helper
 ```bash
@@ -110,7 +62,6 @@ ______________________________________________
 |_____________________________________________|
                                    | by Slote |
                                    |__________/
-
 Description:
   Execute Web Crawler
 
@@ -126,15 +77,17 @@ Options:
   -E, --exception[=EXCEPTION]              Add exception. If url contains one of these words then not crawled. (-E foo -E bar) (multiple values allowed)
   -j, --json                               Return json response in terminal
   -o, --output=OUTPUT                      Output path destination
+      --id=ID                              Id Report
   -m, --modules[=MODULES]                  Enable specific module(s). If null disable all modules (multiple values allowed)
-  -i, --inject-variable[=INJECT-VARIABLE]  Inject input variables in specific module. (-i '{"moduleName":{"foo":"bar"}}') (multiple values allowed)
+  -i, --inject-variable[=INJECT-VARIABLE]  Inject input variables in specific module. (-i '{"moduleName":["foo","bar"]}') (multiple values allowed)
+      --html                               Html output
   -h, --help                               Display this help message
   -q, --quiet                              Do not output any message
   -V, --version                            Display this application version
       --ansi                               Force ANSI output
       --no-ansi                            Disable ANSI output
   -n, --no-interaction                     Do not ask any interactive question
-  -e, --env=ENV                            The Environment name. [default: "dev"]
+  -e, --env=ENV                            The Environment name. [default: "prod"]
       --no-debug                           Switches off debug mode.
   -v|vv|vvv, --verbose                     Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
 

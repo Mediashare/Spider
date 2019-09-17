@@ -17,7 +17,7 @@ use App\Entity\Config;
 
 class ModuleListCommand extends Command
 {
-    protected static $defaultName = 'webspider:module:list';
+    protected static $defaultName = 'spider:module:list';
 
     private $output;
     public function __construct(ContainerInterface $container, Output $output) {

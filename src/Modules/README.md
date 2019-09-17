@@ -1,15 +1,27 @@
 # Modules
 Create your own Module for execute php code for webpage crawled and get output result in your json report file.
-
-## Modules list
-```bash
-php bin/console webspider:module:list
+#### Create module
 ```
-## Create Module
+php bin/console spider:module:create "Module Name"
+```
+#### Module list
 ```bash
-php bin/console webspider:module:create "Module Name"
+php bin/console spider:module:list
+```
+#### Disable all modules
+```bash
+php bin/console spider:run http://exemple.com -w -m
+```
+#### Enable specific modules
+```bash
+php bin/console spider:run http://exemple.com -w -m Links -m Search -m NewModule
+```
+#### Inject variables in module
+```bash
+php bin/console spider:run http://exemple.com -i '{"Search":{"value search"}}' -i '{"Search":{"value search 2"}}'
 ```
 Now you can write your php code in function run() from Module file created.
+
 ## Basic
 ### Exemple
 ```php
@@ -119,52 +131,5 @@ class OutputErrors {
         ];
         return "Hello Webspider!"; // Is output result in report 
     }
-}
-```
-
-## Output
-Report is write in `` public/reports/exemple.com/report.json ``
-```JavaScript
-{
-  "website": {
-    "domain": "exemple.com",
-    "scheme": "http"
-  },
-  "config": {
-    "webspider": false,
-    "pathRequire": {...},
-    "pathException": {...},
-    "json": false,
-    "output": null,
-    "variables-injected": {
-      "moduleName": {
-        "varName": "foo bar",
-        ...
-      },
-      ...
-    }
-  }
-  "urls": {
-    "http://exemple.com": {
-      "header": {
-        "httpCode": 200,
-        "transferTime": 0.125422,
-        "downloadSize": 38296,
-        "headers": {...} // Other data header
-      }
-    }
-    ...
-  },
-  "modules": {
-    "Module Name": {
-      "http://exemple.com": {
-        "name": "Module 1",
-        "results": {...}
-      },
-      ...
-    },
-    ...
-  "errors": {...}
-  }
 }
 ```

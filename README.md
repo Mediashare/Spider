@@ -7,7 +7,6 @@ Users have the possibility to use the modules created by the community or to cre
 
 ### What is a Crawler?
 A crawler is an indexing robot, it automatically explores the pages of a website.
-
 Using a crawler can have several interests:
 - Information search & retrieval
 - Validation of the SEO of your website
@@ -27,10 +26,16 @@ I would be happy to receive your ideas and contributions to the project :smiley:
 
 ## Getting start
 ### Installation
+#### Github Installation
 ```bash
 git clone https://github.com/Mediashare/Spider
 cd Spider
 composer install
+```
+#### Docker Installation
+```bash
+docker pull slote/spider
+docker run slote/spider https://exemple.com -w
 ```
 ### Run
 ```bash

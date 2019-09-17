@@ -35,7 +35,7 @@ composer install
 #### Docker Installation
 ```bash
 docker pull slote/spider
-docker run slote/spider https://exemple.com -w
+docker run slote/spider bin/console spider:run https://exemple.com -w
 ```
 ### Run
 ```bash

@@ -1,8 +1,10 @@
 # Spider
 :dizzy: Spider is a php command line tool that allows you to crawl a website for informations scraping.
+
 Spider is a crawler of website modulable write in Php.
 The tool allows you to retrieve information and execute code on website pages. It can be useful for SEO or security audit purposes.
 Users have the possibility to use the modules created by the community or to create their own modules (written in Php via a web interface).
+
 ### What is a Crawler?
 A crawler is an indexing robot, it automatically explores the pages of a website.
 

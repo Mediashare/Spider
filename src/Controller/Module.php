@@ -32,10 +32,10 @@ class Module {
             $result = $module->run();
             
             // Report
-            $this->website->modules[$name]['name'] = $name;
-            $this->website->modules[$name]['description'] = $description;
+            $this->website->modules[$module->className]['name'] = $name;
+            $this->website->modules[$module->className]['description'] = $description;
             if ($result) {
-                $this->website->modules[$name]['results'][(string) $this->webpage->getUrl()] = $result;
+                $this->website->modules[$module->className]['results'][(string) $this->webpage->getUrl()] = $result;
             }
             if ($module->errors) {
                 $this->website->errors = array_merge($this->website->errors, $module->errors);

@@ -100,7 +100,8 @@ class ModuleCreateCommand extends Command
         $boilerplate = str_replace('%$name%', $module['name'], $boilerplate);
         $boilerplate = str_replace('%$variables%', $module['variables'], $boilerplate);
         $boilerplate = str_replace('%$description%', $module['description'], $boilerplate);
-        $boilerplate = str_replace('%$function%', $module['function'], $boilerplate);
+        if (!isset($module['script'])) {$module['script'] = "public function run() {}";}
+        $boilerplate = str_replace('%$script%', $module['script'], $boilerplate);
         
         return $boilerplate;
     }

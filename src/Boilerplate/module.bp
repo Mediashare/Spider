@@ -10,5 +10,5 @@ class %$className% {
     public $variables = %$variables%; // Variables injected
     public $errors; // Output errors
     
-    %$function%
+    %$script%
 }

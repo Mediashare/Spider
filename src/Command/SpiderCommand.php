@@ -34,7 +34,7 @@ class SpiderCommand extends Command
 	        ->setDescription('Execute Web Crawler')
 	        ->setHelp('This command crawl website pages.')
 	        // Arguments
-        	->addArgument('url', InputArgument::IS_ARRAY | InputArgument::REQUIRED, 'Website url')
+            ->addArgument('url', InputArgument::IS_ARRAY, 'Website url')
             // Options
             //  General
         	->addOption('webspider', 'w', InputOption::VALUE_NONE, 
@@ -44,6 +44,9 @@ class SpiderCommand extends Command
         		'Add path require. (-R foo -R bar)')
         	->addOption('exception', 'E', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 
                 'Add exception. If url contains one of these words then not crawled. (-E foo -E bar)')
+            //  Input
+        	->addOption('file', 'f', InputOption::VALUE_REQUIRED, 
+            'Read all urls in file submited')
             //  Output
         	->addOption('json', 'j', InputOption::VALUE_NONE, 
             'Return json response in terminal')
@@ -79,13 +82,29 @@ class SpiderCommand extends Command
             $config->setId($input->getOption('id'));
         }
 
+        $file = $input->getOption('file');
+        if ($file) {
+            $file_content = fopen($file, 'r');
+            while (($line = fgets($file_content)) !== false) {
+                $newUrl = trim(preg_replace('/\s\s+/', ' ', $line));
+                $url = new Url($newUrl);
+                $config->addUrl($url);
+                $website = $config->getWebsite($url);
+                if ($website) {
+                    $website->addUrl($url);
+                } else {
+                    $website = new Website($url);
+                    $config->addWebsite($website);
+                }
+            }
+        }
         foreach ((array) $input->getArgument('url') as $newUrl) {
             $url = new Url($newUrl);
             $config->addUrl($url);
-
+            
             $website = $config->getWebsite($url);
             if ($website) {
-                $website->addUrl($urlEntity);
+                $website->addUrl($url);
             } else {
                 $website = new Website($url);
                 $config->addWebsite($website);

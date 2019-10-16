@@ -27,9 +27,7 @@ class Webspider
 			while (count($website->getUrlsNotCrawled())) {
 				foreach ($website->getUrlsNotCrawled() as $url) {
 					// Check if have pathException & pathRequire
-					if (strpos($url->getUrl(), $url->getWebsite()->getDomain()) === false) {
-						$url->setExcluded(true);
-					}
+					if (strpos($url->getUrl(), $url->getWebsite()->getDomain()) === false) {$url->setExcluded(true);}
 					if ((!$url->isExcluded() && !$url->isCrawled()) || $url === $website->getUrls()[0]) {
 						$webPage = $this->guzzle->getWebPage($url);
 						if ($webPage) {

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Website;
+use App\Entity\WebPage;
 
 class Url
 {
@@ -230,4 +231,66 @@ class Url
         $sources = array_values($sources); // Reset array keys
         return $sources;
     }
+
+    public function checkUrl(WebPage $webPage) {
+		$website = $webPage->getUrl()->getWebsite();
+		$config = $website->getConfig();
+        $url = $this->getUrl();
+        
+		if ($url == "/") {
+			$url = rtrim($website->getScheme().'://'.$website->getDomain(),"/")."/".$url;
+        } elseif ($url[0] == "#") {
+            $url = rtrim($webPage->getUrl()->getUrl()  ,"/")."/".$url;
+        } else {
+			$isUrl = filter_var($url, FILTER_VALIDATE_URL);
+            if (!$isUrl && ($url[0] === "/" && $url[1] !== "/")) {
+                $url = rtrim($website->getScheme().'://'.$website->getDomain(),"/")."/".$url;
+                $isUrl = filter_var($url, FILTER_VALIDATE_URL);
+            }
+			if (!$isUrl && strpos($url, $website->getScheme().'://'.$website->getDomain()) === false) {
+                $url = rtrim($webPage->getUrl()->getUrl(),"/")."/".$url;
+				$isUrl = filter_var($url, FILTER_VALIDATE_URL);
+			}
+            if (!$isUrl) {
+                $url = rtrim($website->getScheme().'://'.$website->getDomain(),"/")."/".$url;
+                $isUrl = filter_var($url, FILTER_VALIDATE_URL);
+            }
+		}
+
+
+
+        // Exceptions
+        $isUrl = filter_var($url, FILTER_VALIDATE_URL);
+        if (!$isUrl) {
+            $this->setExcluded(true);
+        }
+
+        $this->__construct($url);
+
+		if ($this->getHost() !== $website->getDomain()) {
+            $this->setExcluded(true);
+        }
+        
+		if ($this->getHost() !== $website->getDomain()) {
+			$this->setExcluded(true);
+		}
+		foreach ($config->getPathException() as $value) {
+			if (strpos($url, $value) !== false) {
+				$this->setExcluded(true);
+			}
+		}
+		foreach ($config->getPathRequire() as $value) {
+			if (strpos($url, $value) === false) {
+				$this->setExcluded(true);
+			}
+		}
+
+		if (!$this->isExcluded()) {
+			$webPage->addLinks($url);
+			return $url;
+		} else {
+			$webPage->addExternalLinks($url);
+			return false;
+		}
+	}
 }

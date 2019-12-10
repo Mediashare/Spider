@@ -18,71 +18,65 @@ class Guzzle
    	}
    
    public function getWebPage(Url $url) {
-		$isUrl = filter_var($url->getUrl(), FILTER_VALIDATE_URL);
-		if ($isUrl) {
-			$webPage = new WebPage();
-			$this->header = new Header();
-			$body = new Body();
-			$webPage->setUrl($url);
-			$this->header->setWebPage($webPage);
-			$body->setWebPage($webPage);
-			$website = $url->getWebsite();
+		$webPage = new WebPage();
+		$this->header = new Header();
+		$body = new Body();
+		$webPage->setUrl($url);
+		$this->header->setWebPage($webPage);
+		$body->setWebPage($webPage);
+		$website = $url->getWebsite();
 
-			try {
-				$guzzle = $this->guzzle->request('GET', $url->getUrl(), [
-					'headers' => [
-						'User-Agent' => $this->getUserAgent()
-					],
-					'verify' => false,
-					'on_stats' => function (TransferStats $stats) {
-						$performances = $stats->getHandlerStats();
-						// $this->header->setTransferTime($stats->getTransferTime());
-						// You must check if a response was received before using the
-						// response object.
-						if ($stats->hasResponse()) {
-							// If php-curl is not installed
-							if (isset($performances["size_download"])) {$this->header->setDownloadSize($performances["size_download"]);}
-							if (isset($performances["total_time"])) {$this->header->setTransferTime($performances["total_time"]);}
-						}
+		try {
+			$guzzle = $this->guzzle->request('GET', $url->getUrl(), [
+				'headers' => [
+					'User-Agent' => $this->getUserAgent()
+				],
+				'verify' => false,
+				'on_stats' => function (TransferStats $stats) {
+					$performances = $stats->getHandlerStats();
+					// $this->header->setTransferTime($stats->getTransferTime());
+					// You must check if a response was received before using the
+					// response object.
+					if ($stats->hasResponse()) {
+						// If php-curl is not installed
+						if (isset($performances["size_download"])) {$this->header->setDownloadSize($performances["size_download"]);}
+						if (isset($performances["total_time"])) {$this->header->setTransferTime($performances["total_time"]);}
 					}
-				]);	
-			} catch (RequestException $exception) {
-				$url->setExcluded(true);
-				$website->errors[] = [
-					'type' => 'guzzle',
-					'message' => $exception->getMessage(),
-					'url' => $url->getUrl(),
-				];
-				return false;
-			}
-			
-			$httpCode = $guzzle->getStatusCode();
-			// Error httpCode
-			if ($httpCode >= 400 ) {
-				$this->header->setHttpCode($httpCode);
-				foreach ($guzzle->getHeaders() as $name => $values) {
-					$headers[$name] = implode(', ', $values);
 				}
-				$url->setExcluded(true);
-				$website->errors[] = [
-					'type' => 'guzzle',
-					'message' => 'Response status: '.$httpCode,
-					'url' => $url->getUrl(),
-				];
-				return false;
-			}
-			
+			]);	
+		} catch (RequestException $exception) {
+			$url->setExcluded(true);
+			$website->errors[] = [
+				'type' => 'guzzle',
+				'message' => $exception->getMessage(),
+				'url' => $url->getUrl(),
+			];
+			return false;
+		}
+		$httpCode = $guzzle->getStatusCode();
+		// Error httpCode
+		if ($httpCode >= 400 ) {
 			$this->header->setHttpCode($httpCode);
 			foreach ($guzzle->getHeaders() as $name => $values) {
 				$headers[$name] = implode(', ', $values);
 			}
-			$this->header->setContent($headers);
-			$body->setContent($guzzle->getBody());
-
-			return $webPage;
+			$url->setExcluded(true);
+			$website->errors[] = [
+				'type' => 'guzzle',
+				'message' => 'Response status: '.$httpCode,
+				'url' => $url->getUrl(),
+			];
+			return false;
 		}
 		
-		return false;
+		$this->header->setHttpCode($httpCode);
+		foreach ($guzzle->getHeaders() as $name => $values) {
+			$headers[$name] = implode(', ', $values);
+		}
+		$this->header->setContent($headers);
+		$body->setContent($guzzle->getBody());
+
+		return $webPage;
 	}
 	private function getUserAgent() {
 		$userAgents = [

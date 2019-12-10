@@ -2,6 +2,7 @@
 namespace App\Modules;
 
 class %$className% {
+    public $author = "%$author%";
     public $name = "%$name%";
     public $description = "%$description%";
     public $config;

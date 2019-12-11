@@ -1,19 +1,20 @@
 <?php 
 namespace App\Command;
 
-use App\Entity\Config;
 use App\Entity\Url;
+use App\Entity\Config;
 use App\Controller\Guzzle;
 use App\Controller\Module;
 use App\Controller\Output;
-use Symfony\Component\DomCrawler\Crawler as Dom;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\DomCrawler\Crawler as Dom;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
 
 class ModuleUpdateCommand extends Command
@@ -23,6 +24,11 @@ class ModuleUpdateCommand extends Command
     private $output;
     public function __construct(ContainerInterface $container, Output $output) {
         $this->output = $output;
+
+        $url = "http://modules.webspider.fr/";
+        $this->url = new Url($url);
+        $this->guzzle = new Guzzle();
+        
         parent::__construct();
         $this->container = $container;
     }
@@ -45,36 +51,53 @@ class ModuleUpdateCommand extends Command
         echo $this->output->echoColor("\n******************\n", 'green');
         $modules = $this->getModules();
         foreach ($modules as $module) {
-            echo $this->output->echoColor("- ".$module->name, 'purple');
-            echo $this->output->echoColor(" | ".$module->description."\n", 'blue');
+            echo $this->output->echoColor("- ".$module['name']."\n", 'purple');
         }
         echo "\n";
     }
 
     private function getModules() {
-        $urls = $this->getUrls();
-        dd($urls);
-        // Download all file from $urls[]
-        return $modules;
-    }
-    
-    private function getUrls() {
-        $url = "http://modules.webspider.fr/";
-        $url = new Url($url);
-
-        $guzzle = new Guzzle();
-        $webpage = $guzzle->getWebPage($url);
-        
+        $webpage = $this->guzzle->getWebPage($this->url);
         $dom = new Dom($webpage->getBody()->getContent());
 		// Crawl links
 		foreach($dom->filter('a') as $link) {
 			if (!empty($link)) {
 				$href = rtrim(ltrim($link->getAttribute('href')));
-				if ($href && strpos($href, '.php')) {
-					$urls[] = $url.$href;
+				if ($href && (strpos($href, '.php') || strpos($href, '.md'))) {
+					$modules[] = [
+                        'name' => $href,
+                        'url' => $this->url.$href,
+                    ];
 				}
 			}
 		}
-        return $urls;
+        
+        $modules = $this->download($modules);
+        $create = $this->create($modules);
+        return $modules;
+    }
+
+    // Download all file from $urls[]
+    private function download(array $modules) {
+        foreach ($modules as $key => $module) {
+            $name = $module['name'];
+            $url = new Url($module['url']);
+            $webpage = $this->guzzle->getWebPage($url);
+            $dom = new Dom($webpage->getBody()->getContent());
+            $modules[$key]['content'] = $webpage->getBody()->getContent();
+        }
+        return $modules;
+    }
+
+    private function create(array $modules) {
+        $filesystem = new Filesystem();
+        foreach ($modules as $module) {
+            try {
+                $filesystem->dumpFile($this->container->getParameter('modules_dir') . $module['name'], $module['content']);
+            } catch (IOExceptionInterface $exception) {
+                echo "An error occurred while creating your module file at ".$exception->getPath();
+            }
+        }
+        return $modules;
     }
 }

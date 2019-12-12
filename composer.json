@@ -1,8 +1,17 @@
 {
-    "name": "slote/spider",
+    "name": "mediashare/spider",
     "description": "Website crawler modulable.",
     "type": "project",
-    "license": "proprietary",
+    "keywords": ["crawler","scrapping","website crawler","webpage crawling"],
+    "homepage": "https://github.com/Seldaek/monolog",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thibault Marquand",
+            "email": "Mediashare.supp@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
     "require": {
         "php": "^7.1.3",
         "ext-ctype": "*",

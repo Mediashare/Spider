@@ -1,13 +1,21 @@
 <?php
 namespace App\Modules;
 
+/**
+ * New Spider Module.
+ *  Information:
+ *      This module will be executed when the spider crawl(/scan) a webpage. 
+ *      At this point you can use the $this->dom to browse the page more precisely to perform the tasks you want on this webpage. 
+ *  Create your report:
+ *      you can return an [integer|float|string|array] variable from function run().
+ */
 class %$className% {
     public $author = "%$author%";
     public $name = "%$name%";
     public $description = "%$description%";
     public $config;
     public $webpage; // Headers & Body
-    public $dom; // Dom for crawl in webpage
+    public $dom; // Dom for crawl webpage
     public $variables = %$variables%; // Variables injected
     public $errors; // Output errors
     

@@ -14,7 +14,6 @@ use App\Entity\Config;
 use App\Entity\Url;
 use App\Entity\Website;
 
-
 class SpiderCommand extends Command
 {
     protected static $defaultName = 'spider:run';

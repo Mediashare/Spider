@@ -24,6 +24,7 @@ class Crawler
 				if ($href) {
 					$url = new Url($href);
 					$isUrl = $url->checkUrl($webPage, $href);
+					dump($url);die;
 					if ($isUrl) { // newUrl Found
 						if (!$config->getWebspider()) {$url->setExcluded(true);} // No crawling another pages
 						else {$website->addUrl($url);}

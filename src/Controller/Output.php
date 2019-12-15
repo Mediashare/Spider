@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller;
+namespace Spider\Controller;
 
 use Symfony\Component\Console\Helper\ProgressBar;
 

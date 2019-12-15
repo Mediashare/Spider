@@ -1,6 +1,6 @@
 <?php
-namespace App\Controller;
-use App\Controller\FileSystem;
+namespace Spider\Controller;
+use Spider\Controller\FileSystem;
 
 class Module {
     
@@ -48,7 +48,7 @@ class Module {
         $modulesFiles = glob($moduleDir.'*.php');
         $modules = [];
         foreach($modulesFiles as $moduleFile) {
-            $className = "App\\Modules\\".basename($moduleFile, '.php');
+            $className = "Spider\\Modules\\".basename($moduleFile, '.php');
             $module = new $className();
             $module->className = basename($moduleFile, '.php');
             if ($this->config->modules === true || in_array(basename($moduleFile, '.php'), $this->config->modules)) {

@@ -51,12 +51,12 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "Spider\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "Spider\\Tests\\": "tests/"
         }
     },
     "replace": {

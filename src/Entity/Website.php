@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Entity;
+namespace Spider\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use App\Entity\Url;
+use Spider\Entity\Url;
 
 class Website
 {

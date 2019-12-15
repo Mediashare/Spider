@@ -29,7 +29,7 @@ Now you can write your php code in function run() from Module file created.
 ### Exemple
 ```php
 // src/Modules/ModuleName.php
-namespace App\Modules;
+namespace Spider\Modules;
 
 class ModuleName {
     public $name = "Module Name";
@@ -49,7 +49,7 @@ class ModuleName {
 ## Variable injection
 Catch injected variables in your module. 
 ```php
-namespace App\Modules;
+namespace Spider\Modules;
 
 class InjectVariables {
     public $name = "InjectVariables";
@@ -84,7 +84,7 @@ DomCrawler is symfony component for DOM navigation for HTML and XML documents. Y
 ### Exemple
 ```php
 // src/Modules/Links.php
-namespace App\Modules;
+namespace Spider\Modules;
 
 class Links {
     public $name = "Links";
@@ -115,7 +115,7 @@ class Links {
 ## Output Errors
 ```php
 // src/Modules/ModuleName.php
-namespace App\Modules;
+namespace Spider\Modules;
 
 class OutputErrors {
     public $name = "Output Errors";

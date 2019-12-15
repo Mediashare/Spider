@@ -1,5 +1,5 @@
 <?php
-namespace App\Entity;
+namespace Spider\Entity;
 
 class Body
 {

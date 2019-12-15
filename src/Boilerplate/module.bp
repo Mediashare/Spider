@@ -1,5 +1,5 @@
 <?php
-namespace App\Modules;
+namespace Spider\Modules;
 
 /**
  * New Spider Module.

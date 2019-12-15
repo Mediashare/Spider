@@ -241,9 +241,9 @@ class Url
         } elseif ($url[0] == "#") {
             $url = rtrim($webPage->getUrl()->getUrl()  ,"/")."/".$url;
         } else {
-			$isUrl = filter_var($url, FILTER_VALIDATE_URL);
+            $isUrl = filter_var($url, FILTER_VALIDATE_URL);
             if (!$isUrl && ($url[0] === "/" && $url[1] !== "/")) {
-                $url = rtrim($website->getScheme().'://'.$website->getDomain(),"/")."/".$url;
+                $url = rtrim($website->getScheme().'://'.$website->getDomain(),"/").$url;
                 $isUrl = filter_var($url, FILTER_VALIDATE_URL);
             }
 			if (!$isUrl && strpos($url, $website->getScheme().'://'.$website->getDomain()) === false) {

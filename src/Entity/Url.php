@@ -236,9 +236,8 @@ class Url
 		$website = $webPage->getUrl()->getWebsite();
 		$config = $website->getConfig();
         $url = $this->getUrl();
-        
 		if ($url == "/") {
-			$url = rtrim($website->getScheme().'://'.$website->getDomain(),"/")."/".$url;
+            $url = rtrim($website->getScheme().'://'.$website->getDomain(),"/").$url;
         } elseif ($url[0] == "#") {
             $url = rtrim($webPage->getUrl()->getUrl()  ,"/")."/".$url;
         } else {

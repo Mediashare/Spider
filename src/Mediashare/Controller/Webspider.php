@@ -13,17 +13,18 @@ use Spider\Controller\Report;
  */
 class Webspider
 {
-	public function __construct(Output $output) {
-		$this->output = $output;
+	public function __construct(Config $config) {
+		$this->config = $config;
 		$this->guzzle = new Guzzle();
 		$this->report = new Report();
+		$this->output = new Output();
 	}
 
-	public function run(Config $config) {
-		$websites = $config->getWebsites();
+	public function run() {
+		$websites = $this->config->getWebsites();
 		foreach ($websites as $website) {
 			$counter = 0;
-			if (!$config->html) {$this->output->progressBar($counter, count($website->getUrlsNotCrawled()));}
+			if (!$this->config->html) {$this->output->progressBar($counter, count($website->getUrlsNotCrawled()));}
 			while (count($website->getUrlsNotCrawled())) {
 				foreach ($website->getUrlsNotCrawled() as $url) {
 					// Check if have pathException & pathRequire
@@ -38,7 +39,7 @@ class Webspider
 							// ProgressBar
 							$counter++;
 							if ($webPage) {$requestTime = $webPage->getHeader()->getTransferTime()."ms";} else {$requestTime = null;}
-							if ($config->html) {
+							if ($this->config->html) {
 								$message = "--- (".$counter.") URL: [".$url->getUrl()."] ".$requestTime." --- <br/> \n";
 								echo $message;
 							} else {

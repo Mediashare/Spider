@@ -20,9 +20,8 @@ class SpiderCommand extends Command
 
     private $output;
     private $webspider;
-    public function __construct(ContainerInterface $container, Output $output, Webspider $webspider) {
+    public function __construct(ContainerInterface $container, Output $output) {
         $this->output = $output;
-        $this->webspider = $webspider;
         parent::__construct();
         $this->container = $container;
     }
@@ -71,7 +70,9 @@ class SpiderCommand extends Command
         
         $config = $this->initConfig($input);
         if (!$config->html) {$this->output->banner();}
-        $this->webspider->run($config);
+        dump($config);
+        $webspider = new Webspider($config);
+        $webspider->run();
     }
 
     protected function initConfig(InputInterface $input) {

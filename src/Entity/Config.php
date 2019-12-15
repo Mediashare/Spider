@@ -9,16 +9,19 @@ use Spider\Entity\Url;
 class Config
 {
     private $id;
-    private $urls = [];
-    private $websites = [];
+    private $urls;
     private $webspider;
     private $search = [];
     private $pathRequire = [];
     private $pathException = [];
+    private $websites;
     public $json = false;
     public $output;
 
-    public function __construct() {
+    public function __construct()
+    {
+        $this->urls = new ArrayCollection();
+        $this->websites = new ArrayCollection();
         $this->setId(uniqid());
     }
 
@@ -43,28 +46,22 @@ class Config
 
     public function addUrl(Url $url): self
     {
-        if (!empty($this->urls)):
-            if (!$this->urls->contains($url)) {
-                $this->urls[] = $url;
-            }
-        else
+        if (!$this->urls->contains($url)) {
             $this->urls[] = $url;
-        endif;
+        }
 
         return $this;
     }
 
     public function removeUrl(Url $url): self
     {
-        if (!empty($this->urls)):
-            if ($this->urls->contains($url)) {
-                $this->urls->removeElement($url);
-                // set the owning side to null (unless already changed)
-                if ($url->getConfig() === $this) {
-                    $url->setConfig(null);
-                }
+        if ($this->urls->contains($url)) {
+            $this->urls->removeElement($url);
+            // set the owning side to null (unless already changed)
+            if ($url->getConfig() === $this) {
+                $url->setConfig(null);
             }
-        endif;
+        }
 
         return $this;
     }
@@ -137,13 +134,10 @@ class Config
 
     public function addWebsite(Website $website): self
     {
-        if (!empty($this->websites)):
-            if (!$this->websites->contains($website)) {
-            }
-        else
+        if (!$this->websites->contains($website)) {
             $this->websites[] = $website;
             $website->setConfig($this);
-        endif;
+        }
 
         return $this;
     }

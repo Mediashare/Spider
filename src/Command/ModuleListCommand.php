@@ -1,5 +1,5 @@
 <?php 
-namespace App\Command;
+namespace Spider\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -10,9 +10,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
-use App\Controller\Output;
-use App\Controller\Module;
-use App\Entity\Config;
+use Spider\Controller\Output;
+use Spider\Controller\Module;
+use Spider\Entity\Config;
 
 
 class ModuleListCommand extends Command

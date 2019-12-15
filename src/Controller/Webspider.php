@@ -1,12 +1,12 @@
 <?php
-namespace App\Controller;
+namespace Spider\Controller;
 
-use App\Entity\Config;
-use App\Entity\Url;
-use App\Controller\Output;
-use App\Controller\Guzzle;
-use App\Controller\Crawler;
-use App\Controller\Report;
+use Spider\Entity\Config;
+use Spider\Entity\Url;
+use Spider\Controller\Output;
+use Spider\Controller\Guzzle;
+use Spider\Controller\Crawler;
+use Spider\Controller\Report;
 
 /**
  * WebSpider

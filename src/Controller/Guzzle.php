@@ -1,13 +1,13 @@
 <?php
-namespace App\Controller;
+namespace Spider\Controller;
 
 use GuzzleHttp\TransferStats;
 use GuzzleHttp\Client;
 use \GuzzleHttp\Exception\RequestException;
-use App\Entity\Url;
-use App\Entity\WebPage;
-use App\Entity\Header;
-use App\Entity\Body;
+use Spider\Entity\Url;
+use Spider\Entity\WebPage;
+use Spider\Entity\Header;
+use Spider\Entity\Body;
 
 class Guzzle
 {

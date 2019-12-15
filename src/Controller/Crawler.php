@@ -1,11 +1,11 @@
 <?php
-namespace App\Controller;
+namespace Spider\Controller;
 
 use Symfony\Component\DomCrawler\Crawler as Dom;
-use App\Entity\Url;
-use App\Entity\Website;
-use App\Entity\WebPage;
-use App\Controller\Module;
+use Spider\Entity\Url;
+use Spider\Entity\Website;
+use Spider\Entity\WebPage;
+use Spider\Controller\Module;
 
 /**
  * Crawler

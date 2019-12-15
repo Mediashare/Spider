@@ -1,5 +1,5 @@
 <?php 
-namespace App\Command;
+namespace Spider\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -8,11 +8,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use App\Controller\Output;
-use App\Controller\Webspider;
-use App\Entity\Config;
-use App\Entity\Url;
-use App\Entity\Website;
+use Spider\Controller\Output;
+use Spider\Controller\Webspider;
+use Spider\Entity\Config;
+use Spider\Entity\Url;
+use Spider\Entity\Website;
 
 class SpiderCommand extends Command
 {

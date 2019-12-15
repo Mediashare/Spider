@@ -1,11 +1,11 @@
 <?php 
-namespace App\Command;
+namespace Spider\Command;
 
-use App\Entity\Url;
-use App\Entity\Config;
-use App\Controller\Guzzle;
-use App\Controller\Module;
-use App\Controller\Output;
+use Spider\Entity\Url;
+use Spider\Entity\Config;
+use Spider\Controller\Guzzle;
+use Spider\Controller\Module;
+use Spider\Controller\Output;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\DomCrawler\Crawler as Dom;

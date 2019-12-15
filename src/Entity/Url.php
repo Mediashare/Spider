@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Entity;
+namespace Spider\Entity;
 
-use App\Entity\Website;
-use App\Entity\WebPage;
+use Spider\Entity\Website;
+use Spider\Entity\WebPage;
 
 class Url
 {

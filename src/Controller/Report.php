@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller;
+namespace Spider\Controller;
 
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
@@ -7,10 +7,10 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use App\Controller\FileSystem;
-use App\Controller\Output;
-use App\Entity\Report as BuildReport;
-use App\Entity\Website;
+use Spider\Controller\FileSystem;
+use Spider\Controller\Output;
+use Spider\Entity\Report as BuildReport;
+use Spider\Entity\Website;
 
 class Report
 {

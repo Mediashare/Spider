@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller;
+namespace Spider\Controller;
 
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem as fs;

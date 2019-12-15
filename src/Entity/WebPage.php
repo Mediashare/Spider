@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Entity;
+namespace Spider\Entity;
 
-use App\Entity\Header;
-use App\Entity\Body;
-use App\Entity\Url;
+use Spider\Entity\Header;
+use Spider\Entity\Body;
+use Spider\Entity\Url;
 
 class WebPage
 {

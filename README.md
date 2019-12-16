@@ -32,6 +32,10 @@ git clone https://github.com/Mediashare/Spider
 cd Spider
 composer install
 ```
+#### Composer Require
+```bash
+composer require medishare/spider
+```
 #### Docker Installation
 ```bash
 docker pull slote/spider

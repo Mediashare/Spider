@@ -39,7 +39,7 @@ class AbstractControllerTest extends ControllerTraitTest
             'security.authorization_checker' => '?Symfony\\Component\\Security\\Core\\Authorization\\AuthorizationCheckerInterface',
             'templating' => '?Symfony\\Component\\Templating\\EngineInterface',
             'twig' => '?Twig\\Environment',
-            'doctrine' => '?Doctrine\\Common\\Persistence\\ManagerRegistry',
+            'doctrine' => '?Doctrine\\Persistence\\ManagerRegistry',
             'form.factory' => '?Symfony\\Component\\Form\\FormFactoryInterface',
             'parameter_bag' => '?Symfony\\Component\\DependencyInjection\\ParameterBag\\ContainerBagInterface',
             'message_bus' => '?Symfony\\Component\\Messenger\\MessageBusInterface',

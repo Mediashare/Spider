@@ -4,7 +4,7 @@
     "description": "Website crawler modulable.",
     "type": "project",
     "keywords": ["crawler","scrapping","website crawler","webpage crawling"],
-    "homepage": "https://github.com/Seldaek/monolog",
+    "homepage": "https://github.com/Mediashare/Spider",
     "license": "MIT",
     "authors": [
         {

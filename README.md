@@ -54,7 +54,7 @@ Adding a module to a crawler allows the automation of code execution on one or m
 ```bash
 php bin/console spider:module:list
 ```
-#### Disable all modules
+#### Enable all modules
 ```bash
 php bin/console spider:run http://exemple.com -w -m
 ```
@@ -62,7 +62,11 @@ php bin/console spider:run http://exemple.com -w -m
 ```bash
 php bin/console spider:run http://exemple.com -w -m Links -m Search -m NewModule
 ```
-#### Inject variables in module
+#### Disable specific modules
+```bash
+php bin/console spider:run http://exemple.com -w -m Links -m Search -m NewModule -d FileDownload
+```
+#### Inject json variables in module
 ```bash
 php bin/console spider:run http://exemple.com -i '{"Search":{"value search"}}' -i '{"Search":{"value search 2"}}'
 ```
@@ -86,28 +90,30 @@ Description:
   Execute Web Crawler
 
 Usage:
-  spider:run [options] [--] <url>...
+  spider:run [options] [--] [<url>...]
 
 Arguments:
   url                                      Website url
 
 Options:
-  -w, --webspider                          If you want crawl all pages on this website
-  -R, --require[=REQUIRE]                  Add path require. (-R foo -R bar) (multiple values allowed)
-  -E, --exception[=EXCEPTION]              Add exception. If url contains one of these words then not crawled. (-E foo -E bar) (multiple values allowed)
-  -j, --json                               Return json response in terminal
-  -o, --output=OUTPUT                      Output path destination
-      --id=ID                              Id Report
-  -m, --modules[=MODULES]                  Enable specific module(s). If null disable all modules (multiple values allowed)
-  -i, --inject-variable[=INJECT-VARIABLE]  Inject input variables in specific module. (-i '{"moduleName":["foo","bar"]}') (multiple values allowed)
-      --html                               Html output
+  -w, --webspider                          If you want crawl all pages on this website.
+  -R, --require[=REQUIRE]                  Add path require. (-R foo -R bar). (multiple values allowed)
+  -E, --exception[=EXCEPTION]              Add exception. If url contains one of these words then not crawled. (-E foo -E bar). (multiple values allowed)
+  -f, --file=FILE                          Read all urls in file submited.
+  -j, --json                               Return json response in terminal.
+  -o, --output=OUTPUT                      Output path destination.
+      --id=ID                              Id (name) Report.
+  -m, --modules[=MODULES]                  Enable specific module(s) or enable all modules if not module specified. (multiple values allowed)
+  -d, --disable_modules[=DISABLE_MODULES]  Disable specific module(s) or disable all modules if not module specified. (multiple values allowed)
+  -i, --inject-variable[=INJECT-VARIABLE]  Inject input variables in specific module. (-i '{"moduleName":["foo","bar"]}'). (multiple values allowed)
+      --html                               Html output.
   -h, --help                               Display this help message
   -q, --quiet                              Do not output any message
   -V, --version                            Display this application version
       --ansi                               Force ANSI output
       --no-ansi                            Disable ANSI output
   -n, --no-interaction                     Do not ask any interactive question
-  -e, --env=ENV                            The Environment name. [default: "prod"]
+  -e, --env=ENV                            The Environment name. [default: "dev"]
       --no-debug                           Switches off debug mode.
   -v|vv|vvv, --verbose                     Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
 

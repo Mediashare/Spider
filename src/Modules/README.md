@@ -11,7 +11,7 @@ php bin/console spider:module:create "Module Name"
 ```bash
 php bin/console spider:module:list
 ```
-#### Disable all modules
+#### Enable all modules
 ```bash
 php bin/console spider:run http://exemple.com -w -m
 ```
@@ -19,17 +19,23 @@ php bin/console spider:run http://exemple.com -w -m
 ```bash
 php bin/console spider:run http://exemple.com -w -m Links -m Search -m NewModule
 ```
-#### Inject variables in module
+#### Disable specific modules
+```bash
+php bin/console spider:run http://exemple.com -w -m Links -m Search -m NewModule -d FileDownload
+```
+#### Inject json variables in module
 ```bash
 php bin/console spider:run http://exemple.com -i '{"Search":{"value search"}}' -i '{"Search":{"value search 2"}}'
 ```
+
+
 Now you can write your php code in function run() from Module file created.
 
 ## Basic
 ### Exemple
 ```php
 // src/Modules/ModuleName.php
-namespace Spider\Modules;
+namespace App\Modules;
 
 class ModuleName {
     public $name = "Module Name";
@@ -49,7 +55,7 @@ class ModuleName {
 ## Variable injection
 Catch injected variables in your module. 
 ```php
-namespace Spider\Modules;
+namespace App\Modules;
 
 class InjectVariables {
     public $name = "InjectVariables";
@@ -84,7 +90,7 @@ DomCrawler is symfony component for DOM navigation for HTML and XML documents. Y
 ### Exemple
 ```php
 // src/Modules/Links.php
-namespace Spider\Modules;
+namespace App\Modules;
 
 class Links {
     public $name = "Links";
@@ -115,7 +121,7 @@ class Links {
 ## Output Errors
 ```php
 // src/Modules/ModuleName.php
-namespace Spider\Modules;
+namespace App\Modules;
 
 class OutputErrors {
     public $name = "Output Errors";

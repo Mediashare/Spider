@@ -37,30 +37,32 @@ class SpiderCommand extends Command
             // Options
             //  General
         	->addOption('webspider', 'w', InputOption::VALUE_NONE, 
-        		'If you want crawl all pages on this website')
+        		'If you want crawl all pages on this website.')
             //  Require & Exception in URL  
             ->addOption('require', 'R', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 
-        		'Add path require. (-R foo -R bar)')
+        		'Add path require. (-R foo -R bar).')
         	->addOption('exception', 'E', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 
-                'Add exception. If url contains one of these words then not crawled. (-E foo -E bar)')
+                'Add exception. If url contains one of these words then not crawled. (-E foo -E bar).')
             //  Input
         	->addOption('file', 'f', InputOption::VALUE_REQUIRED, 
-            'Read all urls in file submited')
+                'Read all urls in file submited.')
             //  Output
         	->addOption('json', 'j', InputOption::VALUE_NONE, 
-            'Return json response in terminal')
+                'Return json response in terminal.')
         	->addOption('output', 'o', InputOption::VALUE_REQUIRED, 
-                'Output path destination')
+                'Output path destination.')
             ->addOption('id', false, InputOption::VALUE_REQUIRED, 
-                'Id Report')
+                'Id (name) Report.')
             // Modules
             ->addOption('modules', 'm', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 
-                'Enable specific module(s). If null disable all modules')
+                'Enable specific module(s) or enable all modules if not module specified.')
+            ->addOption('disable_modules', 'd', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 
+                'Disable specific module(s) or disable all modules if not module specified.')
             // Inject modules variables 
             ->addOption('inject-variable', 'i', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 
-                'Inject input variables in specific module. (-i \'{"moduleName":["foo","bar"]}\')')
+                'Inject input variables in specific module. (-i \'{"moduleName":["foo","bar"]}\').')
             ->addOption('html', null, InputOption::VALUE_NONE, 
-                    'Html output')
+                    'Html output.')
             
         ;
     }
@@ -122,7 +124,8 @@ class SpiderCommand extends Command
         $config->html = $input->getOption('html');
         // Modules
         $config->modules = $input->getOption('modules');
-        if (empty($config->modules)) {$config->modules = true;} // Enable Modules by default
+        if (!is_array($config->modules) && empty($config->modules)) {$config->modules = true;} // Enable Modules by default
+        $config->disable_modules = $input->getOption('disable_modules');
         // Inject input variables in modules 
         $config->variables = null;
         foreach ($input->getOption('inject-variable') as $variables) {

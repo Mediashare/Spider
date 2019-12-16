@@ -51,10 +51,27 @@ class Module {
             $className = "Spider\\Modules\\".basename($moduleFile, '.php');
             $module = new $className();
             $module->className = basename($moduleFile, '.php');
-            if ($this->config->modules === true || in_array(basename($moduleFile, '.php'), $this->config->modules)) {
-                $modules[] = $module;
+            if ($this->config->modules === true || 
+                (is_array($this->config->modules) && $this->config->modules[0] === null)) { // If all module enabled (-m) 
+                    $modules[$module->className] = $module;
+            } elseif (is_array($this->config->modules) && count($this->config->modules) > 0) { // If specific module selected (-m Module_Name) 
+                foreach ($this->config->modules as $module_enable):
+                    if ($module_enable == $module->name || $module_enable == $module->className):
+                        $modules[$module->className] = $module;
+                    endif;                        
+                endforeach;
+            } elseif (is_array($this->config->modules)) { // If all module enabled (-m) 
+                $modules[$module->className] = $module;
             }
         }
+
+        // If specific module was disabled (-d FileDownload)
+        if (is_array($this->config->disable_modules) && count($this->config->disable_modules) > 0):
+            foreach ($this->config->disable_modules as $module_disable):
+                unset($modules[$module_disable]);                    
+            endforeach;
+        endif;
+        dd($modules);
         return $modules;
     }
 

@@ -3,7 +3,6 @@ namespace Mediashare;
 require 'vendor/autoload.php';
 
 use Spider\Entity\Url;
-use Spider\Entity\SpiderInterface;
 use Spider\Entity\Config;
 use Spider\Entity\Website;
 use Spider\Controller\Output;

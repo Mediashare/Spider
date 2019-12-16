@@ -53,7 +53,7 @@
     "autoload": {
         "psr-4": {
             "Spider\\": "src/",
-            "Mediashare\\": "Interface/SpiderInterface.php"
+            "Mediashare\\": "Spider.php"
         }
     },
     "autoload-dev": {

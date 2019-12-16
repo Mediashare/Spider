@@ -11,7 +11,10 @@
 
 namespace Symfony\Bridge\Doctrine\Security\User;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\Mapping\ClassMetadata;
+use Doctrine\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectRepository;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -83,11 +86,7 @@ class EntityUserProvider implements UserProviderInterface
             // That's the case when the user has been changed by a form with
             // validation errors.
             if (!$id = $this->getClassMetadata()->getIdentifierValues($user)) {
-                throw new \InvalidArgumentException('You cannot refresh a user '.
-                    'from the EntityUserProvider that does not contain an identifier. '.
-                    'The user object has to be serialized with its own identifier '.
-                    'mapped by Doctrine.'
-                );
+                throw new \InvalidArgumentException('You cannot refresh a user from the EntityUserProvider that does not contain an identifier. The user object has to be serialized with its own identifier mapped by Doctrine.');
             }
 
             $refreshedUser = $repository->find($id);
@@ -107,17 +106,17 @@ class EntityUserProvider implements UserProviderInterface
         return $class === $this->getClass() || is_subclass_of($class, $this->getClass());
     }
 
-    private function getObjectManager()
+    private function getObjectManager(): ObjectManager
     {
         return $this->registry->getManager($this->managerName);
     }
 
-    private function getRepository()
+    private function getRepository(): ObjectRepository
     {
         return $this->getObjectManager()->getRepository($this->classOrAlias);
     }
 
-    private function getClass()
+    private function getClass(): string
     {
         if (null === $this->class) {
             $class = $this->classOrAlias;
@@ -132,7 +131,7 @@ class EntityUserProvider implements UserProviderInterface
         return $this->class;
     }
 
-    private function getClassMetadata()
+    private function getClassMetadata(): ClassMetadata
     {
         return $this->getObjectManager()->getClassMetadata($this->classOrAlias);
     }

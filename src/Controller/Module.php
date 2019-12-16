@@ -44,7 +44,7 @@ class Module {
     }
     
     public function getModules() {
-        $moduleDir = __DIR__.'/../../'.$_ENV['MODULES_DIR'];
+        $moduleDir = $this->config->modulesDir;
         $modulesFiles = glob($moduleDir.'*.php');
         $modules = [];
         foreach($modulesFiles as $moduleFile) {

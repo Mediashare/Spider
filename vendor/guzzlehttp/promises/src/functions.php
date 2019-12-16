@@ -213,13 +213,14 @@ function unwrap($promises)
  * rejects, the returned promise is rejected with the rejection reason.
  *
  * @param mixed $promises Promises or values.
+ * @param bool $recursive - If true, resolves new promises that might have been added to the stack during its own resolution.
  *
  * @return PromiseInterface
  */
-function all($promises)
+function all($promises, $recursive = false)
 {
     $results = [];
-    return each(
+    $promise = \GuzzleHttp\Promise\each(
         $promises,
         function ($value, $idx) use (&$results) {
             $results[$idx] = $value;
@@ -231,6 +232,19 @@ function all($promises)
         ksort($results);
         return $results;
     });
+
+    if (true === $recursive) {
+        $promise = $promise->then(function ($results) use ($recursive, &$promises) {
+            foreach ($promises AS $promise) {
+                if (\GuzzleHttp\Promise\PromiseInterface::PENDING === $promise->getState()) {
+                    return all($promises, $recursive);
+                }
+            }
+            return $results;
+        });
+    }
+
+    return $promise;
 }
 
 /**
@@ -241,7 +255,7 @@ function all($promises)
  * fulfilled with an array that contains the fulfillment values of the winners
  * in order of resolution.
  *
- * This prommise is rejected with a {@see GuzzleHttp\Promise\AggregateException}
+ * This promise is rejected with a {@see GuzzleHttp\Promise\AggregateException}
  * if the number of fulfilled promises is less than the desired $count.
  *
  * @param int   $count    Total number of promises.
@@ -254,7 +268,7 @@ function some($count, $promises)
     $results = [];
     $rejections = [];
 
-    return each(
+    return \GuzzleHttp\Promise\each(
         $promises,
         function ($value, $idx, PromiseInterface $p) use (&$results, $count) {
             if ($p->getState() !== PromiseInterface::PENDING) {
@@ -310,7 +324,7 @@ function settle($promises)
 {
     $results = [];
 
-    return each(
+    return \GuzzleHttp\Promise\each(
         $promises,
         function ($value, $idx) use (&$results) {
             $results[$idx] = ['state' => PromiseInterface::FULFILLED, 'value' => $value];

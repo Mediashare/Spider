@@ -54,7 +54,9 @@ class Webspider
 					}
 				}
 			}
-			$this->report->endResponse($website);
+			if (!$config->html) {
+				$this->report->endResponse($website);
+			}
 		}
 	}
 }

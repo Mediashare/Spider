@@ -11,7 +11,7 @@
 
 namespace Symfony\Bundle\FrameworkBundle\Controller;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use Fig\Link\GenericLinkProvider;
 use Fig\Link\Link;
 use Psr\Container\ContainerInterface;
@@ -30,6 +30,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\WebLink\EventListener\AddLinkHeaderListener;
 
@@ -335,11 +336,13 @@ trait ControllerTrait
     /**
      * Shortcut to return the Doctrine Registry service.
      *
+     * @return ManagerRegistry
+     *
      * @throws \LogicException If DoctrineBundle is not available
      *
      * @final
      */
-    protected function getDoctrine(): ManagerRegistry
+    protected function getDoctrine()
     {
         if (!$this->container->has('doctrine')) {
             throw new \LogicException('The DoctrineBundle is not registered in your application. Try running "composer require symfony/orm-pack".');
@@ -351,7 +354,7 @@ trait ControllerTrait
     /**
      * Get a user from the Security Token Storage.
      *
-     * @return object|null
+     * @return UserInterface|object|null
      *
      * @throws \LogicException If SecurityBundle is not available
      *

@@ -11,7 +11,7 @@ php bin/console spider:module:create "Module Name"
 ```bash
 php bin/console spider:module:list
 ```
-#### Enable all modules
+#### Disable all modules
 ```bash
 php bin/console spider:run http://exemple.com -w -m
 ```
@@ -19,16 +19,10 @@ php bin/console spider:run http://exemple.com -w -m
 ```bash
 php bin/console spider:run http://exemple.com -w -m Links -m Search -m NewModule
 ```
-#### Disable specific modules
+#### Inject variables in module
 ```bash
-php bin/console spider:run http://exemple.com -w -m Links -m Search -m NewModule -d FileDownload
+php bin/console spider:run http://exemple.com -i '{"Search":{"value search"}}' -i '{"Search":{"value search 2"}}'
 ```
-#### Inject json variables in module
-```bash
-php bin/console spider:run http://exemple.com -m Search -i '{"Search":{"value search"}}' -i '{"Search":{"value search 2"}}'
-```
-
-
 Now you can write your php code in function run() from Module file created.
 
 ## Basic

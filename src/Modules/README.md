@@ -25,7 +25,7 @@ php bin/console spider:run http://exemple.com -w -m Links -m Search -m NewModule
 ```
 #### Inject json variables in module
 ```bash
-php bin/console spider:run http://exemple.com -i '{"Search":{"value search"}}' -i '{"Search":{"value search 2"}}'
+php bin/console spider:run http://exemple.com -m Search -i '{"Search":{"value search"}}' -i '{"Search":{"value search 2"}}'
 ```
 
 

@@ -71,7 +71,6 @@ class Module {
                 unset($modules[$module_disable]);                    
             endforeach;
         endif;
-        dd($modules);
         return $modules;
     }
 

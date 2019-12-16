@@ -13,8 +13,8 @@ use Spider\Controller\Report;
  */
 class Webspider
 {
-	public function __construct(Output $output) {
-		$this->output = $output;
+	public function __construct() {
+		$this->output = new Output();
 		$this->guzzle = new Guzzle();
 		$this->report = new Report();
 	}

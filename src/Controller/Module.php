@@ -51,8 +51,8 @@ class Module {
             $className = "Spider\\Modules\\".basename($moduleFile, '.php');
             $module = new $className();
             $module->className = basename($moduleFile, '.php');
-            if ($this->config->modules === true || 
-                (is_array($this->config->modules) && $this->config->modules[0] === null)) { // If all module enabled (-m) 
+            if ($this->config->all_modules === true || 
+                (is_array($this->config->modules) && !empty($this->config->modules[0]) && $this->config->modules[0] === null)) { // If all module enabled (-m) 
                     $modules[$module->className] = $module;
             } elseif (is_array($this->config->modules) && count($this->config->modules) > 0) { // If specific module selected (-m Module_Name) 
                 foreach ($this->config->modules as $module_enable):
@@ -60,8 +60,6 @@ class Module {
                         $modules[$module->className] = $module;
                     endif;                        
                 endforeach;
-            } elseif (is_array($this->config->modules)) { // If all module enabled (-m) 
-                $modules[$module->className] = $module;
             }
         }
 

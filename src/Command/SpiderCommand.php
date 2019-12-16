@@ -54,8 +54,10 @@ class SpiderCommand extends Command
             ->addOption('id', false, InputOption::VALUE_REQUIRED, 
                 'Id (name) Report.')
             // Modules
+            ->addOption('all_modules', 'a', InputOption::VALUE_NONE, 
+                'Enable all modules.')
             ->addOption('modules', 'm', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 
-                'Enable specific module(s) or enable all modules if not module specified.')
+                'Enable specific module(s).')
             ->addOption('disable_modules', 'd', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 
                 'Disable specific module(s) or disable all modules if not module specified.')
             // Inject modules variables 
@@ -124,7 +126,7 @@ class SpiderCommand extends Command
         $config->html = $input->getOption('html');
         // Modules
         $config->modules = $input->getOption('modules');
-        if (!is_array($config->modules) && empty($config->modules)) {$config->modules = true;} // Enable Modules by default
+        $config->all_modules = $input->getOption('all_modules');
         $config->disable_modules = $input->getOption('disable_modules');
         // Inject input variables in modules 
         $config->variables = null;

@@ -7,7 +7,7 @@
 /public/bundles/
 /public/reports/
 /var/
-/vendor/
+#/vendor/
 ###< symfony/framework-bundle ###
 .DS_Store
 

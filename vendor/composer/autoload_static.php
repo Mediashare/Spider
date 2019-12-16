@@ -353,7 +353,7 @@ class ComposerStaticInitee777c7c70113813103b44f3fe1e12db
         ),
         'Mediashare\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/Spider.php',
+            0 => __DIR__ . '/../..' . '/Interface/SpiderInterface.php',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (

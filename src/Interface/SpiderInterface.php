@@ -8,7 +8,7 @@ use Spider\Controller\Output;
 use Spider\Controller\Webspider;
 session_start();
 
-class Spider
+class SpiderInterface
 {
     public $id;
     public $url = "http://marquand.pro";

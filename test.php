@@ -8,7 +8,7 @@ $input = [
     'json' => true
 ];
 
-$spider = new \Mediashare\Spider($url, $input);
+$spider = new \Mediashare\SpiderInterface($url, $input);
 $spider->run();
 
 

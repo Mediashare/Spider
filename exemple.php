@@ -5,8 +5,10 @@ $url = 'http://marquand.pro';
 $input = [
     'id' => 'test',
     'webspider' => true,
-    'html' => true,
-    'json' => false,
+    'prompt' => [
+        'html' => true,
+        'json' => false,  
+    ],
     'reports_dir' => __DIR__.'/var/reports/',
     'modules_dir' => __DIR__.'/src/Modules/',
     'all_modules' => false,
@@ -14,4 +16,5 @@ $input = [
 ];
 
 $spider = new \Spider\Spider($url, $input);
-$spider->run();
+$result = $spider->run();
+// dump($result);

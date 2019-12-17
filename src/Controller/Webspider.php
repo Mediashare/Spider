@@ -20,7 +20,7 @@ class Webspider
 	}
 
 	public function run(Config $config) {
-		// var_dump($config);die;
+		$reports = [];
 		$websites = $config->getWebsites();
 		foreach ($websites as $website) {
 			$counter = 0;
@@ -54,7 +54,8 @@ class Webspider
 					}
 				}
 			}
-			$this->report->endResponse($website);
+			$reports[] = $this->report->endResponse($website);
 		}
+		return $reports;
 	}
 }

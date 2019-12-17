@@ -56,6 +56,7 @@ class Report
             // echo new JsonResponse($json);
          }
       }
+      return $file;
    }
 
    public function create(Website $website) {

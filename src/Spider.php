@@ -10,19 +10,19 @@ session_start();
 
 class Spider
 {
-    public $id;
+    public $id; // Id|Name report
     public $url = "http://marquand.pro";
-    public $webspider = true;
-    public $require = [];
-    public $exception = [];
-    public $json = false;
-    public $output = null;
-    public $html = true;
-    public $modules = [];
-    public $all_modules = true;
-    public $disable_modules = false;
-    public $modules_dir = __DIR__.'/Modules/';
-    public $reports_dir = __DIR__.'/../var/reports/';
+    public $webspider = true; // Crawl all website
+    public $require = []; // Path required
+    public $exception = []; // Path exceptions
+    public $html = true; // Prompt html output
+    public $json = false; // Prompt json output
+    public $modules = []; // Select one or more modules to use
+    public $all_modules = true; // Enable all modules
+    public $disable_modules = false; // Disable all modules
+    public $modules_dir = __DIR__.'/Modules/'; // Default modules path
+    public $reports_dir = __DIR__.'/../var/reports/'; // Default reports path
+    public $output = null; // Rewrite ouput destination
 
     public function set(string $input, $value) {
         $this->$input = $value;
@@ -39,20 +39,21 @@ class Spider
         if (isset($option['webspider'])): $this->set('webspider', $option['webspider']); endif;
         if (isset($option['require'])): $this->set('require', $option['require']); endif;
         if (isset($option['exception'])): $this->set('exception', $option['exception']); endif;
-        if (isset($option['json'])): $this->set('json', $option['json']); endif;
-        if (isset($option['output'])): $this->set('output', $option['output']); endif;
-        if (isset($option['html'])): $this->set('html', $option['html']); endif;
+        if (isset($option['prompt']['html'])): $this->set('html', $option['prompt']['html']); endif;
+        if (isset($option['prompt']['json'])): $this->set('json', $option['prompt']['json']); endif;
         if (isset($option['modules'])): $this->set('modules', $option['modules']); endif;
         if (isset($option['all_modules'])): $this->set('all_modules', $option['all_modules']); endif;
         if (isset($option['disable_modules'])): $this->set('disable_modules', $option['disable_modules']); endif;
         if (isset($option['modules_dir'])): $this->set('modules_dir', $option['modules_dir']); endif;
         if (isset($option['reports_dir'])): $this->set('reports_dir', $option['reports_dir']); endif;
+        if (isset($option['output'])): $this->set('output', $option['output']); endif;
         $this->config = $this->initConfig();
     }
 
     public function run() {
         $webspider = new Webspider();
-        $webspider->run($this->config);
+        $reports = $webspider->run($this->config);
+        return $reports;
     } 
 
     public function initConfig() {

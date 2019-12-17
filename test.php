@@ -1,6 +1,5 @@
 <?php
-require 'Spider.php';
-
+require 'vendor/autoload.php';
 $url = 'http://marquand.pro';
 $input = [
     'id' => 'test',
@@ -8,7 +7,7 @@ $input = [
     'json' => true
 ];
 
-$spider = new \Mediashare\Spider($url, $input);
+$spider = new \Spider\Spider($url, $input);
 $spider->run();
 
 

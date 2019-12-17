@@ -1,6 +1,6 @@
 {
     "name": "mediashare/spider",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "description": "Website crawler modulable.",
     "type": "project",
     "keywords": ["crawler","scrapping","website crawler","webpage crawling"],
@@ -52,8 +52,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Spider\\": "src/",
-            "Mediashare\\": "Spider.php"
+            "Spider\\": "src/"
         }
     },
     "autoload-dev": {

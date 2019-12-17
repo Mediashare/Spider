@@ -28,7 +28,7 @@ I would be happy to receive your ideas and contributions to the project :smiley:
 Use Spider library in your project & create your own modules. 
 [More informations...](PACKAGIST.md)
 ```bash
-composer require medishare/spider
+composer require mediashare/spider
 ```
 #### Github
 ```bash

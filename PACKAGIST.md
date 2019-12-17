@@ -2,7 +2,7 @@
 # Packagist Version
 ## Installation
 ```bash
-composer require medishare/spider
+composer require mediashare/spider
 ```
 
 ## Usage

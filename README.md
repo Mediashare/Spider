@@ -26,29 +26,26 @@ I would be happy to receive your ideas and contributions to the project :smiley:
 
 ## Getting start
 ### Installation
-#### Github Installation
+#### Github
 ```bash
 git clone https://github.com/Mediashare/Spider
 cd Spider
 composer install
+
+php bin/console spider:run http://exemple.com -w
+# Or
+php -d memory_limit=3000M bin/console spider:run http://exemple.com -w # Extend PHP memory limit 
 ```
-#### Composer Require
-```bash
-composer require medishare/spider
-```
-#### Docker Installation
+#### Docker
 ```bash
 docker pull slote/spider
 docker run slote/spider bin/console spider:run https://exemple.com -w
 ```
-### Run
+#### [Composer Usage](PACKAGIST.md)
 ```bash
-php bin/console spider:run http://exemple.com -w
+composer require medishare/spider
 ```
-##### Php - Allowed memory size
-```bash
-php -d memory_limit=3000M bin/console spider:run http://exemple.com -w # Php memory limit
-```
+
 [Commands](src/Command/)
 ## Module
 Modules are tools created by the community to add features when crawling a website.

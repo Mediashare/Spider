@@ -19,8 +19,6 @@ Using a crawler can have several interests:
   - Create your own [**Modules**](src/Modules/) (Crawl & execute your php code)
   - No database, Pure PHP & Symfony
   - Output json file
-#### Soon features
-  - Sitemap managment
 
 I would be happy to receive your ideas and contributions to the project :smiley:
 

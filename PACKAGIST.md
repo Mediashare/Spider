@@ -6,25 +6,35 @@ composer require medishare/spider
 ```
 
 ## Usage
+### Create index.php file and init the config.
 ```php
 <?php
 // ./index.php
 require 'vendor/autoload.php';
 
 $url = 'http://marquand.pro';
-$input = [
-    'id' => 'test',
-    'webspider' => true,
-    'json' => true, 
-    'reports_dir' => __DIR__.'/reports/',
-    'modules_dir' => __DIR__.'/modules/',
+$options = [
+    'id' => 'test', // Id|Name report
+    'webspider' => true, // Crawl all website
+    'require' => [], // Path required
+    'exception' => [], // Path exceptions
+    'prompt' => [ // Prompt options
+        'html' => true, // Html output
+        'json' => false,  // Json output
+    ],
+    'modules_dir' => __DIR__.'/modules/', // Default modules path
+    'reports_dir' => __DIR__.'/var/reports/', // Default reports path
+    'all_modules' => false, // Enable all modules
+    'disable_modules' => false, // Disable all modules
+    'modules' => ['Links'] // Select one or more modules to use with class name
 ];
-$spider = new \Spider\Spider($url, $input);
-$spider->run();
+
+$spider = new \Spider\Spider($url, $options);
+$result = $spider->run();
+// dump($result);
 ```
 
-## Modules
-Create own module to execute actions when the crawler scraps a webpage. 
+### Create own module to execute actions when the crawler scraps a webpage. 
 ```php
 // ./modules/Links.php
 <?php
@@ -57,4 +67,8 @@ class Links {
         return $links;
     }
 }
+```
+### Execute the code from the console.
+```bash
+php index.php
 ```

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9ce4d228ddd6d3859f800bb39ee257df",
+    "content-hash": "0a68e1a2fb444a7c5e4401730765735a",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -1017,12 +1017,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "0ffbd72d1b9984211e5671c0f97ffe2755e259b7"
+                "reference": "4c8d3b64c6ce5ee6290873e0a662f3bb589e5221"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/0ffbd72d1b9984211e5671c0f97ffe2755e259b7",
-                "reference": "0ffbd72d1b9984211e5671c0f97ffe2755e259b7",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/4c8d3b64c6ce5ee6290873e0a662f3bb589e5221",
+                "reference": "4c8d3b64c6ce5ee6290873e0a662f3bb589e5221",
                 "shasum": ""
             },
             "require": {
@@ -1082,7 +1082,7 @@
             ],
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2019-12-17T10:27:58+00:00"
+            "time": "2019-12-17T12:15:16+00:00"
         },
         {
             "name": "symfony/dom-crawler",

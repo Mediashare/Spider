@@ -92,6 +92,7 @@ class ComposerStaticInitee777c7c70113813103b44f3fe1e12db
         'M' => 
         array (
             'Monolog\\' => 8,
+            'Mediashare\\' => 11,
         ),
         'G' => 
         array (
@@ -349,6 +350,10 @@ class ComposerStaticInitee777c7c70113813103b44f3fe1e12db
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'Mediashare\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Spider.php',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (

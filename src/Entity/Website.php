@@ -22,7 +22,6 @@ class Website
 
     public function __construct(Url $url) {
         $this->setUpdateDate();
-        $this->urls = new ArrayCollection();
         $this->setDomain($url->getHost());
         $this->setScheme($url->getScheme());
         $this->addUrl($url);
@@ -72,9 +71,9 @@ class Website
     }
 
     /**
-     * @return Collection|Url[]
+     * @return array|Url[]
      */
-    public function getUrls(): Collection
+    public function getUrls()
     {
         return $this->urls;
     }
@@ -82,7 +81,7 @@ class Website
     public function addUrl(Url $newUrl): self
     {
         $excluded = false;
-        foreach ($this->urls as $url) {
+        foreach ((array) $this->urls as $url) {
             // If already saved
             if ($url->getUrl() === $newUrl->getUrl() ||
                 $url->getPath() === $newUrl->getPath()) {

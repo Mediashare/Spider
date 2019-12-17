@@ -6,6 +6,7 @@
 /.env.*.local
 /public/bundles/
 /public/reports/
+/reports/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###

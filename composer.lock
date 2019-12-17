@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "086f8d6e573e8aa2f30add196840aeab",
+    "content-hash": "a0a8ce08532685f0f3dc513a8a2a5a34",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -833,12 +833,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "1878dd9a0a001cdea0732965d17724f359276050"
+                "reference": "354a2f28cded2832fb22fb37efa3e5ed253982fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/1878dd9a0a001cdea0732965d17724f359276050",
-                "reference": "1878dd9a0a001cdea0732965d17724f359276050",
+                "url": "https://api.github.com/repos/symfony/console/zipball/354a2f28cded2832fb22fb37efa3e5ed253982fc",
+                "reference": "354a2f28cded2832fb22fb37efa3e5ed253982fc",
                 "shasum": ""
             },
             "require": {
@@ -900,7 +900,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2019-12-16T14:20:08+00:00"
+            "time": "2019-12-17T10:30:23+00:00"
         },
         {
             "name": "symfony/css-selector",
@@ -1017,12 +1017,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "6fd0f2c743bab30c1bfff845fcc27bc63175538b"
+                "reference": "0ffbd72d1b9984211e5671c0f97ffe2755e259b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/6fd0f2c743bab30c1bfff845fcc27bc63175538b",
-                "reference": "6fd0f2c743bab30c1bfff845fcc27bc63175538b",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/0ffbd72d1b9984211e5671c0f97ffe2755e259b7",
+                "reference": "0ffbd72d1b9984211e5671c0f97ffe2755e259b7",
                 "shasum": ""
             },
             "require": {
@@ -1082,7 +1082,7 @@
             ],
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2019-12-16T11:02:49+00:00"
+            "time": "2019-12-17T10:27:58+00:00"
         },
         {
             "name": "symfony/dom-crawler",
@@ -3502,12 +3502,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "d521b739f51a822476440378200f4707783e6e89"
+                "reference": "bdeeb727638937368d41308ae91d8b474bc1c0be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/d521b739f51a822476440378200f4707783e6e89",
-                "reference": "d521b739f51a822476440378200f4707783e6e89",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/bdeeb727638937368d41308ae91d8b474bc1c0be",
+                "reference": "bdeeb727638937368d41308ae91d8b474bc1c0be",
                 "shasum": ""
             },
             "require": {
@@ -3582,7 +3582,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2019-12-11T19:58:23+00:00"
+            "time": "2019-12-17T08:13:37+00:00"
         },
         {
             "name": "doctrine/doctrine-migrations-bundle",

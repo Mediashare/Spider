@@ -1,5 +1,5 @@
 <?php
-namespace Mediashare;
+namespace Spider;
 
 use Spider\Entity\Url;
 use Spider\Entity\Config;
@@ -22,7 +22,7 @@ class SpiderInterface
     public $all_modules = true;
     public $disable_modules = false;
     public $reports_dir = __DIR__.'/reports/';
-    public $modules_dir = __DIR__.'/Modules/';
+    public $modules_dir = __DIR__.'/modules/';
 
     public function set(string $input, $value) {
         $this->$input = $value;

@@ -56,6 +56,8 @@ class Webspider
 			}
 			if (!$config->html) {
 				$this->report->endResponse($website);
+			} else {
+				$this->report->create($website);
 			}
 		}
 	}

@@ -30,11 +30,11 @@ class Module {
 
             // Execute this Module
             $result = $module->run();
-            
             // Report
             $this->website->modules[$module->className]['name'] = $name;
             $this->website->modules[$module->className]['description'] = $description;
             if ($result) {
+                // dump($this->webpage->getUrl()->getUrl(),$result);
                 $this->website->modules[$module->className]['results'][(string) $this->webpage->getUrl()] = $result;
             }
             if ($module->errors) {
@@ -69,6 +69,7 @@ class Module {
                 unset($modules[$module_disable]);                    
             endforeach;
         endif;
+
         return $modules;
     }
 

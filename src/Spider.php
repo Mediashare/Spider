@@ -41,6 +41,8 @@ class Spider
         if (!empty($option['exception'])): $this->set('exception', $option['exception']); endif;
         if (!empty($option['json'])): $this->set('json', $option['json']); endif;
         if (!empty($option['output'])): $this->set('output', $option['output']); endif;
+        if (!empty($option['modules_dir'])): $this->set('modules_dir', $option['modules_dir']); endif;
+        if (!empty($option['reports_dir'])): $this->set('reports_dir', $option['reports_dir']); endif;
         if (!empty($option['modules'])): $this->set('modules', $option['modules']); endif;
         if (!empty($option['all_modules'])): $this->set('all_modules', $option['all_modules']); endif;
         $this->config = $this->initConfig();

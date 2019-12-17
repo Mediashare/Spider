@@ -21,8 +21,8 @@ class Spider
     public $modules = [];
     public $all_modules = true;
     public $disable_modules = false;
-    public $reports_dir = __DIR__.'/../reports/';
-    public $modules_dir = __DIR__.'/../modules/';
+    public $reports_dir = __DIR__.'/../var/reports/';
+    public $modules_dir = __DIR__.'/Modules/';
 
     public function set(string $input, $value) {
         $this->$input = $value;

@@ -102,7 +102,7 @@ final class Versions
   'symfony/polyfill-php71' => '*@',
   'symfony/polyfill-php70' => '*@',
   'symfony/polyfill-php56' => '*@',
-  'mediashare/spider' => '1.1.2@',
+  'mediashare/spider' => '1.2.0@',
 );
 
     private function __construct()

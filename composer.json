@@ -1,8 +1,8 @@
 {
     "name": "mediashare/spider",
-    "version": "1.1.2",
+    "version": "1.2.0",
     "description": "Website crawler modulable.",
-    "type": "project",
+    "type": "vendor",
     "keywords": ["crawler","scrapping","website crawler","webpage crawling"],
     "homepage": "https://github.com/Mediashare/Spider",
     "license": "MIT",

@@ -34,21 +34,22 @@ class Output
     }
 
     public function progressBar(int $index, int $max, string $message = "") {
-        $outputCli = $_SESSION['outputCli'];
-
-        $progressBar = new ProgressBar($outputCli, $max);
-        // if (strlen($message) > 70)
-        //     $message = substr($message, 0, 70) . '...';
-        // $progressBar->setBarWidth(10);
-        $progressBar->setMessage($message, 'message');
-        $progressBar->setBarCharacter('<fg=white>⚬</>');
-        $progressBar->setEmptyBarCharacter("<fg=red>⚬</>");
-        $progressBar->setProgressCharacter("<fg=cyan>➤</>");
-        $progressBar->setFormat("%message% \n %current%/%max% [%bar%] 🏁 %percent:3s%% %memory:6s%");
-        $progressBar->start();
-        
-        $progressBar->advance($index);
-        if ($index >= $max) {$progressBar->finish();}
+        if (isset($_SESSION['outputCli'])) {
+            $outputCli = $_SESSION['outputCli'];
+            $progressBar = new ProgressBar($outputCli, $max);
+            // if (strlen($message) > 70)
+            //     $message = substr($message, 0, 70) . '...';
+            // $progressBar->setBarWidth(10);
+            $progressBar->setMessage($message, 'message');
+            $progressBar->setBarCharacter('<fg=white>⚬</>');
+            $progressBar->setEmptyBarCharacter("<fg=red>⚬</>");
+            $progressBar->setProgressCharacter("<fg=cyan>➤</>");
+            $progressBar->setFormat("%message% \n %current%/%max% [%bar%] 🏁 %percent:3s%% %memory:6s%");
+            $progressBar->start();
+            
+            $progressBar->advance($index);
+            if ($index >= $max) {$progressBar->finish();}
+        }
     }
 
     private function translateColor(string $color) {

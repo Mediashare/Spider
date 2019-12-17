@@ -21,8 +21,8 @@ class Spider
     public $modules = [];
     public $all_modules = true;
     public $disable_modules = false;
-    public $reports_dir = __DIR__.'/../var/reports/';
     public $modules_dir = __DIR__.'/Modules/';
+    public $reports_dir = __DIR__.'/../var/reports/';
 
     public function set(string $input, $value) {
         $this->$input = $value;
@@ -35,16 +35,18 @@ class Spider
     public function __construct(string $url, ?array $option) {
         $this->id = uniqid();
         $this->set('url', $url);
-        if (!empty($option['id'])): $this->set('id', $option['id']); endif;
-        if (!empty($option['webspider'])): $this->set('webspider', $option['webspider']); endif;
-        if (!empty($option['require'])): $this->set('require', $option['require']); endif;
-        if (!empty($option['exception'])): $this->set('exception', $option['exception']); endif;
-        if (!empty($option['json'])): $this->set('json', $option['json']); endif;
-        if (!empty($option['output'])): $this->set('output', $option['output']); endif;
-        if (!empty($option['modules_dir'])): $this->set('modules_dir', $option['modules_dir']); endif;
-        if (!empty($option['reports_dir'])): $this->set('reports_dir', $option['reports_dir']); endif;
-        if (!empty($option['modules'])): $this->set('modules', $option['modules']); endif;
-        if (!empty($option['all_modules'])): $this->set('all_modules', $option['all_modules']); endif;
+        if (isset($option['id'])): $this->set('id', $option['id']); endif;
+        if (isset($option['webspider'])): $this->set('webspider', $option['webspider']); endif;
+        if (isset($option['require'])): $this->set('require', $option['require']); endif;
+        if (isset($option['exception'])): $this->set('exception', $option['exception']); endif;
+        if (isset($option['json'])): $this->set('json', $option['json']); endif;
+        if (isset($option['output'])): $this->set('output', $option['output']); endif;
+        if (isset($option['html'])): $this->set('html', $option['html']); endif;
+        if (isset($option['modules'])): $this->set('modules', $option['modules']); endif;
+        if (isset($option['all_modules'])): $this->set('all_modules', $option['all_modules']); endif;
+        if (isset($option['disable_modules'])): $this->set('disable_modules', $option['disable_modules']); endif;
+        if (isset($option['modules_dir'])): $this->set('modules_dir', $option['modules_dir']); endif;
+        if (isset($option['reports_dir'])): $this->set('reports_dir', $option['reports_dir']); endif;
         $this->config = $this->initConfig();
     }
 
@@ -55,6 +57,11 @@ class Spider
 
     public function initConfig() {
         $config = new Config();
+
+        if ($this->get('id')) {
+            $config->setId($this->get('id'));
+        }
+
         foreach ((array) $this->get('url') as $newUrl) {
             $url = new Url($newUrl);
             $config->addUrl($url);

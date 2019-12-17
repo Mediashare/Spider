@@ -6,15 +6,16 @@ use Spider\Entity\Url;
 
 class Config
 {
-    private $id;
-    private $urls;
-    private $webspider;
-    private $search = [];
-    private $pathRequire = [];
-    private $pathException = [];
-    private $websites;
+    public $id;
+    public $urls;
+    public $webspider;
+    public $search = [];
+    public $pathRequire = [];
+    public $pathException = [];
+    public $websites;
     public $json = false;
     public $output;
+    public $html;
 
     public function __construct()
     {

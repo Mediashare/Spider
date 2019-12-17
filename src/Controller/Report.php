@@ -25,20 +25,36 @@ class Report
 
    public function endResponse(Website $website) {
       $file = $this->create($website, $end = true);
-
       $output = new Output();
-      $outputCli = $_SESSION['outputCli'];
-      $outputCli->text($output->echoColor("**********************", 'green'));
-      $outputCli->text($output->echoColor("* Output file result: ",'white').$output->echoColor($file['fileDir'],'green'));
-      $outputCli->text($output->echoColor("**********************", 'green'));
-
-      if ($website->getConfig()->json) {
-         $output = $_SESSION['outputCli'];
-         $output->text($this->output->echoColor("***************", 'green'));
-         $output->text($this->output->echoColor("* Json result: ",'cyan'));
-         $output->text($this->output->echoColor("***************", 'green'));
-         echo new Response($file['json'], 200, ['Content-Type' => 'application/json']);
-         // echo new JsonResponse($json);
+      if (!empty($_SESSION['outputCli'])) { // Classic bin/console execution
+         $outputCli = $_SESSION['outputCli'];
+         $outputCli->text($output->echoColor("**********************", 'green'));
+         $outputCli->text($output->echoColor("* Output file result: ",'white').$output->echoColor($file['fileDir'],'green'));
+         $outputCli->text($output->echoColor("**********************", 'green'));
+   
+         if ($website->getConfig()->json) {
+            $output = $_SESSION['outputCli'];
+            $output->text($this->output->echoColor("***************", 'green'));
+            $output->text($this->output->echoColor("* Json result: ",'cyan'));
+            $output->text($this->output->echoColor("***************", 'green'));
+            echo new Response($file['json'], 200, ['Content-Type' => 'application/json']);
+            // echo new JsonResponse($json);
+         }
+      } else {
+         if ($website->getConfig()->html) { // Else Spider Class used
+            echo $this->output->echoColor("**********************\xA", 'green');
+            echo $this->output->echoColor("* Output file result: ",'white').$this->output->echoColor($file['fileDir']."\xA",'green');
+            echo $this->output->echoColor("**********************\xA", 'green');   
+         } 
+         if ($website->getConfig()->json) {
+            if ($website->getConfig()->html) {
+               echo $this->output->echoColor("***************\xA", 'green');
+               echo $this->output->echoColor("* Json result: \xA",'cyan');
+               echo $this->output->echoColor("***************\xA", 'green');
+            }
+            echo new Response($file['json'], 200, ['Content-Type' => 'application/json'])."\xA";
+            // echo new JsonResponse($json);
+         }
       }
    }
 

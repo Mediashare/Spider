@@ -20,6 +20,7 @@ class Webspider
 	}
 
 	public function run(Config $config) {
+		// var_dump($config);die;
 		$websites = $config->getWebsites();
 		foreach ($websites as $website) {
 			$counter = 0;
@@ -30,14 +31,13 @@ class Webspider
 					if (strpos($url->getUrl(), $url->getWebsite()->getDomain()) === false) {$url->setExcluded(true);}
 					if ((!$url->isExcluded() && !$url->isCrawled()) || $url === $website->getUrls()[0]) {
 						$webPage = $this->guzzle->getWebPage($url);
-						
 						// ProgressBar
 						$counter++;
 						if ($webPage) {$requestTime = $webPage->getHeader()->getTransferTime()."ms";} else {$requestTime = null;}
 						if ($config->html) {
-							$message = "--- (".$counter.") URL: [".$url->getUrl()."] ".$requestTime." --- <br/> \n";
+							$message = $this->output->echoColor("--- (".$counter.") URL: [".$url->getUrl()."] ".$requestTime." --- \n", 'cyan');
 							echo $message;
-						} else {
+						} elseif (!$config->json) {
 							$message = $this->output->echoColor("--- (".$counter.") URL: [".$url->getUrl()."] ".$requestTime." ---", 'cyan');
 							$this->output->progressBar($counter, count($website->getUrls()), $message);
 						}
@@ -54,11 +54,7 @@ class Webspider
 					}
 				}
 			}
-			if (!$config->html) {
-				$this->report->endResponse($website);
-			} else {
-				$this->report->create($website);
-			}
+			$this->report->endResponse($website);
 		}
 	}
 }

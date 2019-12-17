@@ -25,6 +25,8 @@ I would be happy to receive your ideas and contributions to the project :smiley:
 ## Getting start
 ### Installation
 #### [Composer Usage](PACKAGIST.md)
+Use Spider library in your project & create your own modules. 
+[More informations...](PACKAGIST.md)
 ```bash
 composer require medishare/spider
 ```
@@ -43,37 +45,19 @@ php -d memory_limit=3000M bin/console spider:run http://exemple.com -w # Extend 
 docker pull slote/spider
 docker run slote/spider bin/console spider:run https://exemple.com -w
 ```
+## [Commands](src/Command/)
+You can use this library with console commands.
+[More informations...](src/Command/)
 
-[Commands](src/Command/)
-## Module
+```bash
+bin/console spider:run http://exemple.com -w
+```
+
+## [Modules](src/Modules/)
 Modules are tools created by the community to add features when crawling a website.
 Adding a module to a crawler allows the automation of code execution on one or more pages of a website. Modules are executed when crawling a page.
-### Commands
-#### Module list
-```bash
-php bin/console spider:module:list
-```
-#### Enable all modules
-```bash
-php bin/console spider:run http://exemple.com -w -m
-```
-#### Enable specific modules
-```bash
-php bin/console spider:run http://exemple.com -w -m Links -m Search -m NewModule
-```
-#### Disable specific modules
-```bash
-php bin/console spider:run http://exemple.com -w -m Links -m Search -m NewModule -d FileDownload
-```
-#### Inject json variables in module
-```bash
-php bin/console spider:run http://exemple.com -m Search -i '{"Search":{"value search"}}' -i '{"Search":{"value search 2"}}'
-```
-#### Creation module
-```
-php bin/console spider:module:create "Module Name"
-```
-[Commands](src/Command/) | [Module Documentation](src/Modules/)
+[More informations...](src/Modules/)
+
 
 ## Helper
 ```bash

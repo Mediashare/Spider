@@ -10,9 +10,9 @@ $input = [
         'json' => false,  
     ],
     'reports_dir' => __DIR__.'/var/reports/',
-    'modules_dir' => __DIR__.'/src/Modules/',
+    'modules_dir' => __DIR__.'/modules/',
     'all_modules' => false,
-    'modules' => ['Links']
+    'modules' => ['Linked']
 ];
 
 $spider = new \Spider\Spider($url, $input);

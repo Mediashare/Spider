@@ -15,7 +15,7 @@ class Spider
     public $webspider = true; // Crawl all website
     public $require = []; // Path required
     public $exception = []; // Path exceptions
-    public $html = true; // Prompt html output
+    public $html = false; // Prompt html output
     public $json = false; // Prompt json output
     public $modules = []; // Select one or more modules to use
     public $all_modules = true; // Enable all modules

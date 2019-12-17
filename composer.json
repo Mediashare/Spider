@@ -1,6 +1,5 @@
 {
     "name": "mediashare/spider",
-    "version": "v1.0",
     "description": "Website crawler modulable.",
     "type": "vendor",
     "keywords": ["crawler","scrapping","website crawler","webpage crawling"],

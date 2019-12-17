@@ -20,8 +20,6 @@ class Config
 
     public function __construct()
     {
-        $this->urls = new ArrayCollection();
-        $this->websites = new ArrayCollection();
         $this->setId(uniqid());
     }
 
@@ -46,22 +44,22 @@ class Config
 
     public function addUrl(Url $url): self
     {
-        if (!$this->urls->contains($url)) {
-            $this->urls[] = $url;
-        }
+        if (!isset($this->urls[$url->getUrl()])):
+            $this->urls[$url->getUrl()] = $url;
+        endif;
 
         return $this;
     }
 
     public function removeUrl(Url $url): self
     {
-        if ($this->urls->contains($url)) {
-            $this->urls->removeElement($url);
+        if (isset($this->urls[$url->getUrl()])):
+            unset($this->urls[$url->getUrl()]);
             // set the owning side to null (unless already changed)
             if ($url->getConfig() === $this) {
                 $url->setConfig(null);
             }
-        }
+        endif;
 
         return $this;
     }
@@ -116,7 +114,7 @@ class Config
 
     public function getWebsite(Url $url)
     {
-        foreach ($this->websites as $website) {
+        foreach ((array) $this->websites as $website) {
             if ($website->getDomain() === $url->getHost()) {
                 return $website;
             }
@@ -125,32 +123,32 @@ class Config
     }
 
     /**
-     * @return Collection|Website[]
+     * @return array|Website[]
      */
-    public function getWebsites(string $host = null): Collection
+    public function getWebsites(string $host = null)
     {
         return $this->websites;
     }
 
     public function addWebsite(Website $website): self
     {
-        if (!$this->websites->contains($website)) {
-            $this->websites[] = $website;
+        if (!isset($this->websites[$website->getDomain()])):
+            $this->websites[$website->getDomain()] = $website;
             $website->setConfig($this);
-        }
+        endif;
 
         return $this;
     }
 
     public function removeWebsite(Website $website): self
     {
-        if ($this->websites->contains($website)) {
-            $this->websites->removeElement($website);
+        if (isset($this->websites[$website->getDomain()])):
+            unset($this->websites[$website->getDomain()]);
             // set the owning side to null (unless already changed)
             if ($website->getConfig() === $this) {
                 $website->setConfig(null);
             }
-        }
+        endif;
 
         return $this;
     }

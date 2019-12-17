@@ -26,6 +26,10 @@ I would be happy to receive your ideas and contributions to the project :smiley:
 
 ## Getting start
 ### Installation
+#### [Composer Usage](PACKAGIST.md)
+```bash
+composer require medishare/spider
+```
 #### Github
 ```bash
 git clone https://github.com/Mediashare/Spider
@@ -40,10 +44,6 @@ php -d memory_limit=3000M bin/console spider:run http://exemple.com -w # Extend 
 ```bash
 docker pull slote/spider
 docker run slote/spider bin/console spider:run https://exemple.com -w
-```
-#### [Composer Usage](PACKAGIST.md)
-```bash
-composer require medishare/spider
 ```
 
 [Commands](src/Command/)

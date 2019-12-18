@@ -1,11 +1,12 @@
 <?php
 namespace Mediashare\Controller;
 
-use Symfony\Component\DomCrawler\Crawler as Dom;
 use Mediashare\Entity\Url;
-use Mediashare\Entity\Website;
+use Mediashare\Entity\Config;
 use Mediashare\Entity\WebPage;
+use Mediashare\Entity\Website;
 use Mediashare\Controller\Module;
+use Symfony\Component\DomCrawler\Crawler as Dom;
 
 /**
  * Crawler
@@ -13,18 +14,15 @@ use Mediashare\Controller\Module;
  */
 class Crawler
 {	
-	public function crawl(WebPage $webPage) {
+	public function crawl(Config $config, Website $website, WebPage $webPage) {
 		$dom = new Dom($webPage->getBody()->getContent());
-		$website = $webPage->getUrl()->getWebsite();
-		$config = $website->getConfig();
-
 		// Crawl links
 		foreach($dom->filter('a') as $link) {
 			if (!empty($link)) {
 				$href = rtrim(ltrim($link->getAttribute('href')));
 				if ($href) {
 					$url = new Url($href);
-					$isUrl = $url->checkUrl($webPage, $href);
+					$isUrl = $url->checkUrl($webPage, $config);
 					if ($isUrl) { // newUrl Found
 						if (!$config->getWebspider()) {$url->setExcluded(true);} // No crawling another pages
 						else {$website->addUrl($url);}
@@ -34,16 +32,15 @@ class Crawler
 		}
 
 		// Modules
-		$this->modules($webPage);
+		$this->modules($config, $webPage);
 
 		// Reset dom for memory
 		$webPage->setBody(null);
    	}
 	
-	private function modules(WebPage $webPage) {
+	private function modules(Config $config, WebPage $webPage) {
 		$dom = new Dom($webPage->getBody()->getContent());
 		$website = $webPage->getUrl()->getWebsite();
-		$config = $website->getConfig();
 
 		$module = new Module();
 		$module->config = $config;

@@ -9,7 +9,6 @@ class Config
     
     public $id; // Id|Name report
     public $url = "http://marquand.pro";
-    public $websites = [];
     public $webspider = true; // Crawl all website
     public $requires = []; // Path required
     public $exceptions = []; // Path exceptions
@@ -53,51 +52,12 @@ class Config
         $this->url = $url;
 
         $website = new Website($url);
-        $this->addWebsite($website);
+        $this->website = $website;
         
         return $this;
     }
 
-    public function getWebsite(Url $url)
-    {
-        foreach ((array) $this->websites as $website) {
-            if ($website->getDomain() === $url->getHost()) {
-                return $website;
-            }
-        }
-        return false;
-    }
 
-    /**
-     * @return array|Website[]
-     */
-    public function getWebsites(string $host = null)
-    {
-        return $this->websites;
-    }
-
-    public function addWebsite(Website $website): self
-    {
-        if (!isset($this->websites[$website->getDomain()])):
-            $this->websites[$website->getDomain()] = $website;
-            $website->setConfig($this);
-        endif;
-
-        return $this;
-    }
-
-    public function removeWebsite(Website $website): self
-    {
-        if (isset($this->websites[$website->getDomain()])):
-            unset($this->websites[$website->getDomain()]);
-            // set the owning side to null (unless already changed)
-            if ($website->getConfig() === $this) {
-                $website->setConfig(null);
-            }
-        endif;
-
-        return $this;
-    }
 
     public function getWebspider(): ?bool
     {
@@ -160,7 +120,7 @@ class Config
     /**
      * @return array|Module[]
      */
-    public function getModuless()
+    public function getModules()
     {
         return $this->modules;
     }
@@ -237,16 +197,5 @@ class Config
     public function getModulesDir(): ?string
     {
         return $this->modules_dir;
-    }
-
-    public function setOutput(?string $output): self
-    {
-        $this->output = $output;
-        return $this;
-    }
-
-    public function getOutput(): ?string
-    {
-        return $this->output;
     }
 }

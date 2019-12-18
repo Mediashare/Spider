@@ -5,7 +5,7 @@ use Mediashare\Entity\Config;
 use Mediashare\Entity\Website;
 use Mediashare\Service\Output;
 use Mediashare\Service\FileSystem;
-use Mediashare\Entity\Report as EntityReport;
+use Mediashare\Entity\Result;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -34,7 +34,7 @@ class Report
          $outputCli->text($this->output->echoColor("* Output file result: ",'white').$this->output->echoColor($file['fileDir'],'green'));
          $outputCli->text($this->output->echoColor("**********************", 'green'));
    
-         if ($website->getConfig()->json) {
+         if ($this->config->json) {
             $output = $_SESSION['outputCli'];
             $output->text($this->output->echoColor("***************", 'green'));
             $output->text($this->output->echoColor("* Json result: ",'cyan'));
@@ -43,13 +43,13 @@ class Report
             // echo new JsonResponse($json);
          }
       } else {
-         if ($website->getConfig()->html) { // Else Spider Class used
+         if ($this->config->html) { // Else Spider Class used
             echo $this->output->echoColor("**********************\xA", 'green');
             echo $this->output->echoColor("* Output file result: ",'white').$this->output->echoColor($file['fileDir']."\xA",'green');
             echo $this->output->echoColor("**********************\xA", 'green');   
          } 
-         if ($website->getConfig()->json) {
-            if ($website->getConfig()->html) {
+         if ($this->config->json) {
+            if ($this->config->html) {
                echo $this->output->echoColor("***************\xA", 'green');
                echo $this->output->echoColor("* Json result: \xA",'cyan');
                echo $this->output->echoColor("***************\xA", 'green');
@@ -63,13 +63,9 @@ class Report
 
    public function create(Website $website) {
       $domain = $website->getDomain();
-      $report = $this->build($website);
-
-      $config = $website->getConfig();
-      $fileDir = $config->getReportsDir().$domain.'/'.$config->getId().'.json';  
-      // $fileDir = $config->projectDir.'/public/reports/'.uniqid().'.json';  
-      if ($config->output) {$fileDir = $config->output;}
+      $fileDir = $this->config->getReportsDir().$domain.'/'.$this->config->getId().'.json';
       
+      $report = $this->build($website);
       $json = $this->serializer->serialize($report, 'json', [
          'circular_reference_handler' => function ($object) {
             return $object->getId();
@@ -88,82 +84,11 @@ class Report
     * Build json report
     *
     * @param Website $website
-    * @return BuildReport 
+    * @return Result 
     */
-   private function build(Website $website) {
-      $report = new EntityReport();
-      date_default_timezone_set('Europe/Paris');
-      $date = new \DateTime();
-      $date = $date->format('d/m/Y H:i:s');
-      // Config
-      $config = $website->getConfig();
-      $report->config = [
-         'id' => $config->getId(),
-         'webspider' => $config->getWebspider(),
-         'pathRequire' => $config->getRequires(),
-         'pathException' => $config->getExceptions(),
-         'json' => $config->json,
-         'output' => $config->output,
-         'modules' => $config->modules,
-         'variables-injected' => $config->variables,
-         'createDate' => $date,
-      ];
-
-      // Spider
-      $job = 'progress';
-      if (count($website->getUrlsNotCrawled()) == 0): $job = 'finish'; endif;
-      $report->spider = [
-         'job' => $job,
-         'urlsCrawled' => count($website->getUrlsCrawled()),
-         'urlsNotCrawled' => count($website->getUrlsNotCrawled()),
-      ];
-
-      // Website
-      $report->website = [
-         'domain' => $website->getDomain(),
-         'scheme' => $website->getScheme(),
-      ];
-
-      // Urls
-      foreach ($website->getUrls() as $url) {
-         // Add Url
-         $report->urls[$url->getUrl()] = [
-            'url' => $url->getUrl(),
-            'isCrawled' => $url->isCrawled(),
-            'isExcluded' => $url->isExcluded(),
-            'sources' => $url->getSources($website)
-         ];
-         
-         $webpage = $url->getWebPage();
-         if ($webpage) {
-            // Url Header
-            $header = $url->getWebPage()->getHeader();
-            $headers = [
-               'httpCode' => $header->getHttpCode(),
-               'transferTime' => $header->getTransferTime(),
-               'downloadSize' => $header->getDownloadSize(),
-               'headers' => $header->getContent()
-            ];
-            $report->urls[$url->getUrl()]['header'] = $headers;
-            // Url links
-            $links = [
-               'links' => $webpage->getLinks(),
-               'externalLinks' => $webpage->getExternalLinks(),
-            ];
-            $report->urls[$url->getUrl()]['links'] = $links;
-            // Modules
-            if (isset($webpage->modules)) {
-               $report->urls[$url->getUrl()]['modules'] = $webpage->modules;
-            }
-         }
-      }
-
-      // Modules
-      if (isset($website->modules)) {$report->modules = $website->modules;}
-
-      // Errors
-      if (isset($website->errors)) {$report->errors = $website->errors;}
-
-      return $report;
+   private function build(Website $website): Result {
+      $result = new Result($this->config, $website);
+      $result = $result->build();
+      return $result;
    }
 }

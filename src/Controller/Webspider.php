@@ -14,7 +14,7 @@ use Mediashare\Controller\Crawler;
  */
 class Webspider
 {
-	public $websites = [];
+	public $website;
 	public $reports;
 	public $counter = 0;
 	public $config;
@@ -27,19 +27,15 @@ class Webspider
 	}
 
 	public function run() {
-		$websites = $this->getWebsites();
-		return $this->reports;
+		$url = $this->config->getUrl();
+		$url = new Url($url);
+		$website = new Website($url);
+		$report = $this->crawl($website);
+		return $report;
 	}
-
-	public function getWebsites() {
-		foreach ((array) $this->config->getWebsites() as $website) {
-			if (!$this->config->html) {$this->output->progressBar($this->counter, count($website->getUrlsNotCrawled()));}
-			$report = $this->crawl($website);
-			$this->reports[] = $report;
-		}
-	}
-
+	
 	public function crawl(Website $website) {
+		if (!$this->config->html) {$this->output->progressBar(0, 1);}
 		while (count($website->getUrlsNotCrawled())) {
 			foreach ($website->getUrlsNotCrawled() as $url) {
 				// Check if have pathException & pathRequire
@@ -50,7 +46,7 @@ class Webspider
 					if ($webPage) {
 						// Crawl
 						$crawler = new Crawler();
-						$crawler->crawl($webPage);
+						$crawler->crawl($this->config, $website, $webPage);
 						$url->setCrawled(true);
 						if (($this->counter % 100) === 0 || $this->counter === 1) {
 							$this->report->create($website);

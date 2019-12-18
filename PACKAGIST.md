@@ -21,7 +21,7 @@ $config->setRequires([]); // Path requires
 $config->setExceptions([]); // Path exceptions
 // Directories
 $config->setReportsDir(__DIR__.'/reports/'); // Default reports path
-$config->setModulesDir(__DIR__.'/src/Modules/'); // Default modules path
+$config->setModulesDir(__DIR__.'/modules/'); // Default modules path
 // Prompt Console / Output
 $config->setJson(false); // Prompt json output
 $config->setHtml(true); // Prompt html output

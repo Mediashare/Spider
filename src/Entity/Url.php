@@ -232,9 +232,9 @@ class Url
         return $sources;
     }
 
-    public function checkUrl(WebPage $webPage) {
-		$website = $webPage->getUrl()->getWebsite();
-		$config = $website->getConfig();
+    public function checkUrl(WebPage $webPage, Config $config) {
+        $website = $webPage->getUrl()->getWebsite();
+		
         $url = $this->getUrl();
 		if ($url == "/") {
             $url = rtrim($website->getScheme().'://'.$website->getDomain(),"/").$url;

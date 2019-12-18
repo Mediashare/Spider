@@ -6,12 +6,12 @@ use Mediashare\Entity\Url;
 
 class Website
 {
-    private $id;
-    private $domain;
-    private $urls;
-    private $createDate;
-    private $updateDate;
-    private $config;
+    public $id;
+    public $domain;
+    public $urls;
+    public $createDate;
+    public $updateDate;
+    public $config;
     public $errors = [];
 
     public function __toString() {

@@ -18,7 +18,6 @@ $options = [
 $config = new \Mediashare\Entity\Config();
 // $config->setId("Audit"); // Id|Name report (uniqid() by default)
 // Website Config
-$config->setUrl('http://marquand.pro'); // Website target
 $config->setWebspider(true); // Crawl all website
 $config->setRequires([]); // Path requires
 $config->setExceptions([]); // Path exceptions
@@ -34,6 +33,6 @@ $config->enableAllModule(true); // Enable all modules
 // $config->addVariables(['Search' => ['Thibault Marquand']]); // Inject this variables in modules 
 
 $spider = new \Mediashare\Spider($config);
-$result = $spider->run();
+$result = $spider->run('http://marquand.pro');
 // dump($result);
 

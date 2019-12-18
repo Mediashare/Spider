@@ -12,7 +12,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class Output extends Controller
 {
-    public $counter = 0;
     public $config;
 
     public function __construct(Config $config) {
@@ -45,15 +44,16 @@ class Output extends Controller
     }
 
 	public function progress(Website $website, $webPage, Url $url) {
-		// ProgressBar
-		$this->counter++;
+        // ProgressBar
+        $counter = count($website->getUrlsCrawled()) + 1;
+        $max_counter = (count($website->getUrlsCrawled()) + count($website->getUrlsNotCrawled()));
 		if ($webPage) {$requestTime = $webPage->getHeader()->getTransferTime()."ms";} else {$requestTime = null;}
 		if ($this->config->html) {
-			$message = $this->echoColor("--- (".$this->counter."/".count($website->getUrls()).") URL: [".$url->getUrl()."] ".$requestTime." --- \n", 'cyan');
+			$message = $this->echoColor("--- (".$counter."/".$max_counter.") URL: [".$url->getUrl()."] ".$requestTime." --- \n", 'cyan');
 			echo $message;
 		} elseif (!$this->config->json) {
 			$message = $this->echoColor("--- URL: [".$url->getUrl()."] ".$requestTime." ---", 'cyan');
-			$this->progressBar($this->counter, count($website->getUrls()), $message);
+			$this->progressBar($counter, $max_counter, $message);
 		}
     }
     

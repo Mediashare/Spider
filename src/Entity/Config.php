@@ -16,11 +16,10 @@ class Config
     public $html = false; // Prompt html output
     public $json = false; // Prompt json output
     public $variables = []; // Variables Injected to modules
-    public $modules = []; // Select one or more modules to use ##
+    public $modules = []; // Select one or more modules to use
     public $enable_modules = true; // Enable all modules
-    public $modules_dir = __DIR__.'/Modules/'; // Default modules path ###
-    public $reports_dir = __DIR__.'/../var/reports/'; // Default reports path ###
-    public $output = null; // Rewrite ouput destination ###
+    public $modules_dir = __DIR__.'/Modules/'; // Default modules path
+    public $reports_dir = __DIR__.'/../var/reports/'; // Default reports path
 
 
     public function __construct()

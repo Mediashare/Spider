@@ -66,7 +66,7 @@ class Report
       $report = $this->build($website);
 
       $config = $website->getConfig();
-      $fileDir = $config->reportsDir.$domain.'/'.$config->getId().'.json';  
+      $fileDir = $config->getReportsDir().$domain.'/'.$config->getId().'.json';  
       // $fileDir = $config->projectDir.'/public/reports/'.uniqid().'.json';  
       if ($config->output) {$fileDir = $config->output;}
       

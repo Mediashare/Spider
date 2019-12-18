@@ -54,7 +54,7 @@ class Module {
      * @return void
      */
     public function getModules() {
-        $moduleDir = $this->config->modulesDir;
+        $moduleDir = $this->config->getModulesDir();
         $modulesFiles = glob($moduleDir.'*.php');
         $modules = [];
         foreach($modulesFiles as $moduleFile) {
@@ -75,11 +75,11 @@ class Module {
         }
 
         // If specific module was disabled (-d FileDownload)
-        if (is_array($this->config->disable_modules) && count($this->config->disable_modules) > 0):
-            foreach ($this->config->disable_modules as $module_disable):
-                unset($modules[$module_disable]);                    
-            endforeach;
-        endif;
+        // if (is_array($this->config->disable_modules) && count($this->config->disable_modules) > 0):
+        //     foreach ($this->config->disable_modules as $module_disable):
+        //         unset($modules[$module_disable]);                    
+        //     endforeach;
+        // endif;
 
         return $modules;
     }

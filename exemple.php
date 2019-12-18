@@ -3,7 +3,7 @@ require 'vendor/autoload.php';
 
 $url = 'http://marquand.pro';
 $options = [
-    'id' => 'test', // Id|Name report
+    'id' => 'tes2t', // Id|Name report
     'webspider' => true, // Crawl all website
     'require' => [], // Path required
     'exception' => [], // Path exceptions

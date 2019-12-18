@@ -15,6 +15,7 @@ class Config
     public $exception = []; // Path exceptions
     public $html = false; // Prompt html output
     public $json = false; // Prompt json output
+    public $variables = []; // Variables Injected to modules
     public $modules = []; // Select one or more modules to use ##
     public $all_modules = true; // Enable all modules
     public $modules_dir = __DIR__.'/Modules/'; // Default modules path ###
@@ -35,11 +36,13 @@ class Config
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(?string $id): self
     {
+        if (!$id):$id = uniqid();endif;
         $this->id = $id;
         return $this;
     }
+
 
     /**
      * @return array|Url[]
@@ -47,6 +50,21 @@ class Config
     public function getUrls()
     {
         return $this->urls;
+    }
+
+    public function addUrls(?array $urls) {
+        foreach ((array) $urls as $url) {
+            $url = new Url($url);
+            $this->addUrl($url);        
+            $website = $this->getWebsite($url);
+            if ($website) {
+                $website->addUrl($url);
+            } else {
+                $website = new Website($url);
+                $this->addWebsite($website);
+            }
+        }
+        return $this;
     }
 
     public function addUrl(Url $url): self
@@ -178,12 +196,23 @@ class Config
         return $this->modules;
     }
 
-    public function addModules(Module $module): self
+    public function addModules(?array $modules): self
+    {
+        foreach ((array) $modules as $module) {
+            if (!isset($this->modules[$module->getClassName()])):
+                $this->modules[$module->getClassName()] = $url;
+            endif;
+        }
+
+        return $this;
+    }
+
+    public function addModule(Module $module): self
     {
         if (!isset($this->modules[$module->getClassName()])):
             $this->modules[$module->getClassName()] = $url;
         endif;
-
+     
         return $this;
     }
 
@@ -198,6 +227,15 @@ class Config
         endif;
 
         return $this;
+    }
+
+    function addVariables(?array $variables_injected) {
+        foreach ($variables_injected as $variables) {
+            $variables = json_decode($variables, true);
+            foreach ((array) $variables as $module => $variable) {
+                $this->variables[$module][] = $variable;
+            }
+        }
     }
 
     public function enableAllModule(bool $enable): self
@@ -228,7 +266,7 @@ class Config
         return $this->modules_dir;
     }
 
-    public function setOutput(string $output): self
+    public function setOutput(?string $output): self
     {
         $this->output = $output;
         return $this;

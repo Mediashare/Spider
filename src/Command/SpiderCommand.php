@@ -32,7 +32,7 @@ class SpiderCommand extends Command
 	        ->setDescription('Execute Web Crawler')
 	        ->setHelp('This command crawl website pages.')
 	        // Arguments
-            ->addArgument('url', InputArgument::IS_ARRAY, 'Website url')
+            ->addArgument('urls', InputArgument::IS_ARRAY, 'Website url')
             // Options
             //  General
         	->addOption('webspider', 'w', InputOption::VALUE_NONE, 
@@ -53,12 +53,10 @@ class SpiderCommand extends Command
             ->addOption('id', false, InputOption::VALUE_REQUIRED, 
                 'Id (name) Report.')
             // Modules
-            ->addOption('all_modules', 'a', InputOption::VALUE_NONE, 
+            ->addOption('enable-modules', 'M', InputOption::VALUE_NONE, 
                 'Enable all modules.')
-            ->addOption('modules', 'm', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 
+            ->addOption('module', 'm', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 
                 'Enable specific module(s).')
-            ->addOption('disable_modules', 'd', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 
-                'Disable specific module(s) or disable all modules if not module specified.')
             // Inject modules variables 
             ->addOption('inject-variable', 'i', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 
                 'Inject input variables in specific module. json format (-i {"moduleName":["foo","bar"]}").')
@@ -80,17 +78,31 @@ class SpiderCommand extends Command
 
     protected function initConfig(InputInterface $input) {
         $config = new Config();
+        $config->setId($input->getOption('id'));
+        $config->addUrls($input->getArgument('urls'));
+        $config->setWebspider($input->getOption('webspider'));
+        // Require & Exception in URL
+        $config->setRequires((array) $input->getOption('require'));
+        $config->setExceptions((array) $input->getOption('exception'));
+        // Output
+        $config->setReportsDir($this->container->getParameter('reports_dir'));
+        $config->setModulesDir($this->container->getParameter('modules_dir'));
+        $config->setJson($input->getOption('json'));
+        $config->setOutput($input->getOption('output'));
+        $config->setHtml($input->getOption('html'));
+        $config->enableAllModule($input->getOption('enable-modules'));
+        // Modules
+        $config->addModules($input->getOption('module'));
+        // Inject input variables in modules 
+        $config->addVariables($input->getOption('inject-variable'));
 
-        if ($input->getOption('id')) {
-            $config->setId($input->getOption('id'));
-        }
-
+        // Files
         $file = $input->getOption('file');
         if ($file) {
             $file_content = fopen($file, 'r');
             while (($line = fgets($file_content)) !== false) {
-                $newUrl = trim(preg_replace('/\s\s+/', ' ', $line));
-                $url = new Url($newUrl);
+                $url = trim(preg_replace('/\s\s+/', ' ', $line));
+                $url = new Url($url);
                 $config->addUrl($url);
                 $website = $config->getWebsite($url);
                 if ($website) {
@@ -99,41 +111,6 @@ class SpiderCommand extends Command
                     $website = new Website($url);
                     $config->addWebsite($website);
                 }
-            }
-        }
-        foreach ((array) $input->getArgument('url') as $newUrl) {
-            $url = new Url($newUrl);
-            $config->addUrl($url);
-            
-            $website = $config->getWebsite($url);
-            if ($website) {
-                $website->addUrl($url);
-            } else {
-                $website = new Website($url);
-                $config->addWebsite($website);
-            }
-        }
-
-        $config->setWebspider($input->getOption('webspider'));
-        // Require & Exception in URL
-        $config->setRequires((array) $input->getOption('require'));
-        $config->setExceptions((array) $input->getOption('exception'));
-        // Output
-        $config->reportsDir = $this->container->getParameter('reports_dir');
-        $config->modulesDir = $this->container->getParameter('modules_dir');
-        $config->json = $input->getOption('json');
-        $config->output = $input->getOption('output');
-        $config->html = $input->getOption('html');
-        // Modules
-        $config->modules = $input->getOption('modules');
-        $config->all_modules = $input->getOption('all_modules');
-        $config->disable_modules = $input->getOption('disable_modules');
-        // Inject input variables in modules 
-        $config->variables = null;
-        foreach ($input->getOption('inject-variable') as $variables) {
-            $variables = json_decode($variables, true);
-            foreach ((array) $variables as $module => $variable) {
-                $config->variables[$module][] = $variable;
             }
         }
 

@@ -62,8 +62,7 @@ class Module {
             $className = "Mediashare\\Modules\\".basename($moduleFile, '.php');
             $module = new $className();
             $module->className = basename($moduleFile, '.php');
-            if ($this->config->all_modules === true || // If all module enabled (-m) 
-                (is_array($this->config->modules) && !empty($this->config->modules[0]) && $this->config->modules[0] === null)) { // If all module enabled (-m) 
+            if ($this->config->enable_modules) { // If all module enabled (-m) 
                     $modules[$module->className] = $module;
             } elseif (is_array($this->config->modules) && count($this->config->modules) > 0) { // If specific module selected (-m Module_Name) 
                 foreach ($this->config->modules as $module_enable):
@@ -80,7 +79,6 @@ class Module {
         //         unset($modules[$module_disable]);                    
         //     endforeach;
         // endif;
-
         return $modules;
     }
 

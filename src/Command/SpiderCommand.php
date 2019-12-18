@@ -95,7 +95,7 @@ class SpiderCommand extends Command
         $config->addModules($input->getOption('module'));
         // Inject input variables in modules 
         $config->addVariables($input->getOption('inject-variable'));
-
+        
         // Files
         $file = $input->getOption('file');
         if ($file) {

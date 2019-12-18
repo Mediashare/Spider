@@ -7,18 +7,18 @@ $options = [
     'webspider' => true, // Crawl all website
     'require' => [], // Path required
     'exception' => [], // Path exceptions
-    'prompt' => [ // Prompt console options
-        'html' => true, // Html output
-        'json' => false,  // Json output
-    ],
-    'modules_dir' => __DIR__.'/src/Modules/', // Default modules path
+    // Prompt console options
+    'html' => true, // Html output
+    'json' => false,  // Json output
+    // Directory
     'reports_dir' => __DIR__.'/../../reports/', // Default reports path
-    'all_modules' => false, // Enable all modules
-    'disable_modules' => false, // Disable all modules
-    'modules' => ['Links'] // Select one or more modules to use with class name
+    'modules_dir' => __DIR__.'/src/Modules/', // Default modules path
+    // Modules
+    'modules' => ['Links'], // Select one or more modules to use with class name
+    'enable_modules' => false, // Enable all modules
 ];
 
 $spider = new \Mediashare\Spider($url, $options);
 $result = $spider->run();
-// dump($result);
+dump($result);
 

@@ -19,7 +19,6 @@ class Spider
     public $json = false; // Prompt json output
     public $modules = []; // Select one or more modules to use
     public $enable_modules = true; // Enable all modules
-    public $disable_modules = false; // Disable all modules
     public $modules_dir = __DIR__.'/Modules/'; // Default modules path
     public $reports_dir = __DIR__.'/../var/reports/'; // Default reports path
     public $inject_variables = [];
@@ -40,11 +39,10 @@ class Spider
         if (isset($option['webspider'])): $this->set('webspider', $option['webspider']); endif;
         if (isset($option['require'])): $this->set('require', $option['require']); endif;
         if (isset($option['exception'])): $this->set('exception', $option['exception']); endif;
-        if (isset($option['prompt']['html'])): $this->set('html', $option['prompt']['html']); endif;
-        if (isset($option['prompt']['json'])): $this->set('json', $option['prompt']['json']); endif;
+        if (isset($option['html'])): $this->set('html', $option['html']); endif;
+        if (isset($option['json'])): $this->set('json', $option['json']); endif;
         if (isset($option['modules'])): $this->set('modules', $option['modules']); endif;
         if (isset($option['enable_modules'])): $this->set('enable_modules', $option['enable_modules']); endif;
-        if (isset($option['disable_modules'])): $this->set('disable_modules', $option['disable_modules']); endif;
         if (isset($option['modules_dir'])): $this->set('modules_dir', $option['modules_dir']); endif;
         if (isset($option['reports_dir'])): $this->set('reports_dir', $option['reports_dir']); endif;
         if (isset($option['inject_variables'])): $this->set('inject_variables', $option['inject_variables']); endif;
@@ -77,7 +75,7 @@ class Spider
         $config->addModules($this->get('modules'));
         // Inject this variables in modules 
         $config->addVariables($this->get('inject_variables'));
-    
+        // dump($config);die;
         return $config;
     }
 }

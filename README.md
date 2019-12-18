@@ -1,9 +1,9 @@
 # Spider
-:dizzy: Spider is a php command line tool that allows you to crawl a website for informations scraping.
+:dizzy: Spider is a PHP command line tool that allows you to crawl a website for informations scraping.
 
-Spider is a crawler of website modulable write in Php.
+Spider is a crawler of website modulable write in PHP.
 The tool allows you to retrieve information and execute code on website pages. It can be useful for SEO or security audit purposes.
-Users have the possibility to use the modules created by the community or to create their own modules (written in Php via a web interface).
+Users have the possibility to use the modules created by the community or to create their own modules (written in PHP via a web interface).
 
 ### What is a Crawler?
 A crawler is an indexing robot, it automatically explores the pages of a website.
@@ -16,13 +16,13 @@ Using a crawler can have several interests:
 ### Features
   - Get all links from website
   - Check HTTP response
-  - Create your own [**Modules**](src/Modules/) (Crawl & execute your php code)
+  - Create your own [**Modules**](src/Modules/) (Crawl & execute your PHP code)
   - No database, Pure PHP & Symfony
   - Output json file
 
 I would be happy to receive your ideas and contributions to the project :smiley:
 
-## Getting start
+## Getting started
 ### Installation
 #### [Composer Usage](PACKAGIST.md)
 Use Spider library in your project & create your own modules. 
@@ -47,7 +47,7 @@ docker run slote/spider bin/console spider:run https://exemple.com -w
 ```
 ## [Commands](src/Command/)
 You can use this library with console commands.
-[More informations...](src/Command/)
+[More information...](src/Command/)
 
 ```bash
 bin/console spider:run http://exemple.com -w
@@ -56,7 +56,7 @@ bin/console spider:run http://exemple.com -w
 ## [Modules](src/Modules/)
 Modules are tools created by the community to add features when crawling a website.
 Adding a module to a crawler allows the automation of code execution on one or more pages of a website. Modules are executed when crawling a page.
-[More informations...](src/Modules/)
+[More information...](src/Modules/)
 
 
 ## Helper

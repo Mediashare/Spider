@@ -39,7 +39,7 @@ $result = $spider->run();
 ```php
 // ./modules/Links.php
 <?php
-namespace Mediashare;\Modules;
+namespace Mediashare\Modules;
 
 class Links {
     public $name = "Links";

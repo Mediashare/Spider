@@ -1,13 +1,24 @@
 <?php
-namespace Spider\Controller;
+namespace Spider\Service;
 
+use Spider\Entity\Url;
+use Spider\Entity\Config;
+use Spider\Entity\Website;
 use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * Output client
  */
-class Output
+class Output extends Controller
 {
+    public $counter = 0;
+    public $config;
+
+    public function __construct(Config $config) {
+        $this->config = $config;
+    }
+    
 	/**
 	 * Echo Banner
 	 */
@@ -33,6 +44,19 @@ class Output
         return "\033[".$idColor."m".$txt."\033[39m";
     }
 
+	public function progress(Website $website, $webPage, Url $url) {
+		// ProgressBar
+		$this->counter++;
+		if ($webPage) {$requestTime = $webPage->getHeader()->getTransferTime()."ms";} else {$requestTime = null;}
+		if ($this->config->html) {
+			$message = $this->echoColor("--- (".$this->counter.") URL: [".$url->getUrl()."] ".$requestTime." --- \n", 'cyan');
+			echo $message;
+		} elseif (!$this->config->json) {
+			$message = $this->echoColor("--- (".$this->counter.") URL: [".$url->getUrl()."] ".$requestTime." ---", 'cyan');
+			$this->progressBar($this->counter, count($website->getUrls()), $message);
+		}
+    }
+    
     public function progressBar(int $index, int $max, string $message = "") {
         if (isset($_SESSION['outputCli'])) {
             $outputCli = $_SESSION['outputCli'];

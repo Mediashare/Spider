@@ -5,7 +5,7 @@ use Spider\Entity\Url;
 use Spider\Entity\Config;
 use Spider\Controller\Guzzle;
 use Spider\Controller\Module;
-use Spider\Controller\Output;
+use Spider\Service\Output;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\DomCrawler\Crawler as Dom;

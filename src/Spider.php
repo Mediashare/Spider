@@ -4,7 +4,7 @@ namespace Spider;
 use Spider\Entity\Url;
 use Spider\Entity\Config;
 use Spider\Entity\Website;
-use Spider\Controller\Output;
+use Spider\Service\Output;
 use Spider\Controller\Webspider;
 session_start();
 
@@ -51,8 +51,8 @@ class Spider
     }
 
     public function run() {
-        $webspider = new Webspider();
-        $reports = $webspider->run($this->config);
+        $webspider = new Webspider($this->config);
+        $reports = $webspider->run();
         return $reports;
     } 
 

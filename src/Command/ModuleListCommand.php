@@ -10,7 +10,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
-use Spider\Controller\Output;
+use Spider\Service\Output;
 use Spider\Controller\Module;
 use Spider\Entity\Config;
 

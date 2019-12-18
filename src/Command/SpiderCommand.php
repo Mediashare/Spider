@@ -8,7 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Spider\Controller\Output;
+use Spider\Service\Output;
 use Spider\Controller\Webspider;
 use Spider\Entity\Config;
 use Spider\Entity\Url;
@@ -20,9 +20,8 @@ class SpiderCommand extends Command
 
     private $output;
     private $webspider;
-    public function __construct(ContainerInterface $container, Output $output, Webspider $webspider) {
+    public function __construct(ContainerInterface $container, Output $output) {
         $this->output = $output;
-        $this->webspider = $webspider;
         parent::__construct();
         $this->container = $container;
     }
@@ -75,7 +74,8 @@ class SpiderCommand extends Command
         
         $config = $this->initConfig($input);
         if (!$config->html) {$this->output->banner();}
-        $this->webspider->run($config);
+        $webspider = new Webspider($config);
+        $webspider->run();
     }
 
     protected function initConfig(InputInterface $input) {

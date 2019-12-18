@@ -26,7 +26,7 @@ class Url
         return $this->getUrl();
     }
 
-    public function __construct(string $url) {
+    public function __construct(string $url = "http://marquand.pro") {
         $this->setUpdateDate();
         $this->setCrawled(false);
         $this->setExcluded(false);

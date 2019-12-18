@@ -1,36 +1,38 @@
 <?php
 namespace Spider\Controller;
 
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Spider\Entity\Config;
+use Spider\Entity\Website;
+use Spider\Service\Output;
+use Spider\Controller\FileSystem;
+use Spider\Entity\Report as BuildReport;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Spider\Controller\FileSystem;
-use Spider\Controller\Output;
-use Spider\Entity\Report as BuildReport;
-use Spider\Entity\Website;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class Report
 {
-   public function __construct() {
+   public $config;
+   public $output;
+   public function __construct(Config $config) {
+      $this->config = $config;
 		$encoders = [new XmlEncoder(), new JsonEncoder()];
       $normalizers = new ObjectNormalizer();
       // $normalizers->setCircularReferenceLimit(1);
       $this->serializer = new Serializer([$normalizers], $encoders);
       $this->fileSystem = new FileSystem();
-      $this->output = new Output();
    }
 
    public function endResponse(Website $website) {
       $file = $this->create($website, $end = true);
-      $output = new Output();
       if (!empty($_SESSION['outputCli'])) { // Classic bin/console execution
          $outputCli = $_SESSION['outputCli'];
-         $outputCli->text($output->echoColor("**********************", 'green'));
-         $outputCli->text($output->echoColor("* Output file result: ",'white').$output->echoColor($file['fileDir'],'green'));
-         $outputCli->text($output->echoColor("**********************", 'green'));
+         $outputCli->text($this->output->echoColor("**********************", 'green'));
+         $outputCli->text($this->output->echoColor("* Output file result: ",'white').$this->output->echoColor($file['fileDir'],'green'));
+         $outputCli->text($this->output->echoColor("**********************", 'green'));
    
          if ($website->getConfig()->json) {
             $output = $_SESSION['outputCli'];

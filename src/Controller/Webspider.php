@@ -1,61 +1,64 @@
 <?php
 namespace Spider\Controller;
 
-use Spider\Entity\Config;
 use Spider\Entity\Url;
-use Spider\Controller\Output;
+use Spider\Entity\Config;
+use Spider\Entity\Website;
 use Spider\Controller\Guzzle;
-use Spider\Controller\Crawler;
+use Spider\Service\Output;
 use Spider\Controller\Report;
+use Spider\Controller\Crawler;
 
 /**
  * WebSpider
  */
 class Webspider
 {
-	public function __construct() {
-		$this->output = new Output();
+	public $websites = [];
+	public $reports;
+	public $counter = 0;
+	public $config;
+	public function __construct(Config $config) {
+		$this->config = $config;
+		$this->output = new Output($this->config);
 		$this->guzzle = new Guzzle();
-		$this->report = new Report();
+		$this->report = new Report($this->config);
+		$this->report->output = $this->output;
 	}
 
-	public function run(Config $config) {
-		$reports = [];
-		$websites = $config->getWebsites();
-		foreach ($websites as $website) {
-			$counter = 0;
-			if (!$config->html) {$this->output->progressBar($counter, count($website->getUrlsNotCrawled()));}
-			while (count($website->getUrlsNotCrawled())) {
-				foreach ($website->getUrlsNotCrawled() as $url) {
-					// Check if have pathException & pathRequire
-					if (strpos($url->getUrl(), $url->getWebsite()->getDomain()) === false) {$url->setExcluded(true);}
-					if ((!$url->isExcluded() && !$url->isCrawled()) || $url === $website->getUrls()[0]) {
-						$webPage = $this->guzzle->getWebPage($url);
-						// ProgressBar
-						$counter++;
-						if ($webPage) {$requestTime = $webPage->getHeader()->getTransferTime()."ms";} else {$requestTime = null;}
-						if ($config->html) {
-							$message = $this->output->echoColor("--- (".$counter.") URL: [".$url->getUrl()."] ".$requestTime." --- \n", 'cyan');
-							echo $message;
-						} elseif (!$config->json) {
-							$message = $this->output->echoColor("--- (".$counter.") URL: [".$url->getUrl()."] ".$requestTime." ---", 'cyan');
-							$this->output->progressBar($counter, count($website->getUrls()), $message);
-						}
+	public function run() {
+		$websites = $this->getWebsites();
+		return $this->reports;
+	}
 
-						if ($webPage) {
-							// Crawl
-							$crawler = new Crawler();
-							$crawler->crawl($webPage);
-							$url->setCrawled(true);
-							if (($counter % 100) === 0 || $counter === 1) {
-								$this->report->create($website);
-							}
+	public function getWebsites() {
+		foreach ((array) $this->config->getWebsites() as $website) {
+			if (!$this->config->html) {$this->output->progressBar($this->counter, count($website->getUrlsNotCrawled()));}
+			$report = $this->crawl($website);
+			$this->reports[] = $report;
+		}
+	}
+
+	public function crawl(Website $website) {
+		while (count($website->getUrlsNotCrawled())) {
+			foreach ($website->getUrlsNotCrawled() as $url) {
+				// Check if have pathException & pathRequire
+				if (strpos($url->getUrl(), $url->getWebsite()->getDomain()) === false) {$url->setExcluded(true);}
+				if ((!$url->isExcluded() && !$url->isCrawled()) || $url === $website->getUrls()[0]) {
+					$webPage = $this->guzzle->getWebPage($url);
+					$this->output->progress($website, $webPage, $url);
+					if ($webPage) {
+						// Crawl
+						$crawler = new Crawler();
+						$crawler->crawl($webPage);
+						$url->setCrawled(true);
+						if (($this->counter % 100) === 0 || $this->counter === 1) {
+							$this->report->create($website);
 						}
 					}
 				}
 			}
-			$reports[] = $this->report->endResponse($website);
 		}
-		return $reports;
+		return $this->report->endResponse($website);
 	}
 }

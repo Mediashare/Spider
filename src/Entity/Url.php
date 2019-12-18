@@ -1,26 +1,26 @@
 <?php
 
-namespace Spider\Entity;
+namespace Mediashare\Entity;
 
-use Spider\Entity\Website;
-use Spider\Entity\WebPage;
+use Mediashare\Entity\Website;
+use Mediashare\Entity\WebPage;
 
 class Url
 {
-    private $id;
-    private $url;
-    private $scheme;
-    private $host;
-    private $port;
-    private $path;
-    private $query;
-    private $fragment;
-    private $isCrawled;
-    private $isExcluded;
-    private $website;
-    private $createDate;
-    private $updateDate;
-    private $webpage;
+    public $id;
+    public $url;
+    public $scheme;
+    public $host;
+    public $port;
+    public $path;
+    public $query;
+    public $fragment;
+    public $isCrawled;
+    public $isExcluded;
+    public $website;
+    public $createDate;
+    public $updateDate;
+    public $webpage;
 
     public function __toString() {
         return $this->getUrl();

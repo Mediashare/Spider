@@ -1,5 +1,5 @@
 <?php 
-namespace Spider\Command;
+namespace Mediashare\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -8,11 +8,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Spider\Service\Output;
-use Spider\Controller\Webspider;
-use Spider\Entity\Config;
-use Spider\Entity\Url;
-use Spider\Entity\Website;
+use Mediashare\Service\Output;
+use Mediashare\Controller\Webspider;
+use Mediashare\Entity\Config;
+use Mediashare\Entity\Url;
+use Mediashare\Entity\Website;
 
 class SpiderCommand extends Command
 {

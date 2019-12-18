@@ -1,11 +1,11 @@
 <?php
-namespace Spider\Controller;
+namespace Mediashare\Controller;
 
-use Spider\Entity\Config;
-use Spider\Entity\Website;
-use Spider\Service\Output;
-use Spider\Controller\FileSystem;
-use Spider\Entity\Report as BuildReport;
+use Mediashare\Entity\Config;
+use Mediashare\Entity\Website;
+use Mediashare\Service\Output;
+use Mediashare\Service\FileSystem;
+use Mediashare\Entity\Report as BuildReport;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;

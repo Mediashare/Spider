@@ -1,5 +1,5 @@
 <?php 
-namespace Spider\Command;
+namespace Mediashare\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -10,8 +10,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
-use Spider\Service\Output;
-use Spider\Entity\Config;
+use Mediashare\Service\Output;
+use Mediashare\Entity\Config;
 
 
 class ModuleCreateCommand extends Command

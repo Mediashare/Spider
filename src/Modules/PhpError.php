@@ -1,5 +1,5 @@
 <?php
-namespace Spider\Modules;
+namespace Mediashare\Modules;
 
 class PhpError {
     public $name = "PhpError";

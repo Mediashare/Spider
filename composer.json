@@ -51,12 +51,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Spider\\": "src/"
+            "Mediashare\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Spider\\Tests\\": "tests/"
+            "Mediashare\\Tests\\": "tests/"
         }
     },
     "replace": {

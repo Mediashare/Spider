@@ -18,7 +18,7 @@ $options = [
     'modules' => [] // Select one or more modules to use with class name
 ];
 
-$spider = new \Spider\Spider($url, $options);
+$spider = new \Mediashare\Spider($url, $options);
 $result = $spider->run();
 // dump($result);
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Spider\Entity;
+namespace Mediashare\Entity;
 
-use Spider\Entity\Url;
+use Mediashare\Entity\Url;
 
 class Website
 {

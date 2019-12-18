@@ -1,11 +1,11 @@
 <?php 
-namespace Spider\Command;
+namespace Mediashare\Command;
 
-use Spider\Entity\Url;
-use Spider\Entity\Config;
-use Spider\Controller\Guzzle;
-use Spider\Controller\Module;
-use Spider\Service\Output;
+use Mediashare\Entity\Url;
+use Mediashare\Entity\Config;
+use Mediashare\Controller\Guzzle;
+use Mediashare\Controller\Module;
+use Mediashare\Service\Output;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\DomCrawler\Crawler as Dom;

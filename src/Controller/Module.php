@@ -1,6 +1,6 @@
 <?php
-namespace Spider\Controller;
-use Spider\Controller\FileSystem;
+namespace Mediashare\Controller;
+use Mediashare\Controller\FileSystem;
 
 class Module {
     
@@ -49,7 +49,7 @@ class Module {
         $modules = [];
         foreach($modulesFiles as $moduleFile) {
             require_once $moduleFile;
-            $className = "Spider\\Modules\\".basename($moduleFile, '.php');
+            $className = "Mediashare\\Modules\\".basename($moduleFile, '.php');
             $module = new $className();
             $module->className = basename($moduleFile, '.php');
             if ($this->config->all_modules === true || 

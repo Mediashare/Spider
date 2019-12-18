@@ -1,9 +1,9 @@
 <?php
-namespace Spider\Service;
+namespace Mediashare\Service;
 
-use Spider\Entity\Url;
-use Spider\Entity\Config;
-use Spider\Entity\Website;
+use Mediashare\Entity\Url;
+use Mediashare\Entity\Config;
+use Mediashare\Entity\Website;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 

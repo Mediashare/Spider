@@ -14,18 +14,18 @@ services:
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
-    Spider\:
+    Mediashare\:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Migrations,Tests,Kernel.php}'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    Spider\Controller\:
+    Mediashare\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
     webspider_command:
-        class:  Spider\Command\SpiderCommand
+        class:  Mediashare\Command\SpiderCommand
         arguments: ['@service_container']

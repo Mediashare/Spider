@@ -1,13 +1,13 @@
 <?php
-namespace Spider\Controller;
+namespace Mediashare\Controller;
 
-use Spider\Entity\Url;
-use Spider\Entity\Config;
-use Spider\Entity\Website;
-use Spider\Controller\Guzzle;
-use Spider\Service\Output;
-use Spider\Controller\Report;
-use Spider\Controller\Crawler;
+use Mediashare\Entity\Url;
+use Mediashare\Entity\Config;
+use Mediashare\Entity\Website;
+use Mediashare\Controller\Guzzle;
+use Mediashare\Service\Output;
+use Mediashare\Controller\Report;
+use Mediashare\Controller\Crawler;
 
 /**
  * WebSpider

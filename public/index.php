@@ -1,6 +1,6 @@
 <?php
 
-use Spider\Kernel;
+use Mediashare\Kernel;
 use Symfony\Component\Debug\Debug;
 use Symfony\Component\HttpFoundation\Request;
 date_default_timezone_set('Europe/Paris');

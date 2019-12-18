@@ -29,7 +29,7 @@ $options = [
     'modules' => ['Links'] // Select one or more modules to use with class name
 ];
 
-$spider = new \Spider\Spider($url, $options);
+$spider = new \Mediashare\Spider($url, $options);
 $result = $spider->run();
 // dump($result);
 ```
@@ -38,7 +38,7 @@ $result = $spider->run();
 ```php
 // ./modules/Links.php
 <?php
-namespace Spider\Modules;
+namespace Mediashare;\Modules;
 
 class Links {
     public $name = "Links";

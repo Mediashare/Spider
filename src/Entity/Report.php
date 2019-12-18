@@ -1,6 +1,6 @@
 <?php
 
-namespace Spider\Entity;
+namespace Mediashare\Entity;
 
 class Report
 {

@@ -1,14 +1,15 @@
 <?php
-namespace Spider\Controller;
+namespace Mediashare\Controller;
 
 use Symfony\Component\DomCrawler\Crawler as Dom;
-use Spider\Entity\Url;
-use Spider\Entity\Website;
-use Spider\Entity\WebPage;
-use Spider\Controller\Module;
+use Mediashare\Entity\Url;
+use Mediashare\Entity\Website;
+use Mediashare\Entity\WebPage;
+use Mediashare\Controller\Module;
 
 /**
  * Crawler
+ * 
  */
 class Crawler
 {	

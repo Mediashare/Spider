@@ -1,11 +1,11 @@
 <?php
-namespace Spider;
+namespace Mediashare;
 
-use Spider\Entity\Url;
-use Spider\Entity\Config;
-use Spider\Entity\Website;
-use Spider\Service\Output;
-use Spider\Controller\Webspider;
+use Mediashare\Entity\Url;
+use Mediashare\Entity\Config;
+use Mediashare\Entity\Website;
+use Mediashare\Service\Output;
+use Mediashare\Controller\Webspider;
 session_start();
 
 class Spider

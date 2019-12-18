@@ -199,8 +199,8 @@ class Config
     public function addModules(?array $modules): self
     {
         foreach ((array) $modules as $module) {
-            if (!isset($this->modules[$module->getClassName()])):
-                $this->modules[$module->getClassName()] = $url;
+            if (!isset($this->modules[$module])):
+                $this->modules[$module] = $module;
             endif;
         }
 
@@ -209,8 +209,8 @@ class Config
 
     public function addModule(Module $module): self
     {
-        if (!isset($this->modules[$module->getClassName()])):
-            $this->modules[$module->getClassName()] = $url;
+        if (!isset($this->modules[$module->name])):
+            $this->modules[$module->name] = $url;
         endif;
      
         return $this;

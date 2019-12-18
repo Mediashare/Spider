@@ -12,10 +12,10 @@ $options = [
         'json' => false,  // Json output
     ],
     'modules_dir' => __DIR__.'/src/Modules/', // Default modules path
-    'reports_dir' => __DIR__.'/var/reports/', // Default reports path
+    'reports_dir' => __DIR__.'/../../reports/', // Default reports path
     'all_modules' => false, // Enable all modules
     'disable_modules' => false, // Disable all modules
-    'modules' => [] // Select one or more modules to use with class name
+    'modules' => ['Links'] // Select one or more modules to use with class name
 ];
 
 $spider = new \Mediashare\Spider($url, $options);

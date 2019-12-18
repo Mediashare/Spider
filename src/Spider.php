@@ -18,17 +18,18 @@ class Spider
     public $html = false; // Prompt html output
     public $json = false; // Prompt json output
     public $modules = []; // Select one or more modules to use
-    public $all_modules = true; // Enable all modules
+    public $enable_modules = true; // Enable all modules
     public $disable_modules = false; // Disable all modules
     public $modules_dir = __DIR__.'/Modules/'; // Default modules path
     public $reports_dir = __DIR__.'/../var/reports/'; // Default reports path
+    public $inject_variables = [];
     public $output = null; // Rewrite ouput destination
 
     public function set(string $input, $value) {
         $this->$input = $value;
         return $this;
     }
-    public function get(string $input) {
+    public function get($input) {
         return $this->$input;
     }
 
@@ -42,10 +43,11 @@ class Spider
         if (isset($option['prompt']['html'])): $this->set('html', $option['prompt']['html']); endif;
         if (isset($option['prompt']['json'])): $this->set('json', $option['prompt']['json']); endif;
         if (isset($option['modules'])): $this->set('modules', $option['modules']); endif;
-        if (isset($option['all_modules'])): $this->set('all_modules', $option['all_modules']); endif;
+        if (isset($option['enable_modules'])): $this->set('enable_modules', $option['enable_modules']); endif;
         if (isset($option['disable_modules'])): $this->set('disable_modules', $option['disable_modules']); endif;
         if (isset($option['modules_dir'])): $this->set('modules_dir', $option['modules_dir']); endif;
         if (isset($option['reports_dir'])): $this->set('reports_dir', $option['reports_dir']); endif;
+        if (isset($option['inject_variables'])): $this->set('inject_variables', $option['inject_variables']); endif;
         if (isset($option['output'])): $this->set('output', $option['output']); endif;
         $this->config = $this->initConfig();
     }
@@ -58,40 +60,23 @@ class Spider
 
     public function initConfig() {
         $config = new Config();
-
-        if ($this->get('id')) {
-            $config->setId($this->get('id'));
-        }
-
-        foreach ((array) $this->get('url') as $newUrl) {
-            $url = new Url($newUrl);
-            $config->addUrl($url);
-            
-            $website = $config->getWebsite($url);
-            if ($website) {
-                $website->addUrl($url);
-            } else {
-                $website = new Website($url);
-                $config->addWebsite($website);
-            }
-        }
-    
+        $config->setId($this->get('id'));
+        $config->addUrls([$this->get('url')]);
         $config->setWebspider($this->get('webspider'));
         // Require & Exception in URL
         $config->setRequires((array) $this->get('require'));
         $config->setExceptions((array) $this->get('exception'));
         // Output
-        $config->reportsDir = $this->get('reports_dir');
-        $config->modulesDir = $this->get('modules_dir');
-        $config->json = $this->get('json');
-        $config->output = $this->get('output');
-        $config->html = $this->get('html');
+        $config->setReportsDir($this->get('reports_dir'));
+        $config->setModulesDir($this->get('modules_dir'));
+        $config->setJson($this->get('json'));
+        $config->setOutput($this->get('output'));
+        $config->setHtml($this->get('html'));
+        $config->enableAllModule($this->get('enable_modules'));
         // Modules
-        $config->modules = $this->get('modules');
-        $config->all_modules = $this->get('all_modules');
-        $config->disable_modules = $this->get('disable_modules');
-        // Inject input variables in modules 
-        $config->variables = null;
+        $config->addModules($this->get('modules'));
+        // Inject this variables in modules 
+        $config->addVariables($this->get('inject_variables'));
     
         return $config;
     }

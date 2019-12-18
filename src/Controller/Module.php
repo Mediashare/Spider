@@ -26,7 +26,7 @@ class Module {
             if ($variables) {
                 $module->variables = [];
                 if (isset($this->config->variables[$module->className])) {
-                    $module->variables = (array) $this->getVariables($this->config->variables[$module->className]);
+                    $module->variables = (array) $this->config->variables[$module->className];
                 }
             }
             // Execute this Module
@@ -80,28 +80,5 @@ class Module {
         //     endforeach;
         // endif;
         return $modules;
-    }
-
-
-    public function getVariables(array $tabVariables) {
-        foreach ($tabVariables as $key => $listVariables) {
-            foreach ($listVariables as $key => $variable) {
-                if (is_array($variable)) {
-                    foreach ($variable as $value) {
-                        if (is_array($value)) {
-                            $values = $value;
-                            foreach ($values as $value) {
-                                $variables[$key] = $value;
-                            }
-                        } else {
-                            $variables[$key] = $value;
-                        }
-                    }
-                } else {
-                    $variables[] = $variable;
-                }
-            }
-        }
-        return $variables;
     }
 }

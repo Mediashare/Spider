@@ -3,22 +3,37 @@ require 'vendor/autoload.php';
 
 $url = 'http://marquand.pro';
 $options = [
-    'id' => 'tes2t', // Id|Name report
+    'id' => 'audit-marquand.pro', // Id|Name report (uniqid() by default)
     'webspider' => true, // Crawl all website
     'require' => [], // Path required
     'exception' => [], // Path exceptions
-    // Prompt console options
-    'html' => true, // Html output
-    'json' => false,  // Json output
-    // Directory
-    'reports_dir' => __DIR__.'/../../reports/', // Default reports path
+    'html' => true, // Prompt html output
+    'json' => false,  // Prompt json output
+    'reports_dir' => __DIR__.'/reports/', // Default reports path
     'modules_dir' => __DIR__.'/src/Modules/', // Default modules path
-    // Modules
     'modules' => ['Links'], // Select one or more modules to use with class name
-    'enable_modules' => false, // Enable all modules
+    'enable_modules' => true, // Enable all modules
 ];
 
-$spider = new \Mediashare\Spider($url, $options);
+$config = new \Mediashare\Entity\Config();
+// $config->setId("Audit");
+$config->setUrl('http://marquand.pro');
+$config->setWebspider(true);
+// Require & Exception in URL
+$config->setRequires([]);
+$config->setExceptions([]);
+// Output
+$config->setReportsDir(__DIR__.'/reports/');
+$config->setModulesDir(__DIR__.'/src/Modules/');
+$config->setJson(false);
+$config->setHtml(true);
+$config->enableAllModule(false);
+// Modules
+$config->addModules(['Links', 'Search']);
+// Inject this variables in modules 
+$config->addVariables(['Search' => ['Thibault']]);
+
+$spider = new \Mediashare\Spider($config);
 $result = $spider->run();
-dump($result);
+// dump($result);
 

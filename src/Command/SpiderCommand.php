@@ -32,7 +32,7 @@ class SpiderCommand extends Command
 	        ->setDescription('Execute Web Crawler')
 	        ->setHelp('This command crawl website pages.')
 	        // Arguments
-            ->addArgument('urls', InputArgument::IS_ARRAY, 'Website url')
+            ->addArgument('url', InputArgument::IS_REQUIRED, 'Website url')
             // Options
             //  General
         	->addOption('webspider', 'w', InputOption::VALUE_NONE, 
@@ -79,7 +79,7 @@ class SpiderCommand extends Command
     protected function initConfig(InputInterface $input) {
         $config = new Config();
         $config->setId($input->getOption('id'));
-        $config->addUrls($input->getArgument('urls'));
+        $config->addUrls([$input->getArgument('url')]);
         $config->setWebspider($input->getOption('webspider'));
         // Require & Exception in URL
         $config->setRequires((array) $input->getOption('require'));

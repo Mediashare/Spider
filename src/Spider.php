@@ -32,22 +32,8 @@ class Spider
         return $this->$input;
     }
 
-    public function __construct(string $url, ?array $option) {
-        $this->id = uniqid();
-        $this->set('url', $url);
-        if (isset($option['id'])): $this->set('id', $option['id']); endif;
-        if (isset($option['webspider'])): $this->set('webspider', $option['webspider']); endif;
-        if (isset($option['require'])): $this->set('require', $option['require']); endif;
-        if (isset($option['exception'])): $this->set('exception', $option['exception']); endif;
-        if (isset($option['html'])): $this->set('html', $option['html']); endif;
-        if (isset($option['json'])): $this->set('json', $option['json']); endif;
-        if (isset($option['modules'])): $this->set('modules', $option['modules']); endif;
-        if (isset($option['enable_modules'])): $this->set('enable_modules', $option['enable_modules']); endif;
-        if (isset($option['modules_dir'])): $this->set('modules_dir', $option['modules_dir']); endif;
-        if (isset($option['reports_dir'])): $this->set('reports_dir', $option['reports_dir']); endif;
-        if (isset($option['inject_variables'])): $this->set('inject_variables', $option['inject_variables']); endif;
-        if (isset($option['output'])): $this->set('output', $option['output']); endif;
-        $this->config = $this->initConfig();
+    public function __construct(Config $config) {
+        $this->config = $config;
     }
 
     public function run() {

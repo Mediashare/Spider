@@ -8,11 +8,11 @@ class Config
 {
     
     public $id; // Id|Name report
-    public $urls = [];
+    public $url = "http://marquand.pro";
     public $websites = [];
     public $webspider = true; // Crawl all website
-    public $require = []; // Path required
-    public $exception = []; // Path exceptions
+    public $requires = []; // Path required
+    public $exceptions = []; // Path exceptions
     public $html = false; // Prompt html output
     public $json = false; // Prompt json output
     public $variables = []; // Variables Injected to modules
@@ -43,49 +43,19 @@ class Config
         return $this;
     }
 
-
-    /**
-     * @return array|Url[]
-     */
-    public function getUrls()
+    public function getUrl(): string
     {
-        return $this->urls;
+        return $this->url;
     }
 
-    public function addUrls(?array $urls) {
-        foreach ((array) $urls as $url) {
-            $url = new Url($url);
-            $this->addUrl($url);        
-            $website = $this->getWebsite($url);
-            if ($website) {
-                $website->addUrl($url);
-            } else {
-                $website = new Website($url);
-                $this->addWebsite($website);
-            }
-        }
-        return $this;
-    }
-
-    public function addUrl(Url $url): self
+    public function setUrl(string $url): self
     {
-        if (!isset($this->urls[$url->getUrl()])):
-            $this->urls[$url->getUrl()] = $url;
-        endif;
+        $url = new Url($url);        
+        $this->url = $url;
 
-        return $this;
-    }
-
-    public function removeUrl(Url $url): self
-    {
-        if (isset($this->urls[$url->getUrl()])):
-            unset($this->urls[$url->getUrl()]);
-            // set the owning side to null (unless already changed)
-            if ($url->getConfig() === $this) {
-                $url->setConfig(null);
-            }
-        endif;
-
+        $website = new Website($url);
+        $this->addWebsite($website);
+        
         return $this;
     }
 
@@ -229,11 +199,15 @@ class Config
         return $this;
     }
 
-    function addVariables(?array $variables_injected) {
-        foreach ($variables_injected as $variables) {
-            $variables = json_decode($variables, true);
-            foreach ((array) $variables as $module => $variable) {
-                $this->variables[$module][] = $variable;
+    function addVariables($variables_injected) {
+        foreach ($variables_injected as $module_name => $variables) {
+            if (!is_array($variables)) { // Is Json Input
+                $variables = json_decode($variables, true);
+                foreach ((array) $variables as $module => $variable) {
+                    $this->variables[$module][] = $variable;
+                }
+            } else {
+                $this->variables[$module_name] = $variables;
             }
         }
     }

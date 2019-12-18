@@ -78,8 +78,8 @@ class Spider
     
         $config->setWebspider($this->get('webspider'));
         // Require & Exception in URL
-        $config->setPathRequire((array) $this->get('require'));
-        $config->setPathException((array) $this->get('exception'));
+        $config->setRequires((array) $this->get('require'));
+        $config->setExceptions((array) $this->get('exception'));
         // Output
         $config->reportsDir = $this->get('reports_dir');
         $config->modulesDir = $this->get('modules_dir');

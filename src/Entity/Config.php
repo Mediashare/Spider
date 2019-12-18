@@ -6,16 +6,21 @@ use Mediashare\Entity\Url;
 
 class Config
 {
-    public $id;
-    public $urls;
-    public $webspider;
-    public $search = [];
-    public $pathRequire = [];
-    public $pathException = [];
-    public $websites;
-    public $json = false;
-    public $output;
-    public $html;
+    
+    public $id; // Id|Name report
+    public $urls = [];
+    public $websites = [];
+    public $webspider = true; // Crawl all website
+    public $require = []; // Path required
+    public $exception = []; // Path exceptions
+    public $html = false; // Prompt html output
+    public $json = false; // Prompt json output
+    public $modules = []; // Select one or more modules to use ##
+    public $all_modules = true; // Enable all modules
+    public $modules_dir = __DIR__.'/Modules/'; // Default modules path ###
+    public $reports_dir = __DIR__.'/../var/reports/'; // Default reports path ###
+    public $output = null; // Rewrite ouput destination ###
+
 
     public function __construct()
     {
@@ -24,6 +29,9 @@ class Config
 
     public function getId(): ?string
     {
+        if (!$this->id):
+            $this->id = uniqid();
+        endif;
         return $this->id;
     }
 
@@ -59,54 +67,6 @@ class Config
                 $url->setConfig(null);
             }
         endif;
-
-        return $this;
-    }
-
-    public function getWebspider(): ?bool
-    {
-        return $this->webspider;
-    }
-
-    public function setWebspider(bool $webspider): self
-    {
-        $this->webspider = $webspider;
-
-        return $this;
-    }
-
-    public function getSearch(): ?array
-    {
-        return $this->search;
-    }
-
-    public function setSearch(?array $search): self
-    {
-        $this->search = $search;
-
-        return $this;
-    }
-
-    public function getPathRequire(): ?array
-    {
-        return $this->pathRequire;
-    }
-
-    public function setPathRequire(?array $pathRequire): self
-    {
-        $this->pathRequire = $pathRequire;
-
-        return $this;
-    }
-
-    public function getPathException(): ?array
-    {
-        return $this->pathException;
-    }
-
-    public function setPathException(?array $pathException): self
-    {
-        $this->pathException = $pathException;
 
         return $this;
     }
@@ -150,5 +110,132 @@ class Config
         endif;
 
         return $this;
+    }
+
+    public function getWebspider(): ?bool
+    {
+        return $this->webspider;
+    }
+
+    public function setWebspider(bool $webspider): self
+    {
+        $this->webspider = $webspider;
+
+        return $this;
+    }
+
+    public function getRequires(): ?array
+    {
+        return $this->requires;
+    }
+
+    public function setRequires(?array $requires): self
+    {
+        $this->requires = $requires;
+
+        return $this;
+    }
+
+    public function getExceptions(): ?array
+    {
+        return $this->exceptions;
+    }
+
+    public function setExceptions(?array $exceptions): self
+    {
+        $this->exceptions = $exceptions;
+
+        return $this;
+    }
+
+    public function getHtml(): ?bool
+    {
+        return $this->html;
+    }
+
+    public function setHtml(bool $html): self
+    {
+        $this->html = $html;
+        return $this;
+    }
+
+    public function getJson(): ?bool
+    {
+        return $this->json;
+    }
+
+    public function setJson(bool $json): self
+    {
+        $this->json = $json;
+        return $this;
+    }
+
+    /**
+     * @return array|Module[]
+     */
+    public function getModuless()
+    {
+        return $this->modules;
+    }
+
+    public function addModules(Module $module): self
+    {
+        if (!isset($this->modules[$module->getClassName()])):
+            $this->modules[$module->getClassName()] = $url;
+        endif;
+
+        return $this;
+    }
+
+    public function removeModule(Module $module): self
+    {
+        if (isset($this->modules[$module->getModule()])):
+            unset($this->modules[$module->getModule()]);
+            // set the owning side to null (unless already changed)
+            if ($module->getConfig() === $this) {
+                $module->setConfig(null);
+            }
+        endif;
+
+        return $this;
+    }
+
+    public function enableAllModule(bool $enable): self
+    {
+        $this->all_modules = $enable;
+        return $this;
+    }
+
+    public function setReportsDir(string $reports_dir): self
+    {
+        $this->reports_dir = $reports_dir;
+        return $this;
+    }
+
+    public function getReportsDir(): ?string
+    {
+        return $this->reports_dir;
+    }
+
+    public function setModulesDir(string $modules_dir): self
+    {
+        $this->modules_dir = $modules_dir;
+        return $this;
+    }
+
+    public function getModulesDir(): ?string
+    {
+        return $this->modules_dir;
+    }
+
+    public function setOutput(string $output): self
+    {
+        $this->output = $output;
+        return $this;
+    }
+
+    public function getOutput(): ?string
+    {
+        return $this->output;
     }
 }

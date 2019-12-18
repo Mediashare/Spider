@@ -273,12 +273,12 @@ class Url
 		if ($this->getHost() !== $website->getDomain()) {
 			$this->setExcluded(true);
 		}
-		foreach ($config->getPathException() as $value) {
+		foreach ($config->getExceptions() as $value) {
 			if (strpos($url, $value) !== false) {
 				$this->setExcluded(true);
 			}
 		}
-		foreach ($config->getPathRequire() as $value) {
+		foreach ($config->getRequires() as $value) {
 			if (strpos($url, $value) === false) {
 				$this->setExcluded(true);
 			}

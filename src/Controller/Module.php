@@ -18,8 +18,10 @@ class Module {
             $module->config = $this->config;
 			$module->webpage = $this->webpage;
             $module->dom = $this->dom;
+            // SEO
             $name = $module->name;
             $description = $module->description;
+            // Variables
             $variables = $module->variables;
             if ($variables) {
                 $module->variables = [];
@@ -27,22 +29,30 @@ class Module {
                     $module->variables = (array) $this->getVariables($this->config->variables[$module->className]);
                 }
             }
-
             // Execute this Module
             $result = $module->run();
-            // Report
-            $this->website->modules[$module->className]['name'] = $name;
-            $this->website->modules[$module->className]['description'] = $description;
-            if ($result) {
-                // dump($this->webpage->getUrl()->getUrl(),$result);
-                $this->website->modules[$module->className]['results'][(string) $this->webpage->getUrl()] = $result;
-            }
-            if ($module->errors) {
-                $this->website->errors = array_merge($this->website->errors, $module->errors);
-            }
+            $this->report($module, $result);
+        }
+    }
+
+    public function report($module, $result) {
+        // Report
+        $this->website->modules[$module->className]['name'] = $module->name;
+        $this->website->modules[$module->className]['description'] = $module->description;
+        if ($result) {
+            // dump($this->webpage->getUrl()->getUrl(),$result);
+            $this->website->modules[$module->className]['results'][(string) $this->webpage->getUrl()] = $result;
+        }
+        if ($module->errors) {
+            $this->website->errors = array_merge($this->website->errors, $module->errors);
         }
     }
     
+    /**
+     * Get all modules from $moduleDir & automatique including that class.
+     *
+     * @return void
+     */
     public function getModules() {
         $moduleDir = $this->config->modulesDir;
         $modulesFiles = glob($moduleDir.'*.php');
@@ -52,7 +62,7 @@ class Module {
             $className = "Mediashare\\Modules\\".basename($moduleFile, '.php');
             $module = new $className();
             $module->className = basename($moduleFile, '.php');
-            if ($this->config->all_modules === true || 
+            if ($this->config->all_modules === true || // If all module enabled (-m) 
                 (is_array($this->config->modules) && !empty($this->config->modules[0]) && $this->config->modules[0] === null)) { // If all module enabled (-m) 
                     $modules[$module->className] = $module;
             } elseif (is_array($this->config->modules) && count($this->config->modules) > 0) { // If specific module selected (-m Module_Name) 

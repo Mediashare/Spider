@@ -61,7 +61,7 @@ class SpiderCommand extends Command
                 'Disable specific module(s) or disable all modules if not module specified.')
             // Inject modules variables 
             ->addOption('inject-variable', 'i', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 
-                'Inject input variables in specific module. (-i \'{"moduleName":["foo","bar"]}\').')
+                'Inject input variables in specific module. json format (-i {"moduleName":["foo","bar"]}").')
             ->addOption('html', null, InputOption::VALUE_NONE, 
                     'Html output.')
             
@@ -116,8 +116,8 @@ class SpiderCommand extends Command
 
         $config->setWebspider($input->getOption('webspider'));
         // Require & Exception in URL
-        $config->setPathRequire((array) $input->getOption('require'));
-        $config->setPathException((array) $input->getOption('exception'));
+        $config->setRequires((array) $input->getOption('require'));
+        $config->setExceptions((array) $input->getOption('exception'));
         // Output
         $config->reportsDir = $this->container->getParameter('reports_dir');
         $config->modulesDir = $this->container->getParameter('modules_dir');

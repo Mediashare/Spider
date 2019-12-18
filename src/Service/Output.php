@@ -49,10 +49,10 @@ class Output extends Controller
 		$this->counter++;
 		if ($webPage) {$requestTime = $webPage->getHeader()->getTransferTime()."ms";} else {$requestTime = null;}
 		if ($this->config->html) {
-			$message = $this->echoColor("--- (".$this->counter.") URL: [".$url->getUrl()."] ".$requestTime." --- \n", 'cyan');
+			$message = $this->echoColor("--- (".$this->counter."/".count($website->getUrls()).") URL: [".$url->getUrl()."] ".$requestTime." --- \n", 'cyan');
 			echo $message;
 		} elseif (!$this->config->json) {
-			$message = $this->echoColor("--- (".$this->counter.") URL: [".$url->getUrl()."] ".$requestTime." ---", 'cyan');
+			$message = $this->echoColor("--- URL: [".$url->getUrl()."] ".$requestTime." ---", 'cyan');
 			$this->progressBar($this->counter, count($website->getUrls()), $message);
 		}
     }

@@ -5,7 +5,7 @@ use Mediashare\Entity\Config;
 use Mediashare\Entity\Website;
 use Mediashare\Service\Output;
 use Mediashare\Service\FileSystem;
-use Mediashare\Entity\Report as BuildReport;
+use Mediashare\Entity\Report as EntityReport;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -84,19 +84,24 @@ class Report
       ];
    }
 
-   private function build(Website $website, $end = false) {
-      $report = new BuildReport();
+   /**
+    * Build json report
+    *
+    * @param Website $website
+    * @return BuildReport 
+    */
+   private function build(Website $website) {
+      $report = new EntityReport();
       date_default_timezone_set('Europe/Paris');
       $date = new \DateTime();
       $date = $date->format('d/m/Y H:i:s');
-
       // Config
       $config = $website->getConfig();
       $report->config = [
          'id' => $config->getId(),
          'webspider' => $config->getWebspider(),
-         'pathRequire' => $config->getPathRequire(),
-         'pathException' => $config->getPathException(),
+         'pathRequire' => $config->getRequires(),
+         'pathException' => $config->getExceptions(),
          'json' => $config->json,
          'output' => $config->output,
          'modules' => $config->modules,

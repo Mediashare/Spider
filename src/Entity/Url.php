@@ -232,9 +232,9 @@ class Url
         return $sources;
     }
 
-    public function checkUrl(WebPage $webPage) {
-		$website = $webPage->getUrl()->getWebsite();
-		$config = $website->getConfig();
+    public function checkUrl(WebPage $webPage, Config $config) {
+        $website = $webPage->getUrl()->getWebsite();
+		
         $url = $this->getUrl();
 		if ($url == "/") {
             $url = rtrim($website->getScheme().'://'.$website->getDomain(),"/").$url;
@@ -259,12 +259,12 @@ class Url
 
 
         // Exceptions
+        $this->__construct($url);
         $isUrl = filter_var($url, FILTER_VALIDATE_URL);
         if (!$isUrl) {
             $this->setExcluded(true);
         }
 
-        $this->__construct($url);
 
 		if ($this->getHost() !== $website->getDomain()) {
             $this->setExcluded(true);

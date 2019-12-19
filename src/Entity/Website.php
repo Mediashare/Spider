@@ -6,19 +6,20 @@ use Mediashare\Entity\Url;
 
 class Website
 {
-    private $id;
-    private $domain;
-    private $urls;
-    private $createDate;
-    private $updateDate;
-    private $config;
+    public $id;
+    public $domain;
+    public $urls;
+    public $createDate;
+    public $updateDate;
+    public $config;
     public $errors = [];
 
     public function __toString() {
         return $this->getDomain();
     }
 
-    public function __construct(Url $url) {
+    public function __construct(string $url = "http://marquand.pro") {
+        $url = new Url($url);
         $this->setUpdateDate();
         $this->setDomain($url->getHost());
         $this->setScheme($url->getScheme());
@@ -88,7 +89,7 @@ class Website
         }
 
         if (!$excluded) {
-            $this->urls[] = $newUrl;
+            $this->urls[$newUrl->getUrl()] = $newUrl;
             $newUrl->setWebsite($this);
         }
 

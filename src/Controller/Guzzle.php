@@ -46,6 +46,7 @@ class Guzzle
 			]);	
 		} catch (RequestException $exception) {
 			$url->setExcluded(true);
+			$url->isCrawled(false);
 			$website->errors[] = [
 				'type' => 'guzzle',
 				'message' => $exception->getMessage(),

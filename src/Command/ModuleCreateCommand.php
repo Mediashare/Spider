@@ -42,7 +42,6 @@ class ModuleCreateCommand extends Command
     
     protected function execute(InputInterface $input, OutputInterface $output) {
         $io = new SymfonyStyle($input, $output);
-        $_SESSION['outputCli'] = $io;
         $this->output->banner();
         
         if ($input->getOption('variables')) {$variables = "true";} else {$variables = "false";}

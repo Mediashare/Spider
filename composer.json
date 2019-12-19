@@ -1,8 +1,8 @@
 {
     "name": "mediashare/spider",
-    "description": "Website crawler modulable.",
+    "description": "Spider is a php library for crawling website that allows you to scrape informations & automated actions.",
     "type": "vendor",
-    "keywords": ["crawler","scrapping","website crawler","webpage crawling"],
+    "keywords": ["crawler","scrapper","library","scrappe", "modulable"],
     "homepage": "https://github.com/Mediashare/Spider",
     "license": "MIT",
     "authors": [
@@ -17,6 +17,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "guzzlehttp/guzzle": "^6.3",
+        "league/climate": "^3.5",
         "sensiolabs/ansi-to-html": "^1.1",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "4.3.*",

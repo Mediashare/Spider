@@ -32,7 +32,7 @@ class SpiderCommand extends Command
 	        ->setDescription('Execute Web Crawler')
 	        ->setHelp('This command crawl website pages.')
 	        // Arguments
-            ->addArgument('url', InputArgument::IS_REQUIRED, 'Website url')
+            ->addArgument('url', InputArgument::REQUIRED, 'Website url')
             // Options
             //  General
         	->addOption('webspider', 'w', InputOption::VALUE_NONE, 
@@ -48,8 +48,6 @@ class SpiderCommand extends Command
             //  Output
         	->addOption('json', 'j', InputOption::VALUE_NONE, 
                 'Return json response in terminal.')
-        	->addOption('output', 'o', InputOption::VALUE_REQUIRED, 
-                'Output path destination.')
             ->addOption('id', false, InputOption::VALUE_REQUIRED, 
                 'Id (name) Report.')
             // Modules
@@ -67,19 +65,15 @@ class SpiderCommand extends Command
     }
     
     protected function execute(InputInterface $input, OutputInterface $output) {
-        $io = new SymfonyStyle($input, $output);
-        $_SESSION['outputCli'] = $io;
-        
         $config = $this->initConfig($input);
-        if (!$config->html) {$this->output->banner();}
-        $webspider = new Webspider($config);
+        $url = new Url($input->getArgument('url'));
+        $webspider = new Webspider($url, $config);
         $webspider->run();
     }
 
     protected function initConfig(InputInterface $input) {
         $config = new Config();
         $config->setId($input->getOption('id'));
-        $config->addUrls([$input->getArgument('url')]);
         $config->setWebspider($input->getOption('webspider'));
         // Require & Exception in URL
         $config->setRequires((array) $input->getOption('require'));
@@ -88,8 +82,7 @@ class SpiderCommand extends Command
         $config->setReportsDir($this->container->getParameter('reports_dir'));
         $config->setModulesDir($this->container->getParameter('modules_dir'));
         $config->setJson($input->getOption('json'));
-        $config->setOutput($input->getOption('output'));
-        $config->setHtml($input->getOption('html'));
+        $config->setVerbose($input->getOption('verbose'));
         $config->enableAllModule($input->getOption('enable-modules'));
         // Modules
         $config->addModules($input->getOption('module'));
@@ -104,7 +97,7 @@ class SpiderCommand extends Command
                 $url = trim(preg_replace('/\s\s+/', ' ', $line));
                 $url = new Url($url);
                 $config->addUrl($url);
-                $website = $config->getWebsite($url);
+                $website = $url->getWebsite($url);
                 if ($website) {
                     $website->addUrl($url);
                 } else {

@@ -1,11 +1,12 @@
 <?php
 namespace Mediashare\Controller;
 
-use Symfony\Component\DomCrawler\Crawler as Dom;
 use Mediashare\Entity\Url;
-use Mediashare\Entity\Website;
+use Mediashare\Entity\Config;
 use Mediashare\Entity\WebPage;
+use Mediashare\Entity\Website;
 use Mediashare\Controller\Module;
+use Symfony\Component\DomCrawler\Crawler as Dom;
 
 /**
  * Crawler
@@ -13,42 +14,46 @@ use Mediashare\Controller\Module;
  */
 class Crawler
 {	
-	public function crawl(WebPage $webPage) {
-		$dom = new Dom($webPage->getBody()->getContent());
-		$website = $webPage->getUrl()->getWebsite();
-		$config = $website->getConfig();
-
+	public $config;
+	public $website;
+	public $webpage;
+	public function __construct(Config $config, Website $website, WebPage $webpage) {
+		$this->config = $config;
+		$this->website = $website;
+		$this->webpage = $webpage;
+	}
+	public function crawl() {
+		$dom = new Dom($this->webpage->getBody()->getContent());
 		// Crawl links
 		foreach($dom->filter('a') as $link) {
 			if (!empty($link)) {
 				$href = rtrim(ltrim($link->getAttribute('href')));
 				if ($href) {
 					$url = new Url($href);
-					$isUrl = $url->checkUrl($webPage, $href);
+					$isUrl = $url->checkUrl($this->webpage, $this->config);
 					if ($isUrl) { // newUrl Found
-						if (!$config->getWebspider()) {$url->setExcluded(true);} // No crawling another pages
-						else {$website->addUrl($url);}
+						if (!$this->config->getWebspider()) {$url->setExcluded(true);} // No crawling another pages
+						else {$this->website->addUrl($url);}
 					}
 				}
 			}
 		}
 
 		// Modules
-		$this->modules($webPage);
+		$this->modules();
 
 		// Reset dom for memory
-		$webPage->setBody(null);
+		$this->webpage->setBody(null);
    	}
 	
-	private function modules(WebPage $webPage) {
-		$dom = new Dom($webPage->getBody()->getContent());
-		$website = $webPage->getUrl()->getWebsite();
-		$config = $website->getConfig();
+	private function modules() {
+		$dom = new Dom($this->webpage->getBody()->getContent());
+		$website = $this->webpage->getUrl()->getWebsite();
 
 		$module = new Module();
-		$module->config = $config;
-		$module->website = $website;
-		$module->webpage = $webPage;
+		$module->config = $this->config;
+		$module->website = $this->website;
+		$module->webpage = $this->webpage;
 		$module->dom = $dom;
 		// Get result
 		$module->execute();

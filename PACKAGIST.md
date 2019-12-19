@@ -73,30 +73,8 @@ class Links {
 php index.php
 ```
 #### Output
-```log
---- (1) URL: [http://marquand.pro] 140ms --- 
---- (2) URL: [http://marquand.pro/projets] 67ms --- 
---- (3) URL: [http://marquand.pro/CurriculumVitae] 58ms --- 
---- (4) URL: [http://marquand.pro/contact] 68ms --- 
---- (5) URL: [http://marquand.pro/12/projet] 70ms --- 
---- (6) URL: [http://marquand.pro/10/projet] 64ms --- 
---- (7) URL: [http://marquand.pro/8/projet] 63ms --- 
---- (8) URL: [http://marquand.pro/7/projet] 65ms --- 
---- (9) URL: [http://marquand.pro/getmonero.org] 45ms --- 
---- (10) URL: [http://marquand.pro/6/projet] 64ms --- 
---- (11) URL: [http://marquand.pro/4/projet] 70ms --- 
---- (12) URL: [http://marquand.pro/projets/#] 84ms --- 
---- (13) URL: [http://marquand.pro/projets/getmonero.org] 63ms --- 
---- (14) URL: [http://marquand.pro/CurriculumVitae/#] 59ms --- 
---- (15) URL: [http://marquand.pro/contact/#] 71ms --- 
---- (16) URL: [http://marquand.pro/12/projet/#] 60ms --- 
---- (17) URL: [http://marquand.pro/10/projet/#] 61ms --- 
---- (18) URL: [http://marquand.pro/8/projet/#] 61ms --- 
---- (19) URL: [http://marquand.pro/7/projet/#] 63ms --- 
---- (20) URL: [http://marquand.pro/7/projet/getmonero.org] 51ms --- 
---- (21) URL: [http://marquand.pro/6/projet/#] 63ms --- 
---- (22) URL: [http://marquand.pro/4/projet/#] 61ms --- 
-**********************
-* Output file result: /home/slote/Bureau/Spider/var/reports/marquand.pro/test.json
-**********************
+```sh
+-*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*
+* Output file result: /home/slote/Bureau/Spider/var/reports/marquand.pro/5dfaf1c0147c6.json
+-*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*
 ```

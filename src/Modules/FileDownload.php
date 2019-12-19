@@ -1,5 +1,5 @@
 <?php
-namespace Spider\Modules;
+namespace Mediashare\Modules;
 
 class FileDownload {
     public $name = "FileDownload";
@@ -14,10 +14,10 @@ class FileDownload {
     public function run() {
         // File directory
         $domain = parse_url($this->webpage->getUrl())['host'];
-        if (!\file_exists($this->config->reportsDir)):
-            \mkdir($this->config->reportsDir);
+        if (!\file_exists($this->config->reports_dir)):
+            \mkdir($this->config->reports_dir);
         endif;
-        $this->dir = rtrim($this->config->reportsDir, '/').'/'.$domain;
+        $this->dir = rtrim($this->config->reports_dir, '/').'/'.$domain;
         if (!\file_exists($this->dir)):
             \mkdir($this->dir);
         endif;
@@ -33,10 +33,12 @@ class FileDownload {
                 $files[] = $file;
             endif;
         }
-        return [
-            'dir' => $this->dir,
-            'files' => $files,
-        ];
+        if (!empty($files)) {
+            return [
+                'dir' => $this->dir,
+                'files' => $files,
+            ];
+        }
     }
     public function getFile(string $url) {
         $url = preg_replace( '~\s+~', '%20', $url); // Url encoding

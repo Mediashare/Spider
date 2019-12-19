@@ -1,5 +1,5 @@
 # Spider
-:dizzy: Spider is a php command line tool that allows you to crawl a website for informations scraping.
+:dizzy: Spider is a php library for crawling website that allows you to scrape informations & automated actions.
 
 Spider is a crawler of website modulable write in Php.
 The tool allows you to retrieve information and execute code on website pages. It can be useful for SEO or security audit purposes.

@@ -14,38 +14,46 @@ use Symfony\Component\DomCrawler\Crawler as Dom;
  */
 class Crawler
 {	
-	public function crawl(Config $config, Website $website, WebPage $webPage) {
-		$dom = new Dom($webPage->getBody()->getContent());
+	public $config;
+	public $website;
+	public $webpage;
+	public function __construct(Config $config, Website $website, WebPage $webpage) {
+		$this->config = $config;
+		$this->website = $website;
+		$this->webpage = $webpage;
+	}
+	public function crawl() {
+		$dom = new Dom($this->webpage->getBody()->getContent());
 		// Crawl links
 		foreach($dom->filter('a') as $link) {
 			if (!empty($link)) {
 				$href = rtrim(ltrim($link->getAttribute('href')));
 				if ($href) {
 					$url = new Url($href);
-					$isUrl = $url->checkUrl($webPage, $config);
+					$isUrl = $url->checkUrl($this->webpage, $this->config);
 					if ($isUrl) { // newUrl Found
-						if (!$config->getWebspider()) {$url->setExcluded(true);} // No crawling another pages
-						else {$website->addUrl($url);}
+						if (!$this->config->getWebspider()) {$url->setExcluded(true);} // No crawling another pages
+						else {$this->website->addUrl($url);}
 					}
 				}
 			}
 		}
 
 		// Modules
-		$this->modules($config, $webPage);
+		$this->modules();
 
 		// Reset dom for memory
-		$webPage->setBody(null);
+		$this->webpage->setBody(null);
    	}
 	
-	private function modules(Config $config, WebPage $webPage) {
-		$dom = new Dom($webPage->getBody()->getContent());
-		$website = $webPage->getUrl()->getWebsite();
+	private function modules() {
+		$dom = new Dom($this->webpage->getBody()->getContent());
+		$website = $this->webpage->getUrl()->getWebsite();
 
 		$module = new Module();
-		$module->config = $config;
-		$module->website = $website;
-		$module->webpage = $webPage;
+		$module->config = $this->config;
+		$module->website = $this->website;
+		$module->webpage = $this->webpage;
 		$module->dom = $dom;
 		// Get result
 		$module->execute();

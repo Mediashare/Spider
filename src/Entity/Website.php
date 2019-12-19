@@ -18,7 +18,8 @@ class Website
         return $this->getDomain();
     }
 
-    public function __construct(Url $url) {
+    public function __construct(string $url = "http://marquand.pro") {
+        $url = new Url($url);
         $this->setUpdateDate();
         $this->setDomain($url->getHost());
         $this->setScheme($url->getScheme());
@@ -88,7 +89,7 @@ class Website
         }
 
         if (!$excluded) {
-            $this->urls[] = $newUrl;
+            $this->urls[$newUrl->getUrl()] = $newUrl;
             $newUrl->setWebsite($this);
         }
 

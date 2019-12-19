@@ -6,7 +6,6 @@ use Mediashare\Entity\Url;
 
 class Config
 {
-    
     public $id; // Id|Name report
     public $url = "http://marquand.pro";
     public $webspider = true; // Crawl all website
@@ -21,8 +20,7 @@ class Config
     public $reports_dir = __DIR__.'/../var/reports/'; // Default reports path
 
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->setId(uniqid());
     }
 
@@ -50,9 +48,6 @@ class Config
     {
         $url = new Url($url);        
         $this->url = $url;
-
-        $website = new Website($url);
-        $this->website = $website;
         
         return $this;
     }

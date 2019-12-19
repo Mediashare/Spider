@@ -14,22 +14,21 @@ use Mediashare\Controller\Crawler;
  */
 class Webspider
 {
+	public $url;
+	public $config;
 	public $website;
 	public $reports;
 	public $counter = 0;
-	public $config;
-	public function __construct(Config $config) {
+	public function __construct(Url $url, Config $config) {
+		$this->url = $url;
 		$this->config = $config;
 		$this->output = new Output($this->config);
+		$this->report = new Report($this->config, $this->output);
 		$this->guzzle = new Guzzle();
-		$this->report = new Report($this->config);
-		$this->report->output = $this->output;
 	}
 
 	public function run() {
-		$url = $this->config->getUrl();
-		$url = new Url($url);
-		$website = new Website($url);
+		$website = new Website($this->url);
 		$report = $this->crawl($website);
 		return $report;
 	}
@@ -41,12 +40,12 @@ class Webspider
 				// Check if have pathException & pathRequire
 				if (strpos($url->getUrl(), $url->getWebsite()->getDomain()) === false) {$url->setExcluded(true);}
 				if ((!$url->isExcluded() && !$url->isCrawled()) || $url === $website->getUrls()[0]) {
-					$webPage = $this->guzzle->getWebPage($url);
-					$this->output->progress($website, $webPage, $url);
-					if ($webPage) {
+					$guzzle = $this->guzzle->getWebPage($url);
+					$this->output->progress($website, $guzzle, $url);
+					if ($guzzle) {
 						// Crawl
-						$crawler = new Crawler();
-						$crawler->crawl($this->config, $website, $webPage);
+						$crawler = new Crawler($this->config, $website, $guzzle);
+						$crawler->crawl();
 						$url->setCrawled(true);
 						if (($this->counter % 100) === 0 || $this->counter === 1) {
 							$this->report->create($website);

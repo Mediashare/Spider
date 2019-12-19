@@ -70,15 +70,15 @@ class SpiderCommand extends Command
         
         $config = $this->initConfig($input);
         if (!$config->html) {$this->output->banner();}
-        $webspider = new Webspider($config);
+
+        $url = new Url($input->getArgument('url'));
+        $webspider = new Webspider($url, $config);
         $webspider->run();
     }
 
     protected function initConfig(InputInterface $input) {
         $config = new Config();
         $config->setId($input->getOption('id'));
-        $url = new Url($input->getArgument('url'));
-        $config->setUrl($url);
         $config->setWebspider($input->getOption('webspider'));
         // Require & Exception in URL
         $config->setRequires((array) $input->getOption('require'));

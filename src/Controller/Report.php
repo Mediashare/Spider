@@ -17,8 +17,9 @@ class Report
 {
    public $config;
    public $output;
-   public function __construct(Config $config) {
+   public function __construct(Config $config, Output $output) {
       $this->config = $config;
+      $this->output = $output;
 		$encoders = [new XmlEncoder(), new JsonEncoder()];
       $normalizers = new ObjectNormalizer();
       // $normalizers->setCircularReferenceLimit(1);

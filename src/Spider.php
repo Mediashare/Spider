@@ -8,21 +8,18 @@ session_start();
 
 class Spider
 {
-    public $config;
     public $url;
-
-    public function __construct(Config $config) {
+    public $config;
+    public $report;
+    public function __construct(Url $url, Config $config) {
+        $this->url = $url;
         $this->config = $config;
     }
 
-    public function run(string $url) {
-        $this->url = new Url($url);
-        $config = $this->config->setUrl($url);
-
-        $webspider = new Webspider($config);
-        $reports = $webspider->run();
-        
-        return $reports;
+    public function run() {
+        $webspider = new Webspider($this->url, $this->config);
+        $this->report = $webspider->run();
+        return $this;
     }
 }
 

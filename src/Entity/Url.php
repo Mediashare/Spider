@@ -259,12 +259,12 @@ class Url
 
 
         // Exceptions
+        $this->__construct($url);
         $isUrl = filter_var($url, FILTER_VALIDATE_URL);
         if (!$isUrl) {
             $this->setExcluded(true);
         }
 
-        $this->__construct($url);
 
 		if ($this->getHost() !== $website->getDomain()) {
             $this->setExcluded(true);

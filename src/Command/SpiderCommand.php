@@ -65,12 +65,7 @@ class SpiderCommand extends Command
     }
     
     protected function execute(InputInterface $input, OutputInterface $output) {
-        $io = new SymfonyStyle($input, $output);
-        $_SESSION['outputCli'] = $io;
-        
         $config = $this->initConfig($input);
-        if (!$config->html) {$this->output->banner();}
-
         $url = new Url($input->getArgument('url'));
         $webspider = new Webspider($url, $config);
         $webspider->run();
@@ -87,7 +82,7 @@ class SpiderCommand extends Command
         $config->setReportsDir($this->container->getParameter('reports_dir'));
         $config->setModulesDir($this->container->getParameter('modules_dir'));
         $config->setJson($input->getOption('json'));
-        $config->setHtml($input->getOption('html'));
+        $config->setVerbose($input->getOption('verbose'));
         $config->enableAllModule($input->getOption('enable-modules'));
         // Modules
         $config->addModules($input->getOption('module'));

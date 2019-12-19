@@ -11,7 +11,7 @@ class Config
     public $webspider = true; // Crawl all website
     public $requires = []; // Path required
     public $exceptions = []; // Path exceptions
-    public $html = false; // Prompt html output
+    public $verbose = false; // Prompt ouput (verbose & debug mode)
     public $json = false; // Prompt json output
     public $variables = []; // Variables Injected to modules
     public $modules = []; // Select one or more modules to use
@@ -90,14 +90,14 @@ class Config
         return $this;
     }
 
-    public function getHtml(): ?bool
+    public function getVerbose(): ?bool
     {
-        return $this->html;
+        return $this->verbose;
     }
 
-    public function setHtml(bool $html): self
+    public function setVerbose(bool $verbose): self
     {
-        $this->html = $html;
+        $this->verbose = $verbose;
         return $this;
     }
 

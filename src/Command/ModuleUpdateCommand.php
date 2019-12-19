@@ -42,7 +42,6 @@ class ModuleUpdateCommand extends Command
     
     protected function execute(InputInterface $input, OutputInterface $output) {
         $io = new SymfonyStyle($input, $output);
-        $_SESSION['outputCli'] = $io;
         $this->output->banner();
         // Output
         echo $this->output->echoColor("******************\n", 'green');

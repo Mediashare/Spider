@@ -23,18 +23,18 @@ class Webspider
 		$this->url = $url;
 		$this->config = $config;
 		$this->output = new Output($this->config);
-		$this->report = new Report($this->config, $this->output);
+		$this->report = new Report($this->config);
 		$this->guzzle = new Guzzle();
 	}
 
 	public function run() {
+        $this->output->banner();
 		$website = new Website($this->url);
 		$report = $this->crawl($website);
 		return $report;
 	}
 	
 	public function crawl(Website $website) {
-		if (!$this->config->html) {$this->output->progressBar(0, 1);}
 		while (count($website->getUrlsNotCrawled())) {
 			foreach ($website->getUrlsNotCrawled() as $url) {
 				// Check if have pathException & pathRequire
@@ -54,6 +54,7 @@ class Webspider
 				}
 			}
 		}
-		return $this->report->endResponse($website);
+		$report = $this->report->create($website, $end = true);
+		return $report;
 	}
 }

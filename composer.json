@@ -17,6 +17,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "guzzlehttp/guzzle": "^6.3",
+        "league/climate": "^3.5",
         "sensiolabs/ansi-to-html": "^1.1",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "4.3.*",

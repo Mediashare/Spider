@@ -17,9 +17,11 @@ $config = new \Mediashare\Entity\Config();
 $config->setWebspider(true); // Crawl all website
 $config->setReportsDir(__DIR__.'/reports/'); // Default reports path
 $config->setModulesDir(__DIR__.'/modules/'); // Default modules path
-// Prompt Console / Output
+// Prompt Console / Dump
+$config->setVerbose(true); // Prompt verbose output
 $config->setJson(false); // Prompt json output
-$config->setHtml(true); // Prompt html output
+// Modules Activation
+$config->enableAllModule(true); // Enable all modules
 // Modules Activation
 $config->enableAllModule(true); // Enable all modules
 // $config->addModules(['Links', 'Search']);// Select one or more modules to use with class name

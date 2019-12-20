@@ -39,12 +39,12 @@ class Config
         return $this;
     }
 
-    public function getUrl(): Url
+    public function getUrl(): ?Url
     {
         return $this->url;
     }
 
-    public function setUrl(Url $url): self
+    public function setUrl(?Url $url): self
     {    
         $this->url = $url;
         return $this;

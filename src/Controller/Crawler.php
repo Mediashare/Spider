@@ -20,23 +20,31 @@ class Crawler
 	public $config;
 	public $guzzle;
 	public $crawler;
+	public $webpage;
 	public function __construct(Url $url, Config $config) {
 		$this->url = $url;
 		$this->config = $config;
 	}
 
 	public function run() {
-		$this->crawler = $this->getCrawler($this->url);
+		$this->crawler = $this->getDomCrawler($this->url);
 		// Crawl links
 		foreach($this->crawler->filter('a') as $link) {
 			if (!empty($link)) {
 				$href = rtrim(ltrim($link->getAttribute('href')));
 				if ($href) {
 					$url = new Url($href);
-					$isUrl = $url->checkUrl($this->guzzle->webpage, $this->config);
-					if ($isUrl) { // newUrl Found
-						if (!$this->config->getWebspider()) {$url->setExcluded(true);} // No crawling another pages
-						else {$this->url->getWebsite()->addUrl($url);}
+					$isUrl = $url->checkUrl($this->config);
+					if ($isUrl) {
+						if (!$url->isExcluded()) { // newUrl Found
+							if (!$this->config->getWebspider()) {$url->setExcluded(true);} // No crawling another pages
+							else {
+								$this->url->getWebsite()->addUrl($url);
+								$this->url->getWebpage()->addLinks($url->getUrl());
+							}
+						} else {
+							$this->url->getWebpage()->addExternalLinks($url->getUrl());
+						}
 					}
 				}
 			}
@@ -45,11 +53,12 @@ class Crawler
 		return $this;
 	}
 
-	public function getCrawler() {
+	public function getDomCrawler(Url $url) {
 		// Guzzle get Webpage content
-		$this->guzzle = new Guzzle($this->url);
-		$this->guzzle = $this->guzzle->run();
-		$body = $this->guzzle->body;
+		$guzzle = new Guzzle($url);
+		$guzzle = $guzzle->run();
+		$body = $guzzle->body;
+		$this->webpage = $guzzle->webpage;
 		// Generate DomCrawler (Symfony Library)
 		$crawler = new DomCrawler($body->getContent());
 		return $crawler;

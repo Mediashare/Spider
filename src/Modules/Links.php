@@ -4,12 +4,12 @@ namespace Mediashare\Modules;
 class Links {
     public $name = "Links";
     public $description = "Get all links in webpage";
-    public $webpage; // Headers & Body
+    public $url; // Url with Headers & Body
     public $crawler; // Dom for crawl in webpage
     public $errors; // Output errors
     
     public function run() { 
-        $source = $this->webpage->getUrl();
+        $source = $this->url->getUrl();
         $links = [];
         foreach($this->crawler->filter('a') as $link) {
             if (!empty($link)) {

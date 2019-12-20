@@ -6,7 +6,7 @@ class Search {
     public $description = "Search text from a webpage. 
 This command need injection variables with text(s) do you want find in website.";
     public $config;
-    public $webpage; // Headers & Body
+    public $url; // Url with Headers & Body
     public $crawler; // Dom for crawl in webpage
     public $variables = true; // Variables injected
     public $errors; // Output errors
@@ -21,7 +21,7 @@ This command need injection variables with text(s) do you want find in website."
 					strpos(strip_tags($text), strip_tags($search)) !== false) {
 					// Write result
 					$results['Search: '.$search] = [
-						'url' => (string) $this->webpage->getUrl()
+						'url' => (string) $this->url->getUrl()
 					];
 				}
 			}

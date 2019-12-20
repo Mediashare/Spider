@@ -5,13 +5,13 @@ class Evaneos {
     public $name = "Evaneos";
     public $description = "";
     public $config;
-    public $webpage; // Headers & Body
+    public $url; // Url with Headers & Body
     public $crawler; // Dom for crawl in webpage
     public $variables = false; // Variables injected
     public $errors; // Output errors
     
     public function run () {
-        $page_content = $this->webpage->getBody()->getContent();
+        $page_content = $this->url->getWebpage()->getBody()->getContent();
         if (strpos($page_content, '/iframe/widget-evaneos.php') !== false):
             return 'Iframe Evaneos Widget Here!';
         endif;

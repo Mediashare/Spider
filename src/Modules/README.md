@@ -35,7 +35,7 @@ class ModuleName {
     public $name = "Module Name";
     public $description = "This is description of module.";
     public $config;
-    public $webpage; // Headers & Body
+    public $url; // Url with Headers & Body
     public $crawler; // Dom for crawl in webpage
     public $variables; // Variables injected
     public $errors; // Output errors
@@ -55,7 +55,7 @@ class InjectVariables {
     public $name = "InjectVariables";
     public $description = "Vavirables injection in module.";
     public $config;
-    public $webpage; // Headers & Body
+    public $url; // Url with Headers & Body
     public $crawler; // Dom for crawl in webpage
     public $variables; // Variables injected
     public $errors; // Output errors
@@ -89,7 +89,7 @@ namespace App\Modules;
 class Links {
     public $name = "Links";
     public $description = "Get all links from a webpage.";
-    public $webpage; // Headers & Body
+    public $url; // Url with Headers & Body
     public $crawler; // DomCrawler for crawl in webpage
     public $variables; // Variables injected
     public $errors; // Output errors
@@ -121,7 +121,7 @@ class OutputErrors {
     public $name = "Output Errors";
     public $description = "Output errors from Module";
     public $config;
-    public $webpage; // Headers & Body
+    public $url; // Url with Headers & Body
     public $crawler; // Dom for crawl in webpage
     public $variables; // Variables injected
     public $errors; // Output errors

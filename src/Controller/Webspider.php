@@ -62,6 +62,7 @@ class Webspider
 			// Crawl
 			$crawler = new Crawler($url, $this->config);
 			$crawler->run();
+			$url->setWebpage($crawler->webpage);
 			return $crawler;
 		} else {
 			return false;
@@ -70,9 +71,11 @@ class Webspider
 
 	public function modules(Url $url) {
 		$modules = $this->modules->run($url);
-		foreach ($modules->errors as $error) {
-			$this->errors[] = $error;
-		}
+		if (!empty($modules->errors)):
+			foreach ($modules->errors as $index => $error) {
+				$this->errors[] = $error;
+			}
+		endif;
 		return $modules;
 	}
 
@@ -96,8 +99,7 @@ class Webspider
 		$website = $this->url->getWebsite();
 		$counter = count($website->getUrlsCrawled()) + 1;
 		$max_counter = (count($website->getUrlsCrawled()) + count($website->getUrlsNotCrawled()));
-		
-		if ($webpage) {$requestTime = $webpage->getHeader()->getTransferTime()."ms";} else {$requestTime = null;}
+		if ($webpage->getHeader()) {$requestTime = $webpage->getHeader()->getTransferTime()."ms";} else {$requestTime = null;}
 		$message = $this->output->echoColor("--- (".$counter."/".$max_counter.") URL: [".$url->getUrl()."] ".$requestTime." ---", "white");
 
 		$this->output->progressBar($counter, $max_counter, $message);

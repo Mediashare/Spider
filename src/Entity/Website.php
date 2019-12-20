@@ -9,8 +9,6 @@ class Website
     public $id;
     public $domain;
     public $urls;
-    public $createDate;
-    public $updateDate;
 
     public function __toString() {
         return $this->getDomain();
@@ -18,7 +16,6 @@ class Website
 
     public function __construct(Url $url) {
         $this->url = $url;
-        $this->setUpdateDate();
         $this->setDomain((string) $url->getHost());
         $this->setScheme((string) $url->getScheme());
         $this->addUrl($url);
@@ -96,41 +93,9 @@ class Website
 
     public function removeUrl(Url $url): self
     {
-        if ($this->urls->contains($url)) {
-            $this->urls->removeElement($url);
-            // set the owning side to null (unless already changed)
-            if ($url->getWebsite() === $this) {
-                $url->setWebsite(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getCreateDate(): ?\DateTime
-    {
-        return $this->createDate;
-    }
-
-    public function setCreateDate(): self
-    {
-        $this->createDate = new \DateTime();
-
-        return $this;
-    }
-
-    public function getUpdateDate(): ?\DateTime
-    {
-        return $this->updateDate;
-    }
-
-    public function setUpdateDate(): self
-    {
-        if (!$this->createDate) {
-            $this->setCreateDate();
-        }
-        $this->updateDate = new \DateTime();
-
+        if (isset($this->urls[$url->getUrl()])):
+            unset($this->urls[$url->getUrl()]);
+        endif;
         return $this;
     }
 

@@ -5,13 +5,13 @@ class SitemapChecker {
     public $name = "SitemapChecker";
     public $description = "";
     public $config;
-    public $webpage; // Headers & Body
+    public $url; // Url with Headers & Body
     public $crawler; // Dom for crawl in webpage
     public $variables = false; // Variables injected
     public $errors; // Output errors
     
     public function run() {
-        $webpage = $this->webpage->getBody()->getContent();
+        $webpage = $this->url->getWebpage()->getBody()->getContent();
         $urls = $this->getUrls($webpage);
         $results = $this->getHttpResponse($urls);
         return $results;

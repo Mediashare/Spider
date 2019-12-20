@@ -5,7 +5,7 @@ class FileDownload {
     public $name = "FileDownload";
     public $description = "";
     public $config;
-    public $webpage; // Headers & Body
+    public $url; // Webpage with Headers & Body
     public $crawler; // Dom for crawl in webpage
     public $variables = false; // Variables injected
     public $errors; // Output errors
@@ -13,7 +13,7 @@ class FileDownload {
 
     public function run() {
         // File directory
-        $domain = parse_url($this->webpage->getUrl())['host'];
+        $domain = parse_url($this->url->getUrl())['host'];
         if (!\file_exists($this->config->reports_dir)):
             \mkdir($this->config->reports_dir);
         endif;
@@ -26,7 +26,7 @@ class FileDownload {
             \mkdir($this->dir);
         endif;
 
-        $urls = $this->webpage->getLinks();
+        $urls = $this->url->getWebpage()->getLinks();
         foreach ($urls as $url) {
             $file = $this->getFile($url);
             if ($file): 

@@ -44,7 +44,7 @@ class Links {
     public $name = "Links";
     public $description = "Get all links in webpage";
     public $config;
-    public $webpage; // Headers & Body
+    public $url; // Url with Headers & Body
     public $crawler; // Dom for crawl in webpage
     public $variables = "0"; // Variables injected
     public $errors; // Output errors

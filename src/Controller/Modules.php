@@ -15,14 +15,14 @@ class Modules {
     
     public function run(Url $url) {
         $crawler = new Crawler($url, $this->config);
-        $crawler->run();
+        $crawler = $crawler->run();
         $results = [];
         // Modules
         $modules = $this->getModules($this->config);
         foreach ($modules as $module) {
             // Set required Object in Module
+            $module->url = $url;
             $module->config = $crawler->config;
-            $module->webpage = $crawler->guzzle->webpage;
             $module->crawler = $crawler->crawler;
             // SEO
             $name = $module->name;
@@ -45,6 +45,10 @@ class Modules {
                 }
             }
         }
+
+        // For Memory size
+        $url->getWebpage()->setBody(null);
+
         return $this;
     }
 

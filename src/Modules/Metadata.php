@@ -5,7 +5,7 @@ class Metadata {
     public $name = "Metadata";
     public $description = "Get all metadata from a webpage.";
     public $config;
-    public $webpage; // Headers & Body
+    public $url; // Url with Headers & Body
     public $crawler; // Dom for crawl in webpage
     public $variables = false; // Variables injected
     public $errors;
@@ -26,7 +26,7 @@ class Metadata {
             $this->errors[] = [
                 'type' => 'SEO',
                 'message' => 'Title not found!',
-                'url' => (string) $this->webpage->getUrl(),
+                'url' => (string) $this->url->getUrl(),
             ];
         }
     }

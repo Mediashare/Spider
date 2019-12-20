@@ -18,8 +18,6 @@ class Url
     public $fragment;
     public $isCrawled;
     public $isExcluded;
-    public $createDate;
-    public $updateDate;
     public $webpage;
 
     public function __toString() {
@@ -27,13 +25,13 @@ class Url
     }
 
     public function __construct(string $url = "http://marquand.pro") {
-        $this->setUpdateDate();
         $this->setCrawled(false);
         $this->setExcluded(false);
         $this->setUrl($url);
         $website = new Website($this);
         $this->setWebsite($website);
-
+        $webpage = new Webpage($this);
+        $this->setWebpage($webpage);
     }
 
     public function getId(): ?string
@@ -67,12 +65,12 @@ class Url
         return $this;
     }
 
-    public function getWebsite(): Website
+    public function getWebsite(): ?Website
     {
         return $this->website;
     }
 
-    public function setWebsite(Website $website): self
+    public function setWebsite(?Website $website): self
     {
         $this->website = $website;
         return $this;
@@ -175,33 +173,6 @@ class Url
         return $this;
     }
 
-    public function getCreateDate(): ?\DateTime
-    {
-        return $this->createDate;
-    }
-
-    public function setCreateDate(): self
-    {
-        $this->createDate = new \DateTime();
-
-        return $this;
-    }
-
-    public function getUpdateDate(): ?\DateTime
-    {
-        return $this->updateDate;
-    }
-
-    public function setUpdateDate(): self
-    {
-        if (!$this->createDate) {
-            $this->setCreateDate();
-        }
-        $this->updateDate = new \DateTime();
-
-        return $this;
-    }
-
     public function getWebpage(): ?Webpage
     {
         return $this->webpage;
@@ -214,13 +185,13 @@ class Url
         return $this;
     }
     
-    public function getSources(Website $website): ?array
+    public function getSources(): ?array
     {
         $sources = [];
-        $urls = $website->getUrls();
+        $urls = (array) $this->website->getUrls();
         foreach ($urls as $url) {
             if ($url->isCrawled()) {
-                $links = $url->getWebPage()->getLinks(); // Internal links
+                $links = $url->getWebpage()->getLinks(); // Internal links
                 foreach ($links as $link) {
                     if ($link == $this->getUrl() || 
                         rtrim(parse_url($link, PHP_URL_PATH), '/') === rtrim(parse_url($this->getUrl(), PHP_URL_PATH), '/')) {
@@ -230,16 +201,18 @@ class Url
             }
         }
         $sources = array_values($sources); // Reset array keys
+        $this->sources = $sources;
         return $sources;
     }
 
-    public function checkUrl(WebPage $webPage, Config $config) {
-        $website = $webPage->getUrl()->getWebsite();
+    public function checkUrl(Config $config) {
+        $url = $config->url;
+        $website = $url->getWebsite();
         $url = $this->getUrl();
 		if ($url == "/") {
             $url = rtrim($website->getScheme().'://'.$website->getDomain(),"/").$url;
         } elseif ($url[0] == "#") {
-            $url = rtrim($webPage->getUrl()->getUrl()  ,"/")."/".$url;
+            $url = rtrim($url  ,"/")."/".$url;
         } else {
             $isUrl = filter_var($url, FILTER_VALIDATE_URL);
             if (!$isUrl && ($url[0] === "/" && $url[1] !== "/")) {
@@ -247,32 +220,32 @@ class Url
                 $isUrl = filter_var($url, FILTER_VALIDATE_URL);
             }
 			if (!$isUrl && strpos($url, $website->getScheme().'://'.$website->getDomain()) === false) {
-                $url = rtrim($webPage->getUrl()->getUrl(),"/")."/".$url;
+                $url = rtrim($url,"/")."/".$url;
 				$isUrl = filter_var($url, FILTER_VALIDATE_URL);
 			}
             if (!$isUrl) {
                 $url = rtrim($website->getScheme().'://'.$website->getDomain(),"/")."/".$url;
                 $isUrl = filter_var($url, FILTER_VALIDATE_URL);
             }
-		}
+        }
 
-
+        $isUrl = filter_var($url, FILTER_VALIDATE_URL);
 
         // Exceptions
+        $this->checkExceptions($url, $config);
+        if ($isUrl) {return $url;} else {return false;}
+    }
+    
+    public function checkExceptions(string $url, Config $config) {
         $this->__construct($url);
         $isUrl = filter_var($url, FILTER_VALIDATE_URL);
         if (!$isUrl) {
             $this->setExcluded(true);
         }
-
-
-		if ($this->getHost() !== $website->getDomain()) {
+        $website = $config->url->getWebsite();
+		if (\strpos($this->getUrl(), $website->getScheme().'://'.$website->getDomain()) === false) {
             $this->setExcluded(true);
-        }
-        
-		if ($this->getHost() !== $website->getDomain()) {
-			$this->setExcluded(true);
-		}
+        }        
 		foreach ($config->getExceptions() as $value) {
 			if (strpos($url, $value) !== false) {
 				$this->setExcluded(true);
@@ -282,14 +255,12 @@ class Url
 			if (strpos($url, $value) === false) {
 				$this->setExcluded(true);
 			}
-		}
-
-		if (!$this->isExcluded()) {
-			$webPage->addLinks($url);
-			return $url;
+        }
+        
+        if (!$this->isExcluded()) {
+            return true;
 		} else {
-			$webPage->addExternalLinks($url);
-			return false;
-		}
-	}
+            return false;
+        }
+    }
 }

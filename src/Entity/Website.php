@@ -48,7 +48,7 @@ class Website
         $urls = [];
         foreach ($this->getUrls() as $url) {
             if ($url->isCrawled()) {
-                $urls[] = $url;
+                $urls[(string) $url] = $url;
             }
         }
         return $urls;
@@ -58,7 +58,7 @@ class Website
         $urls = [];
         foreach ($this->getUrls() as $url) {
             if (!$url->isCrawled() && !$url->isExcluded()) {
-                $urls[] = $url;
+                $urls[(string) $url] = $url;
             }
         }
         return $urls;

@@ -4,34 +4,39 @@ namespace Mediashare\Entity;
 
 use Mediashare\Entity\Config;
 use Mediashare\Entity\Website;
+use Mediashare\Controller\Modules;
+use Mediashare\Controller\Webspider;
+use Mediashare\Entity\Module as ModuleEntity;
 
 class Result
 {
     public $id;
     public $config;
     public $website;
-    public $urls;
-    public $modules;
-    public $errors;
-
-    public function __construct(config $config, Website $website) {
+    public $urls = [];
+    public $modules = [];
+    public $errors = [];
+    public function __construct(Webspider $webspider) {
+        $this->webspider = $webspider;
         $this->id = uniqid();
-        $this->config = $config;
-        $this->website = $website;
+        $this->config = $webspider->config;
+        $this->modules = $webspider->modules;
+        $this->website = $webspider->url->getWebsite();
+        $this->errors = $webspider->errors;
     }
     
     public function build() {
+        $this->setModules($this->modules);
         $this->setUrls($this->website);
-
-        // Modules
-        if (isset($this->website->modules)) {$this->modules = $this->website->modules;}
-        // Errors
-        if (isset($this->website->errors)) {$this->errors = $this->website->errors;}
         return $this;
     }
 
-    public function setUrls(?Website $website) {
-        if (!$website) {$website = $this->website;}
+    public function setModules(Modules $modules) {
+        $this->modules = $modules->results;
+        return $this;
+    }
+
+    public function setUrls(Website $website) {
         // Urls
         foreach ((array)$website->getUrls() as $url) {
             // Add Url

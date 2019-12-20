@@ -39,19 +39,16 @@ class Config
         return $this;
     }
 
-    public function getUrl(): string
+    public function getUrl(): Url
     {
         return $this->url;
     }
 
-    public function setUrl(string $url): self
-    {
-        $url = new Url($url);        
+    public function setUrl(Url $url): self
+    {    
         $this->url = $url;
-        
         return $this;
     }
-
 
 
     public function getWebspider(): ?bool

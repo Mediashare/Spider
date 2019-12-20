@@ -6,14 +6,18 @@ use Mediashare\Entity\Header;
 use Mediashare\Entity\Body;
 use Mediashare\Entity\Url;
 
-class WebPage
+class Webpage
 {
-    private $id;
-    private $header;
-    private $body;
-    private $links = [];
-    private $externalLinks = [];
-    private $url;
+    public $id;
+    public $header;
+    public $body;
+    public $links = [];
+    public $externalLinks = [];
+    public $url;
+
+    public function __construct(Url $url) {
+        $this->setUrl($url);
+    }
 
     public function __toString() {
         return $this->getUrl()->getUrl();

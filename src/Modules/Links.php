@@ -4,16 +4,14 @@ namespace Mediashare\Modules;
 class Links {
     public $name = "Links";
     public $description = "Get all links in webpage";
-    public $config;
     public $webpage; // Headers & Body
-    public $dom; // Dom for crawl in webpage
-    public $variables = "0"; // Variables injected
+    public $crawler; // Dom for crawl in webpage
     public $errors; // Output errors
     
     public function run() { 
         $source = $this->webpage->getUrl();
         $links = [];
-        foreach($this->dom->filter('a') as $link) {
+        foreach($this->crawler->filter('a') as $link) {
             if (!empty($link)) {
                 $href = rtrim(ltrim($link->getAttribute('href')));
                 if ($href) {

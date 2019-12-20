@@ -6,7 +6,7 @@ class Evaneos {
     public $description = "";
     public $config;
     public $webpage; // Headers & Body
-    public $dom; // Dom for crawl in webpage
+    public $crawler; // Dom for crawl in webpage
     public $variables = false; // Variables injected
     public $errors; // Output errors
     
@@ -15,7 +15,7 @@ class Evaneos {
         if (strpos($page_content, '/iframe/widget-evaneos.php') !== false):
             return 'Iframe Evaneos Widget Here!';
         endif;
-        foreach ($this->dom->filter('script') as $script) {
+        foreach ($this->crawler->filter('script') as $script) {
             $content = (string) $script->textContent;
             if (strpos($content, 'EvaneosWidgetsObject') !== false):
                 return 'Script Evaneos Widget Here!';

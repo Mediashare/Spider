@@ -6,7 +6,7 @@ class SitemapChecker {
     public $description = "";
     public $config;
     public $webpage; // Headers & Body
-    public $dom; // Dom for crawl in webpage
+    public $crawler; // Dom for crawl in webpage
     public $variables = false; // Variables injected
     public $errors; // Output errors
     

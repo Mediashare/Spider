@@ -3,12 +3,13 @@
 namespace Mediashare\Entity;
 
 use Mediashare\Entity\Website;
-use Mediashare\Entity\WebPage;
+use Mediashare\Entity\Webpage;
 
 class Url
 {
     public $id;
     public $url;
+    public $website;
     public $scheme;
     public $host;
     public $port;
@@ -17,7 +18,6 @@ class Url
     public $fragment;
     public $isCrawled;
     public $isExcluded;
-    public $website;
     public $createDate;
     public $updateDate;
     public $webpage;
@@ -31,6 +31,9 @@ class Url
         $this->setCrawled(false);
         $this->setExcluded(false);
         $this->setUrl($url);
+        $website = new Website($this);
+        $this->setWebsite($website);
+
     }
 
     public function getId(): ?string
@@ -52,7 +55,6 @@ class Url
     public function setUrl(string $url): self
     {
         $this->url = $url;
-        // $this->setId(uniqid());
         $this->setId($url);
         // Parse url
         $this->setScheme(parse_url($url, PHP_URL_SCHEME));
@@ -62,6 +64,17 @@ class Url
         $this->setQuery(parse_url($url, PHP_URL_QUERY));
         $this->setFragment(parse_url($url, PHP_URL_FRAGMENT));
 
+        return $this;
+    }
+
+    public function getWebsite(): Website
+    {
+        return $this->website;
+    }
+
+    public function setWebsite(Website $website): self
+    {
+        $this->website = $website;
         return $this;
     }
 
@@ -162,18 +175,6 @@ class Url
         return $this;
     }
 
-    public function getWebsite(): ?Website
-    {
-        return $this->website;
-    }
-
-    public function setWebsite(?Website $website): self
-    {
-        $this->website = $website;
-
-        return $this;
-    }
-
     public function getCreateDate(): ?\DateTime
     {
         return $this->createDate;
@@ -201,12 +202,12 @@ class Url
         return $this;
     }
 
-    public function getWebpage(): ?WebPage
+    public function getWebpage(): ?Webpage
     {
         return $this->webpage;
     }
 
-    public function setWebpage(?WebPage $webpage): self
+    public function setWebpage(?Webpage $webpage): self
     {
         $this->webpage = $webpage;
 
@@ -234,7 +235,6 @@ class Url
 
     public function checkUrl(WebPage $webPage, Config $config) {
         $website = $webPage->getUrl()->getWebsite();
-		
         $url = $this->getUrl();
 		if ($url == "/") {
             $url = rtrim($website->getScheme().'://'.$website->getDomain(),"/").$url;

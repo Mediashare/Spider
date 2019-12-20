@@ -3,31 +3,32 @@ namespace Mediashare\Controller;
 
 use GuzzleHttp\TransferStats;
 use GuzzleHttp\Client;
-use \GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\RequestException;
 use Mediashare\Entity\Url;
-use Mediashare\Entity\WebPage;
+use Mediashare\Entity\Webpage;
 use Mediashare\Entity\Header;
 use Mediashare\Entity\Body;
 
 class Guzzle
 {
-	public function __construct() {
+	public $url;
+	public $webpage;
+	public $header;
+	public $body;
+	public $errors = [];
+	public function __construct(Url $url) {
+		$this->url = $url;
 		$this->guzzle = new Client([
 			'http_errors' => false, 
 		]);
    	}
    
-   public function getWebPage(Url $url) {
-		$webPage = new WebPage();
+   public function run() {
+		$this->webpage = new Webpage($this->url);
 		$this->header = new Header();
-		$body = new Body();
-		$webPage->setUrl($url);
-		$this->header->setWebPage($webPage);
-		$body->setWebPage($webPage);
-		$website = $url->getWebsite();
-
+		$this->body = new Body();
 		try {
-			$guzzle = $this->guzzle->request('GET', $url->getUrl(), [
+			$guzzle = $this->guzzle->request('GET', $this->url->getUrl(), [
 				'headers' => [
 					'User-Agent' => $this->getUserAgent()
 				],
@@ -43,17 +44,18 @@ class Guzzle
 						if (isset($performances["total_time"])) {$this->header->setTransferTime($performances["total_time"]);}
 					}
 				}
-			]);	
+			]);
 		} catch (RequestException $exception) {
-			$url->setExcluded(true);
-			$url->isCrawled(false);
-			$website->errors[] = [
+			$this->url->setExcluded(true);
+			$this->url->isCrawled(false);
+			$this->errors[] = [
 				'type' => 'guzzle',
 				'message' => $exception->getMessage(),
-				'url' => $url->getUrl(),
+				'url' => $this->url->getUrl(),
 			];
 			return false;
 		}
+
 		$httpCode = $guzzle->getStatusCode();
 		// Error httpCode
 		if ($httpCode >= 400 ) {
@@ -61,11 +63,11 @@ class Guzzle
 			foreach ($guzzle->getHeaders() as $name => $values) {
 				$headers[$name] = implode(', ', $values);
 			}
-			$url->setExcluded(true);
-			$website->errors[] = [
+			$this->url->setExcluded(true);
+			$this->errors[] = [
 				'type' => 'guzzle',
 				'message' => 'Response status: '.$httpCode,
-				'url' => $url->getUrl(),
+				'url' => $this->url->getUrl(),
 			];
 			return false;
 		}
@@ -75,10 +77,14 @@ class Guzzle
 			$headers[$name] = implode(', ', $values);
 		}
 		$this->header->setContent($headers);
-		$body->setContent($guzzle->getBody());
+		$this->body->setContent($guzzle->getBody());
 
-		return $webPage;
+		$this->webpage->setHeader($this->header);
+		$this->webpage->setBody($this->body);
+
+		return $this;
 	}
+
 	private function getUserAgent() {
 		$userAgents = [
 			'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36',

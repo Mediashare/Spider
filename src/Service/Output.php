@@ -47,19 +47,6 @@ class Output {
         }
     }
 
-    
-	public function progress(Website $website, $webpage, Url $url) {
-        if ($this->verbose) {
-            $counter = count($website->getUrlsCrawled()) + 1;
-            $max_counter = (count($website->getUrlsCrawled()) + count($website->getUrlsNotCrawled()));
-            
-            if ($webpage) {$requestTime = $webpage->getHeader()->getTransferTime()."ms";} else {$requestTime = null;}
-            $message = $this->echoColor("--- (".$counter."/".$max_counter.") URL: [".$url->getUrl()."] ".$requestTime." ---", "white");
-            // ProgressBar
-            $this->progressBar($counter, $max_counter, $message);
-        }
-    }
-
     public function progressBar(int $counter, int $max_counter, ?string $message) {
         if ($this->verbose) {
             $climate = new \League\CLImate\CLImate;

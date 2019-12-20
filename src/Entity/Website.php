@@ -11,18 +11,16 @@ class Website
     public $urls;
     public $createDate;
     public $updateDate;
-    public $config;
-    public $errors = [];
 
     public function __toString() {
         return $this->getDomain();
     }
 
-    public function __construct(string $url = "http://marquand.pro") {
-        $url = new Url($url);
+    public function __construct(Url $url) {
+        $this->url = $url;
         $this->setUpdateDate();
-        $this->setDomain($url->getHost());
-        $this->setScheme($url->getScheme());
+        $this->setDomain((string) $url->getHost());
+        $this->setScheme((string) $url->getScheme());
         $this->addUrl($url);
     }
 
@@ -105,18 +103,6 @@ class Website
                 $url->setWebsite(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getConfig(): ?Config
-    {
-        return $this->config;
-    }
-
-    public function setConfig(?Config $config): self
-    {
-        $this->config = $config;
 
         return $this;
     }

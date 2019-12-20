@@ -6,7 +6,7 @@ class Metadata {
     public $description = "Get all metadata from a webpage.";
     public $config;
     public $webpage; // Headers & Body
-    public $dom; // Dom for crawl in webpage
+    public $crawler; // Dom for crawl in webpage
     public $variables = false; // Variables injected
     public $errors;
     
@@ -19,7 +19,7 @@ class Metadata {
     }
 
     private function getTitle() {
-        $title = $this->dom->filterXpath("//title");
+        $title = $this->crawler->filterXpath("//title");
         if ($title->count()) {
             return $title->text();
         } else {
@@ -33,7 +33,7 @@ class Metadata {
 
     private function getOtherMeta() {
         $result = null;
-        $metaBalises = $this->dom->filterXpath("//meta")->extract(array('name','property','content'));
+        $metaBalises = $this->crawler->filterXpath("//meta")->extract(array('name','property','content'));
         foreach ($metaBalises as $meta) {
             $type = null;
             if ($meta[0]) {

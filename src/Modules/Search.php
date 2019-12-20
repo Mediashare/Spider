@@ -7,7 +7,7 @@ class Search {
 This command need injection variables with text(s) do you want find in website.";
     public $config;
     public $webpage; // Headers & Body
-    public $dom; // Dom for crawl in webpage
+    public $crawler; // Dom for crawl in webpage
     public $variables = true; // Variables injected
     public $errors; // Output errors
     
@@ -16,7 +16,7 @@ This command need injection variables with text(s) do you want find in website."
 		foreach ((array) $this->variables as $search) {
 			if (!empty($search)) {
                 $search = strtolower($search);
-                $text = strtolower($this->dom->text());
+                $text = strtolower($this->crawler->text());
 				if (strpos($text, $search) !== false || 
 					strpos(strip_tags($text), strip_tags($search)) !== false) {
 					// Write result

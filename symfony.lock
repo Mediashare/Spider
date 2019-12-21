@@ -291,7 +291,11 @@
         "version": "v4.3.2"
     },
     "symfony/inflector": {
+<<<<<<< HEAD
         "version": "v5.0.2"
+=======
+        "version": "v4.3.3"
+>>>>>>> master
     },
     "symfony/maker-bundle": {
         "version": "1.0",
@@ -329,6 +333,9 @@
     "symfony/property-info": {
         "version": "v5.0.2"
     },
+    "symfony/property-info": {
+        "version": "v5.0.2"
+    },
     "symfony/routing": {
         "version": "4.2",
         "recipe": {
@@ -346,6 +353,9 @@
     },
     "symfony/serializer": {
         "version": "v5.0.2"
+    },
+    "symfony/serializer-pack": {
+        "version": "v1.0.2"
     },
     "symfony/serializer-pack": {
         "version": "v1.0.2"
@@ -375,6 +385,9 @@
             "config/routes/dev/twig.yaml",
             "templates/base.html.twig"
         ]
+    },
+    "symfony/twig-pack": {
+        "version": "v1.0.0"
     },
     "symfony/validator": {
         "version": "4.3",
@@ -411,6 +424,9 @@
     },
     "symfony/yaml": {
         "version": "v4.3.2"
+    },
+    "twig/extra-bundle": {
+        "version": "v3.0.0"
     },
     "twig/twig": {
         "version": "v2.11.3"

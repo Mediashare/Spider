@@ -62,7 +62,7 @@ $result = $spider->run();
 - The name of your class needs to be the same as the name of the .php file.
 - The entry point for executing modules is the run() function, so it is mandatory to have a run() function in your module.
   
-Spider executes the run() function when the webpage has just been crawled. So you can use the DomCrawler.
+Spider executes the run() function public when the webpage has just been crawled. So you can use the DomCrawler.
 ### Documentation
 DomCrawler is symfony component for DOM navigation for HTML and XML documents. You can retrieve [Documentation Here](https://symfony.com/doc/current/components/dom_crawler.html#usage).
 ```php
@@ -71,8 +71,6 @@ DomCrawler is symfony component for DOM navigation for HTML and XML documents. Y
 namespace Mediashare\Spider\Modules;
 
 class Links {
-    public $name = "Links";
-    public $description = "Get all links in webpage";
     public $config; // Spider Config
     public $url; // Url with Headers & Body
     public $crawler; // Dom for crawl in webpage

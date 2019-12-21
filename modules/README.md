@@ -11,10 +11,11 @@ Create your own Module for execute php code for webpage crawled and get output r
 <?php
 // ./modules/Hello.php
 namespace Mediashare\Spider\Spider\Modules;
-
+/**
+ * Hello
+ * Return Hello World! From [url source]
+ */
 class Hello {
-    public $name = "Hello";
-    public $description = "Return Hello World! From [url source]";
     public $config; // Spider Config
     public $url; // Url with Headers & Body
     public $crawler; // Dom for crawl in webpage
@@ -68,8 +69,6 @@ class Links {
 namespace Mediashare\Spider\Spider\Modules;
 
 class OutputErrors {
-    public $name = "Output Errors";
-    public $description = "Output errors from Module";
     public $config; // Spider Config
     public $url; // Url with Headers & Body
     public $crawler; // Dom for crawl in webpage

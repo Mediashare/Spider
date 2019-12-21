@@ -35,24 +35,22 @@ class Report
     public function build() {
       $result = new Result($this->webspider);
       $this->result = $result->build();
-      return $this;
+      return $this->result;
    }
 
    public function create(bool $end = false) {
       $json = $this->json($this->result);
-      
+      $output = $this->config->getOutput();
       $fileSystem = new FileSystem();
-      $domain = $this->website->getDomain();
-      $file_direction = $this->config->getReportsDir().$domain.'/'.$this->config->getId().'.json';
-      $fileSystem->createJsonFile($json, $file_direction);
+      $fileSystem->createJsonFile($json, $output);
       if ($end) {
-         $this->output->fileDirection($file_direction);
+         $this->output->fileDirection($output);
          $this->output->json($json);
       }
       return $this;
    }
 
-   public function json(Result $result):string {
+   public function json(Result $result) {
       // Serialize
 		$encoders = [new XmlEncoder(), new JsonEncoder()];
       $normalizers = new ObjectNormalizer();

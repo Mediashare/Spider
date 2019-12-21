@@ -16,8 +16,9 @@ class Config
     public $variables = []; // Variables Injected to modules
     public $modules = []; // Select one or more modules to use
     public $enable_modules = true; // Enable all modules
-    public $modules_dir;
-    public $reports_dir;
+    public $modulesDir;
+    public $reportsDir;
+    public $output;
     public function __construct() {
         $this->setId(uniqid());
     }
@@ -167,32 +168,47 @@ class Config
         return $this;
     }
 
-    public function setReportsDir(string $reports_dir): self
+    public function setReportsDir(string $reportsDir): self
     {
-        $this->reports_dir = $reports_dir;
+        $this->reportsDir = $reportsDir;
         return $this;
     }
 
     public function getReportsDir(): string
     {
 
-        if (!$this->reports_dir):
+        if (!$this->reportsDir):
             $this->setReportsDir(__DIR__.'/../../reports/');
         endif;
-        return $this->reports_dir;
+        return $this->reportsDir;
     }
 
-    public function setModulesDir(string $modules_dir): self
+    public function setModulesDir(string $modulesDir): self
     {
-        $this->modules_dir = $modules_dir;
+        $this->modulesDir = $modulesDir;
         return $this;
     }
 
     public function getModulesDir(): string
     {
-        if (!$this->modules_dir):
-            $this->setReportsDir(__DIR__.'/../../modules/');
+        if (!$this->modulesDir):
+            $this->setModulesDir(__DIR__.'/../../modules/');
         endif;
-        return $this->modules_dir;
+        return $this->modulesDir;
+    }
+
+    public function setOutput(string $output): self
+    {
+        $this->output = $output;
+        return $this;
+    }
+
+    public function getOutput(): string
+    {
+        if (!$this->output):
+            $domain = $this->getUrl()->getHost();
+            $this->setOutput(__DIR__.'/../../reports/'.$domain.'/'.$this->getId().'.json');
+        endif;
+        return $this->output;
     }
 }

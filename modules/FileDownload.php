@@ -14,10 +14,10 @@ class FileDownload {
     public function run() {
         // File directory
         $domain = parse_url($this->url->getUrl())['host'];
-        if (!\file_exists($this->config->reports_dir)):
-            \mkdir($this->config->reports_dir);
+        if (!\file_exists($this->config->getReportsDir())):
+            \mkdir($this->config->getReportsDir());
         endif;
-        $this->dir = rtrim($this->config->reports_dir, '/').'/'.$domain;
+        $this->dir = rtrim($this->config->getReportsDir(), '/').'/'.$domain;
         if (!\file_exists($this->dir)):
             \mkdir($this->dir);
         endif;

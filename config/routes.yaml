@@ -1,3 +1,0 @@
-#index:
-#    path: /
-#    controller: Mediashare\Controller\DefaultController::index

@@ -16,8 +16,8 @@ class Result
     public $modules = [];
     public $errors = [];
     public function __construct(Webspider $webspider) {
-        $this->webspider = $webspider;
         $this->id = uniqid();
+        $this->webspider = $webspider;
         $this->config = $webspider->config;
         $this->modules = $webspider->modules;
         $this->website = $webspider->url->getWebsite();

@@ -10,19 +10,17 @@ class Url
     public $id;
     public $url;
     public $website;
+    public $webpage;
     public $scheme;
     public $host;
-    public $isCrawled;
-    public $isExcluded;
-    public $webpage;
+    public $isCrawled = false;
+    public $isExcluded = false;
 
     public function __toString() {
         return $this->getUrl();
     }
 
     public function __construct(string $url = "http://marquand.pro") {
-        $this->setCrawled(false);
-        $this->setExcluded(false);
         $this->setUrl($url);
         $website = new Website($this);
         $this->setWebsite($website);
@@ -50,7 +48,6 @@ class Url
     {
         $this->url = $url;
         $this->setId($url);
-        // Parse url
         $this->setScheme(parse_url($url, PHP_URL_SCHEME));
         $this->setHost(parse_url($url, PHP_URL_HOST));
 

@@ -176,7 +176,7 @@ class Config
     {
 
         if (!$this->reports_dir):
-            return __DIR__.'/../../var/reports/';
+            return __DIR__.'/../../reports/';
         endif;
         return $this->reports_dir;
     }
@@ -190,7 +190,7 @@ class Config
     public function getModulesDir(): string
     {
         if (!$this->modules_dir):
-            return __DIR__.'/../Modules/';
+            return __DIR__.'/../../modules/';
         endif;
         return $this->modules_dir;
     }

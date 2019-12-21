@@ -9,12 +9,12 @@ $config->setRequires([]); // Path requires
 $config->setExceptions([]); // Path exceptions
 // Directories
 $config->setReportsDir(__DIR__.'/reports/'); // Default reports path
-$config->setModulesDir(__DIR__.'/src/Modules/'); // Default modules path
+$config->setModulesDir(__DIR__.'/modules/'); // Default modules path
 // Prompt Console / Dump
 $config->setVerbose(true); // Prompt verbose output
 $config->setJson(false); // Prompt json output
 // Modules Activation
-$config->enableAllModule(false); // Enable all modules
+$config->enableAllModule(true); // Enable all modules
 $config->addModules(['Links']);// Select one or more modules to use with class name
 // $config->addVariables(['Search' => ['Thibault Marquand']]); // Inject this variables in modules 
 

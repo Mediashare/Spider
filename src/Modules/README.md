@@ -34,7 +34,7 @@ namespace App\Modules;
 class ModuleName {
     public $name = "Module Name";
     public $description = "This is description of module.";
-    public $config;
+    public $config; // Spider Config
     public $url; // Url with Headers & Body
     public $crawler; // Dom for crawl in webpage
     public $variables; // Variables injected
@@ -54,7 +54,7 @@ namespace App\Modules;
 class InjectVariables {
     public $name = "InjectVariables";
     public $description = "Vavirables injection in module.";
-    public $config;
+    public $config; // Spider Config
     public $url; // Url with Headers & Body
     public $crawler; // Dom for crawl in webpage
     public $variables; // Variables injected
@@ -89,6 +89,7 @@ namespace App\Modules;
 class Links {
     public $name = "Links";
     public $description = "Get all links from a webpage.";
+    public $config; // Spider Config
     public $url; // Url with Headers & Body
     public $crawler; // DomCrawler for crawl in webpage
     public $variables; // Variables injected

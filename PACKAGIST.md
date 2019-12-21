@@ -43,7 +43,7 @@ namespace Mediashare\Modules;
 class Links {
     public $name = "Links";
     public $description = "Get all links in webpage";
-    public $config;
+    public $config; // Spider Config
     public $url; // Url with Headers & Body
     public $crawler; // Dom for crawl in webpage
     public $variables = "0"; // Variables injected

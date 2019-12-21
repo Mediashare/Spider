@@ -57,6 +57,7 @@ class Crawler
 		// Guzzle get Webpage content
 		$guzzle = new Guzzle($url);
 		$guzzle = $guzzle->run();
+		if (!$guzzle) {return false;} 
 		$body = $guzzle->body;
 		$this->webpage = $guzzle->webpage;
 		// Generate DomCrawler (Symfony Library)

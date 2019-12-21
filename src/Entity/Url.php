@@ -149,25 +149,24 @@ class Url
     }
 
     public function checkUrl(Config $config) {
-        $url = $config->url;
-        $website = $url->getWebsite();
+        $website_url = parse_url($config->url, PHP_URL_SCHEME).'://'.parse_url($config->url, PHP_URL_HOST);
         $url = $this->getUrl();
 		if ($url == "/") {
-            $url = rtrim($website->getScheme().'://'.$website->getDomain(),"/").$url;
+            $url = rtrim($website_url,"/").$url;
         } elseif ($url[0] == "#") {
             $url = rtrim($url  ,"/")."/".$url;
         } else {
             $isUrl = filter_var($url, FILTER_VALIDATE_URL);
             if (!$isUrl && ($url[0] === "/" && $url[1] !== "/")) {
-                $url = rtrim($website->getScheme().'://'.$website->getDomain(),"/").$url;
+                $url = rtrim($website_url,"/").$url;
                 $isUrl = filter_var($url, FILTER_VALIDATE_URL);
             }
-			if (!$isUrl && strpos($url, $website->getScheme().'://'.$website->getDomain()) === false) {
+			if (!$isUrl && strpos($url, $website_url) === false) {
                 $url = rtrim($url,"/")."/".$url;
 				$isUrl = filter_var($url, FILTER_VALIDATE_URL);
 			}
             if (!$isUrl) {
-                $url = rtrim($website->getScheme().'://'.$website->getDomain(),"/")."/".$url;
+                $url = rtrim($website_url,"/")."/".$url;
                 $isUrl = filter_var($url, FILTER_VALIDATE_URL);
             }
         }
@@ -180,13 +179,13 @@ class Url
     }
     
     public function checkExceptions(string $url, Config $config) {
+        $website_url = parse_url($config->url, PHP_URL_SCHEME).'://'.parse_url($config->url, PHP_URL_HOST);
         $this->__construct($url);
         $isUrl = filter_var($url, FILTER_VALIDATE_URL);
         if (!$isUrl) {
             $this->setExcluded(true);
         }
-        $website = $config->url->getWebsite();
-		if (\strpos($this->getUrl(), $website->getScheme().'://'.$website->getDomain()) === false) {
+		if (\strpos($this->getUrl(), $website_url) === false) {
             $this->setExcluded(true);
         }        
 		foreach ($config->getExceptions() as $value) {

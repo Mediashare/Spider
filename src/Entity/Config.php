@@ -176,7 +176,7 @@ class Config
     {
 
         if (!$this->reports_dir):
-            return __DIR__.'/../../var/reports';
+            return __DIR__.'/../../var/reports/';
         endif;
         return $this->reports_dir;
     }

@@ -1,6 +1,8 @@
 <?php
 namespace Mediashare\Modules;
 
+use Mediashare\Entity\Url;
+
 class Links {
     public $name = "Links";
     public $description = "Get all links in webpage";
@@ -16,9 +18,9 @@ class Links {
                 $href = rtrim(ltrim($link->getAttribute('href')));
                 if ($href) {
                     if (isset($links[$href])) {
-                        $links[$href]++;
+                        $links[$href]['counter']++;
                     } else {
-                        $links[$href] = 1;
+                        $links[$href]['counter'] = 1;
                     }
                 }
             }

@@ -12,10 +12,6 @@ class Url
     public $website;
     public $scheme;
     public $host;
-    public $port;
-    public $path;
-    public $query;
-    public $fragment;
     public $isCrawled;
     public $isExcluded;
     public $webpage;
@@ -57,10 +53,6 @@ class Url
         // Parse url
         $this->setScheme(parse_url($url, PHP_URL_SCHEME));
         $this->setHost(parse_url($url, PHP_URL_HOST));
-        $this->setPort(parse_url($url, PHP_URL_PORT));
-        $this->setPath(parse_url($url, PHP_URL_PATH));
-        $this->setQuery(parse_url($url, PHP_URL_QUERY));
-        $this->setFragment(parse_url($url, PHP_URL_FRAGMENT));
 
         return $this;
     }
@@ -96,55 +88,6 @@ class Url
     public function setHost(?string $host): self
     {
         $this->host = $host;
-
-        return $this;
-    }
-
-    public function getPort(): ?int
-    {
-        return $this->port;
-    }
-
-    public function setPort(?int $port): self
-    {
-        $this->port = $port;
-
-        return $this;
-    }
-
-    public function getPath(): ?string
-    {
-        return $this->path;
-    }
-
-    public function setPath(?string $path): self
-    {
-        if (!$path) {$path = "/";}
-        $this->path = $path;
-
-        return $this;
-    }
-
-    public function getQuery(): ?string
-    {
-        return $this->query;
-    }
-
-    public function setQuery(?string $query): self
-    {
-        $this->query = $query;
-
-        return $this;
-    }
-
-    public function getFragment(): ?string
-    {
-        return $this->fragment;
-    }
-
-    public function setFragment(?string $fragment): self
-    {
-        $this->fragment = $fragment;
 
         return $this;
     }
@@ -206,26 +149,27 @@ class Url
     }
 
     public function checkUrl(Config $config) {
-        $url = $config->url;
-        $website = $url->getWebsite();
+        $website_url = parse_url($config->url, PHP_URL_SCHEME).'://'.parse_url($config->url, PHP_URL_HOST);
         $url = $this->getUrl();
-		if ($url == "/") {
-            $url = rtrim($website->getScheme().'://'.$website->getDomain(),"/").$url;
-        } elseif ($url[0] == "#") {
-            $url = rtrim($url  ,"/")."/".$url;
-        } else {
-            $isUrl = filter_var($url, FILTER_VALIDATE_URL);
-            if (!$isUrl && ($url[0] === "/" && $url[1] !== "/")) {
-                $url = rtrim($website->getScheme().'://'.$website->getDomain(),"/").$url;
+		if ($url) {
+            if ($url == "/") {
+                $url = rtrim($website_url,"/").$url;
+            } elseif ($url[0] == "#") {
+                $url = rtrim($url  ,"/")."/".$url;
+            } else {
                 $isUrl = filter_var($url, FILTER_VALIDATE_URL);
-            }
-			if (!$isUrl && strpos($url, $website->getScheme().'://'.$website->getDomain()) === false) {
-                $url = rtrim($url,"/")."/".$url;
-				$isUrl = filter_var($url, FILTER_VALIDATE_URL);
-			}
-            if (!$isUrl) {
-                $url = rtrim($website->getScheme().'://'.$website->getDomain(),"/")."/".$url;
-                $isUrl = filter_var($url, FILTER_VALIDATE_URL);
+                if (!$isUrl && ($url[0] === "/" && $url[1] !== "/")) {
+                    $url = rtrim($website_url,"/").$url;
+                    $isUrl = filter_var($url, FILTER_VALIDATE_URL);
+                }
+                if (!$isUrl && strpos($url, $website_url) === false) {
+                    $url = rtrim($url,"/")."/".$url;
+                    $isUrl = filter_var($url, FILTER_VALIDATE_URL);
+                }
+                if (!$isUrl) {
+                    $url = rtrim($website_url,"/")."/".$url;
+                    $isUrl = filter_var($url, FILTER_VALIDATE_URL);
+                }
             }
         }
 
@@ -237,13 +181,13 @@ class Url
     }
     
     public function checkExceptions(string $url, Config $config) {
+        $website_url = parse_url($config->url, PHP_URL_SCHEME).'://'.parse_url($config->url, PHP_URL_HOST);
         $this->__construct($url);
         $isUrl = filter_var($url, FILTER_VALIDATE_URL);
         if (!$isUrl) {
             $this->setExcluded(true);
         }
-        $website = $config->url->getWebsite();
-		if (\strpos($this->getUrl(), $website->getScheme().'://'.$website->getDomain()) === false) {
+		if (\strpos($this->getUrl(), $website_url) === false) {
             $this->setExcluded(true);
         }        
 		foreach ($config->getExceptions() as $value) {

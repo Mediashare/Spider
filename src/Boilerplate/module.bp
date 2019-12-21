@@ -14,7 +14,7 @@ class %$className% {
     public $author = "%$author%";
     public $name = "%$name%";
     public $description = "%$description%";
-    public $config;
+    public $config; // Spider Config
     public $url; // Url with Headers & Body
     public $crawler; // Dom for crawl webpage
     public $variables = %$variables%; // Variables injected

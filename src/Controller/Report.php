@@ -40,6 +40,7 @@ class Report
 
    public function create(bool $end = false) {
       $json = $this->json($this->result);
+      
       $fileSystem = new FileSystem();
       $domain = $this->website->getDomain();
       $file_direction = $this->config->getReportsDir().$domain.'/'.$this->config->getId().'.json';

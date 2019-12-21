@@ -4,12 +4,11 @@ namespace Mediashare\Entity;
 
 class Header
 {
-    private $id;
-    private $httpCode;
-    private $transferTime;
-    private $downloadSize;
-    private $webPage;
-    private $content = [];
+    public $id;
+    public $httpCode;
+    public $transferTime;
+    public $downloadSize;
+    public $content = [];
 
     public function __construct() {
         $this->setId(uniqid());
@@ -57,23 +56,6 @@ class Header
     public function setDownloadSize(?float $downloadSize): self
     {   
         $this->downloadSize = (int) round($downloadSize / 1000); // Bytes to Kb
-        return $this;
-    }
-
-    public function getWebPage(): ?WebPage
-    {
-        return $this->webPage;
-    }
-
-    public function setWebPage(WebPage $webPage): self
-    {
-        $this->webPage = $webPage;
-
-        // set the owning side of the relation if necessary
-        if ($this !== $webPage->getHeader()) {
-            $webPage->setHeader($this);
-        }
-
         return $this;
     }
 

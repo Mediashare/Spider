@@ -3,13 +3,7 @@ namespace Mediashare\Entity;
 
 class Body
 {
-    private $id;
     private $content;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getContent(): ?string
     {

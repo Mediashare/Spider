@@ -77,8 +77,7 @@ class Website
         $excluded = false;
         foreach ((array) $this->urls as $url) {
             // If already saved
-            if ($url->getUrl() === $newUrl->getUrl() ||
-                $url->getPath() === $newUrl->getPath()) {
+            if ($url->getUrl() === $newUrl->getUrl()) {
                 $excluded = true;
             }
         }

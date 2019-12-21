@@ -12,10 +12,6 @@ class Url
     public $website;
     public $scheme;
     public $host;
-    public $port;
-    public $path;
-    public $query;
-    public $fragment;
     public $isCrawled;
     public $isExcluded;
     public $webpage;
@@ -57,10 +53,6 @@ class Url
         // Parse url
         $this->setScheme(parse_url($url, PHP_URL_SCHEME));
         $this->setHost(parse_url($url, PHP_URL_HOST));
-        $this->setPort(parse_url($url, PHP_URL_PORT));
-        $this->setPath(parse_url($url, PHP_URL_PATH));
-        $this->setQuery(parse_url($url, PHP_URL_QUERY));
-        $this->setFragment(parse_url($url, PHP_URL_FRAGMENT));
 
         return $this;
     }
@@ -96,55 +88,6 @@ class Url
     public function setHost(?string $host): self
     {
         $this->host = $host;
-
-        return $this;
-    }
-
-    public function getPort(): ?int
-    {
-        return $this->port;
-    }
-
-    public function setPort(?int $port): self
-    {
-        $this->port = $port;
-
-        return $this;
-    }
-
-    public function getPath(): ?string
-    {
-        return $this->path;
-    }
-
-    public function setPath(?string $path): self
-    {
-        if (!$path) {$path = "/";}
-        $this->path = $path;
-
-        return $this;
-    }
-
-    public function getQuery(): ?string
-    {
-        return $this->query;
-    }
-
-    public function setQuery(?string $query): self
-    {
-        $this->query = $query;
-
-        return $this;
-    }
-
-    public function getFragment(): ?string
-    {
-        return $this->fragment;
-    }
-
-    public function setFragment(?string $fragment): self
-    {
-        $this->fragment = $fragment;
 
         return $this;
     }

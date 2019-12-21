@@ -22,7 +22,7 @@ class Hello {
     public $errors; // Output errors
     
     public function run() { 
-        return "Hello World! From [".$this->url->getUrl()."];
+        return "Hello World! From [".$this->url->getUrl()."]";
     }
 }
 ```

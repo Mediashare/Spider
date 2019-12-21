@@ -36,9 +36,12 @@ composer require Mediashare\Spider/spider
 <?php
 // ./index.php
 require 'vendor/autoload.php';
+use Mediashare\Spider\Entity\Config;
+use Mediashare\Spider\Entity\Url;
+use Mediashare\Spider\Spider;
 
 // Website Config
-$config = new \Mediashare\Spider\Entity\Config();
+$config = new Config();
 $config->setWebspider(true); // Crawl all website
 $config->setReportsDir(__DIR__.'/reports/'); // Default reports path
 $config->setModulesDir(__DIR__.'/modules/'); // Default modules path
@@ -50,9 +53,9 @@ $config->enableAllModule(true); // Enable all modules
 // $config->addModules(['Links', 'Search']);// Select one or more modules to use with class name
 
 // Url
-$url = new \Mediashare\Spider\Entity\Url('http://marquand.pro');
+$url = new Url('http://marquand.pro');
 // Spider
-$spider = new \Mediashare\Spider\Spider($url, $config);
+$spider = new Spider($url, $config);
 $result = $spider->run();
 // dump($result);
 ```

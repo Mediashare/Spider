@@ -16,7 +16,8 @@ class Config
     public $variables = []; // Variables Injected to modules
     public $modules = []; // Select one or more modules to use
     public $enable_modules = true; // Enable all modules
-
+    public $modules_dir;
+    public $reports_dir;
     public function __construct() {
         $this->setId(uniqid());
     }
@@ -176,7 +177,7 @@ class Config
     {
 
         if (!$this->reports_dir):
-            return __DIR__.'/../../reports/';
+            $this->setReportsDir(__DIR__.'/../../reports/');
         endif;
         return $this->reports_dir;
     }
@@ -190,7 +191,7 @@ class Config
     public function getModulesDir(): string
     {
         if (!$this->modules_dir):
-            return __DIR__.'/../../modules/';
+            $this->setReportsDir(__DIR__.'/../../modules/');
         endif;
         return $this->modules_dir;
     }

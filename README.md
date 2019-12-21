@@ -35,71 +35,94 @@ composer require mediashare/spider
 git clone https://github.com/Mediashare/Spider
 cd Spider
 composer install
-
-php bin/console spider:run http://exemple.com -w
-# Or
-php -d memory_limit=3000M bin/console spider:run http://exemple.com -w # Extend PHP memory limit 
 ```
 #### Docker
 ```bash
 docker pull slote/spider
-docker run slote/spider bin/console spider:run https://exemple.com -w
+docker run slote/spider php exemple.com
 ```
-## [Commands](src/Command/)
-You can use this library with console commands.
-[More information...](src/Command/)
 
+# Packagist Version
+## Installation
 ```bash
-bin/console spider:run http://exemple.com -w
+composer require mediashare/spider
 ```
 
-## [Modules](src/Modules/)
+## Usage
+### Create index.php file and init the config.
+```php
+<?php
+// ./index.php
+require 'vendor/autoload.php';
+
+// Website Config
+$config = new \Mediashare\Entity\Config();
+$config->setWebspider(true); // Crawl all website
+$config->setReportsDir(__DIR__.'/reports/'); // Default reports path
+$config->setModulesDir(__DIR__.'/modules/'); // Default modules path
+// Prompt Console / Dump
+$config->setVerbose(true); // Prompt verbose output
+$config->setJson(false); // Prompt json output
+// Modules Activation
+$config->enableAllModule(true); // Enable all modules
+// Modules Activation
+$config->enableAllModule(true); // Enable all modules
+// $config->addModules(['Links', 'Search']);// Select one or more modules to use with class name
+
+// Url
+$url = new \Mediashare\Entity\Url('http://marquand.pro');
+// Spider
+$spider = new \Mediashare\Spider($url, $config);
+$result = $spider->run();
+// dump($result);
+```
+
+### Create own module to execute actions when the crawler scraps a webpage. 
+```php
+// ./modules/Links.php
+<?php
+namespace Mediashare\Modules;
+
+class Links {
+    public $name = "Links";
+    public $description = "Get all links in webpage";
+    public $config; // Spider Config
+    public $url; // Url with Headers & Body
+    public $crawler; // Dom for crawl in webpage
+    public $variables = "0"; // Variables injected
+    public $errors; // Output errors
+    
+    public function run() { 
+        $source = $this->webpage->getUrl();
+        $links = [];
+        foreach($this->dom->filter('a') as $link) {
+            if (!empty($link)) {
+                $href = rtrim(ltrim($link->getAttribute('href')));
+                if ($href) {
+                    if (isset($links[$href])) {
+                        $links[$href]++;
+                    } else {
+                        $links[$href] = 1;
+                    }
+                }
+            }
+        }
+        return $links;
+    }
+}
+```
+### Execute the code from the console.
+```bash
+php index.php
+```
+#### Output
+```sh
+-*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*
+* Output file result: /home/slote/Bureau/Spider/var/reports/marquand.pro/5dfaf1c0147c6.json
+-*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*
+```
+
+## [Modules](modules/)
 Modules are tools created by the community to add features when crawling a website.
 Adding a module to a crawler allows the automation of code execution on one or more pages of a website. Modules are executed when crawling a page.
-[More information...](src/Modules/)
-
-
-## Helper
-```bash
-bin/console spider:run -h
-______________________________________________
-|                                             |
-|                  WebSpider                  |
-|                   -------                   |
-|_____________________________________________|
-                                   | by Slote |
-                                   |__________/
-Description:
-  Execute Web Crawler
-
-Usage:
-  spider:run [options] [--] [<url>...]
-
-Arguments:
-  url                                      Website url
-
-Options:
-  -w, --webspider                          If you want crawl all pages on this website.
-  -R, --require[=REQUIRE]                  Add path require. (-R foo -R bar). (multiple values allowed)
-  -E, --exception[=EXCEPTION]              Add exception. If url contains one of these words then not crawled. (-E foo -E bar). (multiple values allowed)
-  -f, --file=FILE                          Read all urls in file submited.
-  -j, --json                               Return json response in terminal.
-  -o, --output=OUTPUT                      Output path destination.
-      --id=ID                              Id (name) Report.
-  -m, --modules[=MODULES]                  Enable specific module(s) or enable all modules if not module specified. (multiple values allowed)
-  -d, --disable_modules[=DISABLE_MODULES]  Disable specific module(s) or disable all modules if not module specified. (multiple values allowed)
-  -i, --inject-variable[=INJECT-VARIABLE]  Inject input variables in specific module. (-i '{"moduleName":["foo","bar"]}'). (multiple values allowed)
-      --html                               Html output.
-  -h, --help                               Display this help message
-  -q, --quiet                              Do not output any message
-  -V, --version                            Display this application version
-      --ansi                               Force ANSI output
-      --no-ansi                            Disable ANSI output
-  -n, --no-interaction                     Do not ask any interactive question
-  -e, --env=ENV                            The Environment name. [default: "dev"]
-      --no-debug                           Switches off debug mode.
-  -v|vv|vvv, --verbose                     Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
-
-Help:
-  This command crawl website pages.
-```
+[More information...](modules/)

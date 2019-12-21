@@ -3,13 +3,11 @@ namespace Mediashare\Spider\Modules;
 
 use Mediashare\Spider\Entity\Url;
 
-class Images {
-    public $name = "Images";
-    public $description = "Get all Images metadata & attributes";
-    public $url; // Url with Headers & Body
-    public $crawler; // Dom for crawl in webpage
-    public $errors; // Output errors
-    
+/**
+ * Images
+ * Get all Images metadata & attributes
+ */
+class Images {    
     public function run() { 
         $images = [];
         foreach($this->crawler->filter('img') as $image) {

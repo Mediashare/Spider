@@ -1,11 +1,11 @@
 <?php
 namespace Mediashare\Spider\Modules;
 
-use Mediashare\Spider\Entity\Url;
-
+/**
+ * Links
+ * Get all links in webpage
+ */
 class Links {
-    public $name = "Links";
-    public $description = "Get all links in webpage";
     public $url; // Url with Headers & Body
     public $crawler; // Dom for crawl in webpage
     public $errors; // Output errors

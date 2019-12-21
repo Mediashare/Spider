@@ -1,9 +1,10 @@
 <?php
 namespace Mediashare\Spider\Modules;
 
+/**
+ * FileDownload
+ */
 class FileDownload {
-    public $name = "FileDownload";
-    public $description = "";
     public $config;
     public $url; // Webpage with Headers & Body
     public $crawler; // Dom for crawl in webpage
@@ -12,20 +13,7 @@ class FileDownload {
     public $dir; // files direction
 
     public function run() {
-        // File directory
-        $domain = parse_url($this->url->getUrl())['host'];
-        if (!\file_exists($this->config->getReportsDir())):
-            \mkdir($this->config->getReportsDir());
-        endif;
-        $this->dir = rtrim($this->config->getReportsDir(), '/').'/'.$domain;
-        if (!\file_exists($this->dir)):
-            \mkdir($this->dir);
-        endif;
-        $this->dir .= '/files/';
-        if (!\file_exists($this->dir)):
-            \mkdir($this->dir);
-        endif;
-
+        $this->createFolder();
         $urls = $this->url->getWebpage()->getLinks();
         foreach ($urls as $url) {
             $file = $this->getFile($url);
@@ -39,6 +27,21 @@ class FileDownload {
                 'files' => $files,
             ];
         }
+    }
+    public function createFolder() {
+        // File directory
+        $domain = parse_url($this->url->getUrl())['host'];
+        if (!\file_exists($this->config->getReportsDir())):
+            \mkdir($this->config->getReportsDir());
+        endif;
+        $this->dir = rtrim($this->config->getReportsDir(), '/').'/'.$domain;
+        if (!\file_exists($this->dir)):
+            \mkdir($this->dir);
+        endif;
+        $this->dir .= '/files/';
+        if (!\file_exists($this->dir)):
+            \mkdir($this->dir);
+        endif;
     }
     public function getFile(string $url) {
         $url = preg_replace( '~\s+~', '%20', $url); // Url encoding

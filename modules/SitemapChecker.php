@@ -2,8 +2,6 @@
 namespace Mediashare\Spider\Modules;
 
 class SitemapChecker {
-    public $name = "SitemapChecker";
-    public $description = "";
     public $config;
     public $url; // Url with Headers & Body
     public $crawler; // Dom for crawl in webpage

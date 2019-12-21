@@ -24,16 +24,11 @@ class Modules {
             $module->url = $url;
             $module->config = $crawler->config;
             $module->crawler = $crawler->crawler;
-            // SEO
-            $name = $module->name;
-            $description = $module->description;
 
             // Execute this Module
             $result = $module->run();
             
             // Report
-            $this->results[$module->className]['name'] = $module->name;
-            $this->results[$module->className]['description'] = $module->description;
             if ($result) {
                 // dump($this->webpage->getUrl()->getUrl(),$result);
                 $this->results[$module->className]['results'][(string) $crawler->url->getUrl()] = $result;

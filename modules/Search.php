@@ -1,12 +1,14 @@
 <?php
 namespace Mediashare\Spider\Modules;
 
+/**
+ * Searcj
+ * Search text from a webpage.
+ * This command need injection variables with text(s) do you want find in website.
+ */
 class Search {
-    public $name = "Search";
-    public $description = "Search text from a webpage. 
-This command need injection variables with text(s) do you want find in website.";
-    public $config;
     public $url; // Url with Headers & Body
+    public $config;
     public $crawler; // Dom for crawl in webpage
     public $variables = true; // Variables injected
     public $errors; // Output errors

@@ -1,5 +1,5 @@
 <?php
-namespace Mediashare\Entity;
+namespace Mediashare\Spider\Entity;
 
 class Body
 {

@@ -1,7 +1,7 @@
 <?php
-namespace Mediashare\Modules;
+namespace Mediashare\Spider\Modules;
 
-use Mediashare\Entity\Url;
+use Mediashare\Spider\Entity\Url;
 
 class Links {
     public $name = "Links";

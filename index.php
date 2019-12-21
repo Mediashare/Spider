@@ -3,7 +3,7 @@ require 'vendor/autoload.php';
 // use Tracy\Debugger;
 // Debugger::enable();
 
-$config = new \Mediashare\Entity\Config(); // Website Config
+$config = new \Mediashare\Spider\Entity\Config(); // Website Config
 // $config->setId("Audit_marquand.pro"); // Id|Name report (uniqid() by default)
 // $config->setWebspider(true); // Crawl all website
 // $config->setRequires(['/projet']); // Path requires
@@ -20,9 +20,9 @@ $config->setVerbose(true); // Prompt verbose output
 // $config->addVariables(['Search' => ['ces deux exchanges']]); // Inject this variables in modules 
 
 // Url
-$url = new \Mediashare\Entity\Url('http://marquand.pro');
+$url = new \Mediashare\Spider\Entity\Url('http://marquand.pro');
 
 // Spider
-$spider = new \Mediashare\Spider($url, $config);
+$spider = new \Mediashare\Spider\Spider($url, $config);
 $result = $spider->run();
 // dump($result);

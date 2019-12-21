@@ -1,13 +1,13 @@
 <?php
-namespace Mediashare\Controller;
+namespace Mediashare\Spider\Controller;
 
-use Mediashare\Entity\Url;
-use Mediashare\Entity\Body;
-use Mediashare\Entity\Config;
-use Mediashare\Entity\WebPage;
-use Mediashare\Entity\Website;
-use Mediashare\Controller\Guzzle;
-use Mediashare\Controller\Module;
+use Mediashare\Spider\Entity\Url;
+use Mediashare\Spider\Entity\Body;
+use Mediashare\Spider\Entity\Config;
+use Mediashare\Spider\Entity\WebPage;
+use Mediashare\Spider\Entity\Website;
+use Mediashare\Spider\Controller\Guzzle;
+use Mediashare\Spider\Controller\Module;
 use Symfony\Component\DomCrawler\Crawler as DomCrawler;
 
 /**

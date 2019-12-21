@@ -10,7 +10,7 @@ Create your own Module for execute php code for webpage crawled and get output r
 ```php
 <?php
 // ./modules/Hello.php
-namespace Mediashare\Modules;
+namespace Mediashare\Spider\Spider\Modules;
 
 class Hello {
     public $name = "Hello";
@@ -32,7 +32,7 @@ DomCrawler is symfony component for DOM navigation for HTML and XML documents. Y
 ### Exemple
 ```php
 // ./modules/Links.php
-namespace Mediashare\Modules;
+namespace Mediashare\Spider\Spider\Modules;
 
 class Links {
     public $name = "Links";
@@ -63,7 +63,7 @@ class Links {
 ## Output Errors
 ```php
 // ./modules/OutputErrors.php
-namespace Mediashare\Modules;
+namespace Mediashare\Spider\Spider\Modules;
 
 class OutputErrors {
     public $name = "Output Errors";

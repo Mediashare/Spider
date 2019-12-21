@@ -1,9 +1,9 @@
 <?php
 
-namespace Mediashare\Entity;
+namespace Mediashare\Spider\Entity;
 
-use Mediashare\Service\FileSystem;
-use Mediashare\Controller\Webspider;
+use Mediashare\Spider\Service\FileSystem;
+use Mediashare\Spider\Controller\Webspider;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;

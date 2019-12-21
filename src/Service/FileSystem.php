@@ -1,5 +1,5 @@
 <?php
-namespace Mediashare\Service;
+namespace Mediashare\Spider\Service;
 
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem as fs;

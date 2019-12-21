@@ -1,13 +1,13 @@
 <?php
-namespace Mediashare\Controller;
+namespace Mediashare\Spider\Controller;
 
 use GuzzleHttp\TransferStats;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use Mediashare\Entity\Url;
-use Mediashare\Entity\Webpage;
-use Mediashare\Entity\Header;
-use Mediashare\Entity\Body;
+use Mediashare\Spider\Entity\Url;
+use Mediashare\Spider\Entity\Webpage;
+use Mediashare\Spider\Entity\Header;
+use Mediashare\Spider\Entity\Body;
 
 class Guzzle
 {

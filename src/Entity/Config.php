@@ -1,8 +1,8 @@
 <?php
 
-namespace Mediashare\Entity;
+namespace Mediashare\Spider\Entity;
 
-use Mediashare\Entity\Url;
+use Mediashare\Spider\Entity\Url;
 
 class Config
 {

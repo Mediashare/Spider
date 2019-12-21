@@ -1,15 +1,15 @@
 <?php
-namespace Mediashare\Controller;
+namespace Mediashare\Spider\Controller;
 
-use Mediashare\Entity\Url;
-use Mediashare\Entity\Config;
-use Mediashare\Entity\Module;
-use Mediashare\Entity\Result;
-use Mediashare\Entity\Website;
-use Mediashare\Service\Output;
-use Mediashare\Controller\Report;
-use Mediashare\Controller\Crawler;
-use Mediashare\Controller\Modules;
+use Mediashare\Spider\Entity\Url;
+use Mediashare\Spider\Entity\Config;
+use Mediashare\Spider\Entity\Module;
+use Mediashare\Spider\Entity\Result;
+use Mediashare\Spider\Entity\Website;
+use Mediashare\Spider\Service\Output;
+use Mediashare\Spider\Controller\Report;
+use Mediashare\Spider\Controller\Crawler;
+use Mediashare\Spider\Controller\Modules;
 
 
 /**

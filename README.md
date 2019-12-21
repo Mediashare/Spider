@@ -24,10 +24,10 @@ I would be happy to receive your ideas and contributions to the project :smiley:
 
 ## Getting started
 ### Installation
-#### [Composer Usage](https://packagist.org/packages/mediashare/spider)
+#### [Composer Usage](https://packagist.org/packages/Mediashare\Spider/spider)
 Use Spider library in your project & create your own modules. 
 ```bash
-composer require mediashare/spider
+composer require Mediashare\Spider/spider
 ```
 
 ## Usage
@@ -38,7 +38,7 @@ composer require mediashare/spider
 require 'vendor/autoload.php';
 
 // Website Config
-$config = new \Mediashare\Entity\Config();
+$config = new \Mediashare\Spider\Entity\Config();
 $config->setWebspider(true); // Crawl all website
 $config->setReportsDir(__DIR__.'/reports/'); // Default reports path
 $config->setModulesDir(__DIR__.'/modules/'); // Default modules path
@@ -50,9 +50,9 @@ $config->enableAllModule(true); // Enable all modules
 // $config->addModules(['Links', 'Search']);// Select one or more modules to use with class name
 
 // Url
-$url = new \Mediashare\Entity\Url('http://marquand.pro');
+$url = new \Mediashare\Spider\Entity\Url('http://marquand.pro');
 // Spider
-$spider = new \Mediashare\Spider($url, $config);
+$spider = new \Mediashare\Spider\Spider($url, $config);
 $result = $spider->run();
 // dump($result);
 ```
@@ -68,7 +68,7 @@ DomCrawler is symfony component for DOM navigation for HTML and XML documents. Y
 ```php
 <?php
 // ./modules/Links.php
-namespace Mediashare\Modules;
+namespace Mediashare\Spider\Modules;
 
 class Links {
     public $name = "Links";

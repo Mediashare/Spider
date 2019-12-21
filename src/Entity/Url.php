@@ -1,9 +1,9 @@
 <?php
 
-namespace Mediashare\Entity;
+namespace Mediashare\Spider\Entity;
 
-use Mediashare\Entity\Website;
-use Mediashare\Entity\Webpage;
+use Mediashare\Spider\Entity\Website;
+use Mediashare\Spider\Entity\Webpage;
 
 class Url
 {

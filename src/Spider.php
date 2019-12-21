@@ -1,9 +1,9 @@
 <?php
-namespace Mediashare;
+namespace Mediashare\Spider;
 
-use Mediashare\Entity\Url;
-use Mediashare\Entity\Config;
-use Mediashare\Controller\Webspider;
+use Mediashare\Spider\Entity\Url;
+use Mediashare\Spider\Entity\Config;
+use Mediashare\Spider\Controller\Webspider;
 
 class Spider
 {

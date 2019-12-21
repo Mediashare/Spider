@@ -1,10 +1,10 @@
 <?php
 
-namespace Mediashare\Entity;
+namespace Mediashare\Spider\Entity;
 
-use Mediashare\Entity\Header;
-use Mediashare\Entity\Body;
-use Mediashare\Entity\Url;
+use Mediashare\Spider\Entity\Header;
+use Mediashare\Spider\Entity\Body;
+use Mediashare\Spider\Entity\Url;
 
 class Webpage
 {

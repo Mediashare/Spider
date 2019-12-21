@@ -1,10 +1,10 @@
 <?php
-namespace Mediashare\Controller;
+namespace Mediashare\Spider\Controller;
 
-use Mediashare\Entity\Url;
-use Mediashare\Entity\Config;
-use Mediashare\Controller\Crawler;
-use Mediashare\Controller\FileSystem;
+use Mediashare\Spider\Entity\Url;
+use Mediashare\Spider\Entity\Config;
+use Mediashare\Spider\Controller\Crawler;
+use Mediashare\Spider\Controller\FileSystem;
 
 class Modules {
     public $results = [];
@@ -64,7 +64,7 @@ class Modules {
         $modules = [];
         foreach($modulesFiles as $moduleFile) {
             require_once $moduleFile;
-            $className = "Mediashare\\Modules\\".basename($moduleFile, '.php');
+            $className = "Mediashare\Spider\\Modules\\".basename($moduleFile, '.php');
             $module = new $className();
             $module->className = basename($moduleFile, '.php');
             if ($config->enableModules) { // If all module enabled (-m) 

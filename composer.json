@@ -24,7 +24,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Mediashare\\" : "src/"
+            "Mediashare\\Spider\\" : "src/"
         }
     },
     "require-dev": {

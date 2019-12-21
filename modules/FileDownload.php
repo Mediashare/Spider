@@ -1,5 +1,5 @@
 <?php
-namespace Mediashare\Modules;
+namespace Mediashare\Spider\Modules;
 
 class FileDownload {
     public $name = "FileDownload";

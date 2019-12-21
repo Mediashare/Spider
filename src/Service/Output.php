@@ -1,7 +1,7 @@
 <?php
-namespace Mediashare\Service;
+namespace Mediashare\Spider\Service;
 
-use Mediashare\Entity\Config;
+use Mediashare\Spider\Entity\Config;
 
 
 /**

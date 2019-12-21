@@ -82,7 +82,7 @@ class SpiderCommand extends Command
         $config->setReportsDir($this->container->getParameter('reports_dir'));
         $config->setModulesDir($this->container->getParameter('modules_dir'));
         $config->setJson($input->getOption('json'));
-        $config->setVerbose($input->getOption('verbose'));
+        $config->setVerbose(true);
         $config->enableAllModule($input->getOption('enable-modules'));
         // Modules
         $config->addModules($input->getOption('module'));

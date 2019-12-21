@@ -4,7 +4,6 @@ namespace Mediashare;
 use Mediashare\Entity\Url;
 use Mediashare\Entity\Config;
 use Mediashare\Controller\Webspider;
-session_start();
 
 class Spider
 {

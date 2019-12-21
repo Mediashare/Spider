@@ -67,7 +67,7 @@ class Output {
     public function fileDirection(string $file_direction) {
         if ($this->config->getVerbose()) {
             $climate = new \League\CLImate\CLImate;
-            $climate->clear();
+            // $climate->clear();
             $climate->border('-*-', 50)->animation('right');
             echo $this->echoColor("* Output file result: ",'white').$this->echoColor($file_direction."\xA",'green');  
             $climate->border('-*-', 50);

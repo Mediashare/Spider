@@ -30,23 +30,6 @@ Use Spider library in your project & create your own modules.
 ```bash
 composer require mediashare/spider
 ```
-#### Github
-```bash
-git clone https://github.com/Mediashare/Spider
-cd Spider
-composer install
-```
-#### Docker
-```bash
-docker pull slote/spider
-docker run slote/spider php exemple.com
-```
-
-# Packagist Version
-## Installation
-```bash
-composer require mediashare/spider
-```
 
 ## Usage
 ### Create index.php file and init the config.
@@ -63,8 +46,6 @@ $config->setModulesDir(__DIR__.'/modules/'); // Default modules path
 // Prompt Console / Dump
 $config->setVerbose(true); // Prompt verbose output
 $config->setJson(false); // Prompt json output
-// Modules Activation
-$config->enableAllModule(true); // Enable all modules
 // Modules Activation
 $config->enableAllModule(true); // Enable all modules
 // $config->addModules(['Links', 'Search']);// Select one or more modules to use with class name

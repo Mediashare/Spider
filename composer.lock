@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bb36c89f0e75e3db93c9eed3baf5c9e9",
+    "content-hash": "de7a0415c78adf520917dac08d75bc8f",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -3016,7 +3016,7 @@
         },
         {
             "name": "symfony/twig-pack",
-            "version": "v1.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/twig-pack.git",
@@ -5184,7 +5184,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "symfony/twig-pack": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

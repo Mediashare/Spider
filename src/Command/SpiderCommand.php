@@ -69,6 +69,7 @@ class SpiderCommand extends Command
         $url = new Url($input->getArgument('url'));
         $webspider = new Webspider($url, $config);
         $webspider->run();
+        return 1;
     }
 
     protected function initConfig(InputInterface $input) {

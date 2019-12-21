@@ -14,8 +14,8 @@ $config->setModulesDir(__DIR__.'/src/Modules/'); // Default modules path
 $config->setVerbose(true); // Prompt verbose output
 $config->setJson(false); // Prompt json output
 // Modules Activation
-$config->enableAllModule(true); // Enable all modules
-// $config->addModules(['Links', 'Search']);// Select one or more modules to use with class name
+$config->enableAllModule(false); // Enable all modules
+$config->addModules(['Links']);// Select one or more modules to use with class name
 // $config->addVariables(['Search' => ['Thibault Marquand']]); // Inject this variables in modules 
 
 // Url

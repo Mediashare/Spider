@@ -32,26 +32,28 @@ DomCrawler is symfony component for DOM navigation for HTML and XML documents. Y
 ### Exemple
 ```php
 // ./modules/Links.php
-namespace Mediashare\Spider\Spider\Modules;
-
+namespace Mediashare\Spider\Modules;
+/**
+ * Links
+ * Get all links in webpage
+ */
 class Links {
-    public $name = "Links";
-    public $description = "Get all links from a webpage.";
-    public $config; // Spider Config
     public $url; // Url with Headers & Body
-    public $crawler; // DomCrawler for crawl in webpage
+    public $crawler; // Dom for crawl in webpage
     public $errors; // Output errors
-
-    public function run() {
-        $source = $this->webpage->getUrl();
+    
+    public function run() { 
+        $source = $this->url->getUrl();
         $links = [];
-        foreach($this->dom->filter('a') as $link) {
+        foreach($this->crawler->filter('a') as $link) {
             if (!empty($link)) {
-                $href = $link->getAttribute('href');
+                $href = rtrim(ltrim($link->getAttribute('href')));
                 if ($href) {
-                    $links[(string) $source][$href] = [
-                        'href' => $href
-                    ];
+                    if (isset($links[$href])) {
+                        $links[$href]['counter']++;
+                    } else {
+                        $links[$href]['counter'] = 1;
+                    }
                 }
             }
         }

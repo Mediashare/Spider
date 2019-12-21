@@ -1,13 +1,7 @@
 <?php
 namespace Mediashare\Spider\Modules;
 
-class SitemapChecker {
-    public $config;
-    public $url; // Url with Headers & Body
-    public $crawler; // Dom for crawl in webpage
-    public $variables = false; // Variables injected
-    public $errors; // Output errors
-    
+class SitemapChecker {    
     public function run() {
         $webpage = $this->url->getWebpage()->getBody()->getContent();
         $urls = $this->getUrls($webpage);

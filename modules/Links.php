@@ -6,10 +6,6 @@ namespace Mediashare\Spider\Modules;
  * Get all links in webpage
  */
 class Links {
-    public $url; // Url with Headers & Body
-    public $crawler; // Dom for crawl in webpage
-    public $errors; // Output errors
-    
     public function run() { 
         $source = $this->url->getUrl();
         $links = [];

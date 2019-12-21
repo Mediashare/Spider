@@ -5,13 +5,6 @@ namespace Mediashare\Spider\Modules;
  * FileDownload
  */
 class FileDownload {
-    public $config;
-    public $url; // Webpage with Headers & Body
-    public $crawler; // Dom for crawl in webpage
-    public $variables = false; // Variables injected
-    public $errors; // Output errors
-    public $dir; // files direction
-
     public function run() {
         $this->createFolder();
         $urls = $this->url->getWebpage()->getLinks();

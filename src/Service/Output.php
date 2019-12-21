@@ -1,11 +1,8 @@
 <?php
 namespace Mediashare\Service;
 
-use Mediashare\Entity\Url;
 use Mediashare\Entity\Config;
-use Mediashare\Entity\Website;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 
 /**
  * Output client
@@ -78,15 +75,9 @@ class Output {
     }
 
     public function json($json) {
-        if ($this->config->getVerbose()) {
-            if ($this->config->getJson()) {
-                echo $this->echoColor("***************\xA", 'green');
-                echo $this->echoColor("* Json result: \xA",'cyan');
-                echo $this->echoColor("***************\xA", 'green');
-                echo new Response($json, 200, ['Content-Type' => 'application/json'])."\xA";
-                $climate = new \League\CLImate\CLImate;
-                $climate->border('-*-');
-            }
+        if ($this->config->getJson()) {
+            header('Content-Type: application/json');
+            echo $json;
         }
     }
 

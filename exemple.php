@@ -1,6 +1,7 @@
 <?php
 require 'vendor/autoload.php';
-
+use Tracy\Debugger;
+Debugger::enable();
 
 $config = new \Mediashare\Entity\Config(); // Website Config
 // $config->setId("Audit"); // Id|Name report (uniqid() by default)
@@ -11,8 +12,8 @@ $config->setExceptions([]); // Path exceptions
 // $config->setReportsDir(__DIR__.'/reports/'); // Default reports path
 // $config->setModulesDir(__DIR__.'/modules/'); // Default modules path
 // Prompt Console / Dump
-$config->setVerbose(true); // Prompt verbose output
-$config->setJson(false); // Prompt json output
+$config->setVerbose(false); // Prompt verbose output
+$config->setJson(true); // Prompt json output
 // Modules Activation
 $config->enableAllModule(true); // Enable all modules
 $config->addModules(['Links']);// Select one or more modules to use with class name
@@ -24,5 +25,4 @@ $url = new \Mediashare\Entity\Url('http://marquand.pro');
 // Spider
 $spider = new \Mediashare\Spider($url, $config);
 $result = $spider->run();
-// dump($result);
-
+// var_dump($result);

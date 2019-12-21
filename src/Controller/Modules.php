@@ -67,7 +67,7 @@ class Modules {
             $className = "Mediashare\\Modules\\".basename($moduleFile, '.php');
             $module = new $className();
             $module->className = basename($moduleFile, '.php');
-            if ($config->enable_modules) { // If all module enabled (-m) 
+            if ($config->enableModules) { // If all module enabled (-m) 
                     $modules[$module->className] = $module;
             } elseif (is_array($config->modules) && count($config->modules) > 0) { // If specific module selected (-m Module_Name) 
                 foreach ($config->modules as $module_enable):

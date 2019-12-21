@@ -2,11 +2,13 @@
 
 namespace Mediashare\Entity;
 
-use Mediashare\Entity\Config;
-use Mediashare\Entity\Website;
-use Mediashare\Controller\Modules;
+use Mediashare\Service\FileSystem;
 use Mediashare\Controller\Webspider;
-use Mediashare\Entity\Module;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+
 
 class Result
 {
@@ -16,38 +18,36 @@ class Result
     public $modules = [];
     public $errors = [];
     public function __construct(Webspider $webspider) {
-        $this->id = uniqid();
-        $this->webspider = $webspider;
+        $this->id = $webspider->config->getId();
         $this->config = $webspider->config;
-        $this->modules = $webspider->modules;
+        $this->modules = $webspider->modules->results;
         $this->website = $webspider->url->getWebsite();
         $this->errors = $webspider->errors;
     }
-    
-    public function build(): self {
-        $this->setModules($this->modules);
-        $this->setUrls($this->website);
+
+    public function build(bool $end = false) {
+        $result = $this->create($end);
         return $this;
     }
 
-    public function setConfig(Config $config) {
-        $this->config = $config;
-        return $this;
+    public function create(bool $end = false) {
+       $json = $this->json();
+       $output = $this->config->getOutput();
+       $fileSystem = new FileSystem();
+       $fileSystem->createJsonFile($json, $output);
+       return $this;
     }
-
-    public function setModules(Modules $modules): self {
-        $this->modules = $modules->results;
-        return $this;
-    }
-
-    public function setUrls(Website $website): self {
-        // Urls
-        foreach ((array)$website->getUrls() as $url) {
-            // $url->getWebpage()->setBody(null);
-            // $url->getSources();
-            // dump($sources);
-            // $this->urls[(string) $url->getUrl()] = $url;
-        }
-        return $this;
+ 
+    public function json() {
+        // Serialize
+        $encoders = [new XmlEncoder(), new JsonEncoder()];
+        $normalizers = new ObjectNormalizer();
+        $serializer = new Serializer([$normalizers], $encoders);
+        $json = $serializer->serialize($this, 'json', [
+            'circular_reference_handler' => function ($object) {
+                return $object->getId();
+            }
+        ]);
+        return $json;
     }
 }

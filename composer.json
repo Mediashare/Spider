@@ -26,5 +26,8 @@
         "psr-4": {
             "Mediashare\\" : "src/"
         }
+    },
+    "require-dev": {
+        "tracy/tracy": "^2.7"
     }
 }

@@ -4,6 +4,7 @@ namespace Mediashare\Controller;
 use Mediashare\Entity\Url;
 use Mediashare\Entity\Config;
 use Mediashare\Entity\Module;
+use Mediashare\Entity\Result;
 use Mediashare\Entity\Website;
 use Mediashare\Service\Output;
 use Mediashare\Controller\Report;
@@ -20,7 +21,6 @@ class Webspider
 	public $config;
 	public $modules = [];
 	public $errors = [];
-	public $counter = 0;
 	public function __construct(Url $url, Config $config) {
 		$this->url = $url;
 		$this->config = $config;
@@ -36,6 +36,7 @@ class Webspider
 	}
 	
 	public function loop(Website $website) {
+		$counter = 0;
 		while (count($website->getUrlsNotCrawled())) {
 			$urls = $website->getUrlsNotCrawled();
 			foreach ($urls as $url) {
@@ -44,13 +45,19 @@ class Webspider
 					// Execute Module(s)
 					$this->modules = $this->modules($url);
 					// Report
-					if (($this->counter % 100) === 0 || $this->counter === 1) {
-						$this->report();
+					if (($counter % 100) === 0 || $counter === 1) {
+						$report = new Result($this);
+						$report = $report->build();
 					}
 				}
 			}
 		}
-		$report = $this->report($end = true);
+		// Report
+		$report = new Result($this);
+		$report = $report->build($end = true);
+		// Output
+		$this->output->fileDirection($this->config->getOutput());
+		$this->output->json($report->json());
 		return $report;
 	}
 
@@ -79,21 +86,6 @@ class Webspider
 		return $modules;
 	}
 
-	
-	/**
-	 * Build Report & Create Json File
-	 *
-	 * @param boolean $end if true then output file direction.
-	 * @return Report
-	 */
-	public function report(bool $end = false) {
-		// Report
-		$report = new Report($this);
-		$report->build();
-		$report = $report->create($end);
-		return $report;
-	}
-
 	private function progress(Url $url) {
 		$webpage = $url->getWebpage();
 		$website = $this->url->getWebsite();
@@ -101,7 +93,7 @@ class Webspider
 		$max_counter = (count($website->getUrlsCrawled()) + count($website->getUrlsNotCrawled()));
 		if ($webpage->getHeader()) {$requestTime = $webpage->getHeader()->getTransferTime()."ms";} else {$requestTime = null;}
 		$message = $this->output->echoColor("--- (".$counter."/".$max_counter.") URL: [".$url->getUrl()."] ".$requestTime." ---", "white");
-
 		$this->output->progressBar($counter, $max_counter, $message);
+		
 	}
 }

@@ -64,7 +64,7 @@ class Modules {
         $modules = [];
         foreach($modulesFiles as $moduleFile) {
             require_once $moduleFile;
-            $className = "Mediashare\Spider\\Modules\\".basename($moduleFile, '.php');
+            $className = "Mediashare\\Spider\\Modules\\".basename($moduleFile, '.php');
             $module = new $className();
             $module->className = basename($moduleFile, '.php');
             if ($config->enableModules) { // If all module enabled (-m) 

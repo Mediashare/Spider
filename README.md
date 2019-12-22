@@ -77,11 +77,10 @@ class Links {
     public $config; // Spider Config
     public $url; // Url with Headers & Body
     public $crawler; // Dom for crawl in webpage
-    public $variables = "0"; // Variables injected
     public $errors; // Output errors
     
     public function run() { 
-        $source = $this->webpage->getUrl();
+        $source = $this->url->getUrl();
         $links = [];
         foreach($this->dom->filter('a') as $link) {
             if (!empty($link)) {

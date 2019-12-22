@@ -16,11 +16,6 @@ namespace Mediashare\Spider\Spider\Modules;
  * Return Hello World! From [url source]
  */
 class Hello {
-    public $config; // Spider Config
-    public $url; // Url with Headers & Body
-    public $crawler; // Dom for crawl in webpage
-    public $errors; // Output errors
-    
     public function run() { 
         return "Hello World! From [".$this->url->getUrl()."]";
     }
@@ -45,6 +40,7 @@ namespace Mediashare\Spider\Modules;
  * Get all links in webpage
  */
 class Links {
+    public $config; // Spider Config
     public $url; // Url with Headers & Body
     public $crawler; // Dom for crawl in webpage
     public $errors; // Output errors

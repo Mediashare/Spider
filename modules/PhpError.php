@@ -7,10 +7,12 @@ class PhpError {
     	$errors[] = "/Applications/MAMP/htdocs/";
     	foreach ($errors as $error):
     		if (strpos($html, $error)):
-    			return [
-    				'Error' => true,
-    				'url' => $this->url->getWebpage()->getUrl()->getUrl()
-    			];
+				$error = [
+					'Error' => true,
+					'url' => $this->url->getWebpage()->getUrl()->getUrl()
+				];
+				$this->errors = $error;
+				return $error;
     		endif;
     	endforeach;
     }

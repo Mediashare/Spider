@@ -60,6 +60,7 @@ $result = $spider->run();
 // dump($result);
 ```
 
+## Modules
 ### Create own module to execute actions when the crawler scraps a webpage. 
 #### Requierements
 - The name of your class needs to be the same as the name of the .php file.

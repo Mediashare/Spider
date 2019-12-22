@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7bab38e77136241510e55cd30df90095",
+    "content-hash": "cea2942c82d2ea1244c96dbc75c70077",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -255,6 +255,87 @@
                 "terminal"
             ],
             "time": "2019-12-01T15:25:43+00:00"
+        },
+        {
+            "name": "mediashare/crawler",
+            "version": "0.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Mediashare/crawler.git",
+                "reference": "87a299976a250360bba05158e3b942b70c3b6b63"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Mediashare/crawler/zipball/87a299976a250360bba05158e3b942b70c3b6b63",
+                "reference": "87a299976a250360bba05158e3b942b70c3b6b63",
+                "shasum": ""
+            },
+            "require": {
+                "league/climate": "^3.5",
+                "mediashare/scraper": "^0.0.4"
+            },
+            "require-dev": {
+                "tracy/tracy": "^2.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mediashare\\Crawler\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mediashare",
+                    "email": "mediashare.supp@gmail.com"
+                }
+            ],
+            "description": "Crawl urls from a webpage and provide a DomCrawler with Scraper Library",
+            "time": "2019-12-22T22:55:25+00:00"
+        },
+        {
+            "name": "mediashare/scraper",
+            "version": "0.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Mediashare/scraper.git",
+                "reference": "a62af09a64b31a7bfd1501ce8023cf80fbb8242d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Mediashare/scraper/zipball/a62af09a64b31a7bfd1501ce8023cf80fbb8242d",
+                "reference": "a62af09a64b31a7bfd1501ce8023cf80fbb8242d",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~6.0",
+                "symfony/css-selector": "^5.0",
+                "symfony/dom-crawler": "^5.0"
+            },
+            "require-dev": {
+                "tracy/tracy": "^2.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mediashare\\Scraper\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mediashare",
+                    "email": "mediashare.supp@gmail.com"
+                }
+            ],
+            "description": "Scrapes the information from the targeted page and provides a DomCrawler",
+            "time": "2019-12-22T20:30:09+00:00"
         },
         {
             "name": "psr/http-message",

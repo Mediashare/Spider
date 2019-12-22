@@ -1,14 +1,15 @@
 <?php
 namespace Mediashare\Spider\Controller;
 
+use Mediashare\Crawler\Crawler;
 use Mediashare\Spider\Entity\Url;
 use Mediashare\Spider\Entity\Config;
 use Mediashare\Spider\Entity\Result;
-use Mediashare\Spider\Entity\Website;
 use Mediashare\Spider\Service\Output;
-use Mediashare\Spider\Controller\Crawler;
 use Mediashare\Spider\Controller\Modules;
 use Mediashare\Spider\Controller\Webspider;
+use Mediashare\Crawler\Config as CrawlerConfig;
+
 
 /**
  * WebSpider
@@ -28,53 +29,15 @@ class Webspider
 	}
 
 	public function run() {
-        $this->output->banner();
-		$result = $this->loop($this->url->getWebsite());
-		return $result;
+		$this->output->banner();
+		$config = new CrawlerConfig();
+		$config->setVerbose($this->config->getVerbose());
+		$crawler = new Crawler((string) $this->url, $config);
+		$crawler->run();
+		
+		return $this;
 	}
 	
-	/**
-	 * Loop for crawl all website
-	 *
-	 * @param Website $website
-	 * @return Result
-	 */
-	public function loop(Website $website): Result {
-		$counter = 0;
-		while (count($website->getUrlsNotCrawled())) {
-			$urls = $website->getUrlsNotCrawled();
-			foreach ($urls as $url) {
-				$crawler = $this->crawl($url);
-				if ($crawler) {
-					// Execute Module(s)
-					$this->modules = $this->modules($url);
-					// Report
-					if (($counter % 100) === 0 || $counter === 1) {
-						$result = new Result($this);
-						$result = $result->build();
-					}
-				}
-			}
-		}
-		$result = $this->result($this);
-		return $result;
-	}
-
-	public function crawl(Url $url) {
-		// Check if have pathException & pathRequire
-		if ((!$url->isExcluded() && !$url->isCrawled()) || $url === $url->getWebsite()->getUrls()[0]) {
-			// Progress
-			$this->progress($url);
-			// Crawl
-			$crawler = new Crawler($url, $this->config);
-			$crawler->run();
-			$url->setWebpage($crawler->webpage);
-			return $crawler;
-		} else {
-			return false;
-		}
-	}
-
 	public function modules(Url $url) {
 		$modules = $this->modules->run($url);
 		if (!empty($modules->errors)):
@@ -85,16 +48,6 @@ class Webspider
 		return $modules;
 	}
 
-	private function progress(Url $url) {
-		$webpage = $url->getWebpage();
-		$website = $this->url->getWebsite();
-		$counter = count($website->getUrlsCrawled()) + 1;
-		$max_counter = (count($website->getUrlsCrawled()) + count($website->getUrlsNotCrawled()));
-		if ($webpage->getHeader()) {$requestTime = $webpage->getHeader()->getTransferTime()."ms";} else {$requestTime = null;}
-		$message = $this->output->echoColor("--- (".$counter."/".$max_counter.") URL: [".$url->getUrl()."] ".$requestTime." ---", "white");
-		$this->output->progressBar($counter, $max_counter, $message);
-	}
-	
 	/**
 	 * End Report
 	 *

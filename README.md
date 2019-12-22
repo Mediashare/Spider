@@ -61,14 +61,13 @@ $result = $spider->run();
 ```
 
 ## Modules
-### Create own module to execute actions when the crawler scraps a webpage. 
-#### Requierements
+### Requierements
 - The name of your class needs to be the same as the name of the .php file.
 - The entry point for executing modules is the run() function, so it is mandatory to have a run() function in your module.
-  
-Spider executes the run() function public when the webpage has just been crawled. So you can use the DomCrawler.
+Spider executes the run() function public when the webpage has just been crawled. So you can use the [DomCrawler](https://symfony.com/doc/current/components/dom_crawler.html#usage).
 ### Documentation
 DomCrawler is symfony component for DOM navigation for HTML and XML documents. You can retrieve [Documentation Here](https://symfony.com/doc/current/components/dom_crawler.html#usage).
+### Create own module to execute actions when the crawler scraps a webpage. 
 ```php
 <?php
 // ./modules/Links.php

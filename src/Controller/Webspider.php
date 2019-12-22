@@ -54,7 +54,7 @@ class Webspider
 		}
 		// Report
 		$report = new Result($this);
-		$report = $report->build($end = true);
+		$report = $report->build();
 		// Output
 		$this->output->fileDirection($this->config->getOutput());
 		$this->output->json($report->json());

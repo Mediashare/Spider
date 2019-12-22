@@ -25,20 +25,20 @@ class Result
         $this->errors = $webspider->errors;
     }
 
-    public function build(bool $end = false) {
-        $result = $this->create($end);
+    /**
+     * Create Json fil Report 
+     *
+     * @return self
+     */
+    public function build(): self {
+        $json = $this->json();
+        $output = $this->config->getOutput();
+        $fileSystem = new FileSystem();
+        $fileSystem->createJsonFile($json, $output);
         return $this;
     }
-
-    public function create(bool $end = false) {
-       $json = $this->json();
-       $output = $this->config->getOutput();
-       $fileSystem = new FileSystem();
-       $fileSystem->createJsonFile($json, $output);
-       return $this;
-    }
  
-    public function json() {
+    public function json(): string {
         // Serialize
         $encoders = [new XmlEncoder(), new JsonEncoder()];
         $normalizers = new ObjectNormalizer();

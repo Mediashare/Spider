@@ -27,7 +27,7 @@ I would be happy to receive your ideas and contributions to the project :smiley:
 #### [Composer Usage](https://packagist.org/packages/Mediashare\Spider/spider)
 Use Spider library in your project & create your own modules. 
 ```bash
-composer require Mediashare\Spider/spider
+composer require mediashare/spider
 ```
 
 ## Usage
@@ -76,7 +76,7 @@ namespace Mediashare\Spider\Modules;
 class Links {
     public $config; // Spider Config
     public $url; // Url with Headers & Body
-    public $crawler; // Dom for crawl in webpage
+    public $crawler; // DomCrawler
     public $errors; // Output errors
     
     public function run() { 

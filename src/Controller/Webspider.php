@@ -3,14 +3,12 @@ namespace Mediashare\Spider\Controller;
 
 use Mediashare\Spider\Entity\Url;
 use Mediashare\Spider\Entity\Config;
-use Mediashare\Spider\Entity\Module;
 use Mediashare\Spider\Entity\Result;
 use Mediashare\Spider\Entity\Website;
 use Mediashare\Spider\Service\Output;
-use Mediashare\Spider\Controller\Report;
 use Mediashare\Spider\Controller\Crawler;
 use Mediashare\Spider\Controller\Modules;
-
+use Mediashare\Spider\Controller\Webspider;
 
 /**
  * WebSpider
@@ -24,18 +22,24 @@ class Webspider
 	public function __construct(Url $url, Config $config) {
 		$this->url = $url;
 		$this->config = $config;
+		$this->output = new Output($config);
+		$this->modules = new Modules($config);
 		$config->setUrl($url);
-		$this->output = new Output($this->config);
-		$this->modules = new Modules($this->config);
 	}
 
 	public function run() {
         $this->output->banner();
-		$report = $this->loop($this->url->getWebsite());
-		return $report;
+		$result = $this->loop($this->url->getWebsite());
+		return $result;
 	}
 	
-	public function loop(Website $website) {
+	/**
+	 * Loop for crawl all website
+	 *
+	 * @param Website $website
+	 * @return Result
+	 */
+	public function loop(Website $website): Result {
 		$counter = 0;
 		while (count($website->getUrlsNotCrawled())) {
 			$urls = $website->getUrlsNotCrawled();
@@ -46,19 +50,14 @@ class Webspider
 					$this->modules = $this->modules($url);
 					// Report
 					if (($counter % 100) === 0 || $counter === 1) {
-						$report = new Result($this);
-						$report = $report->build();
+						$result = new Result($this);
+						$result = $result->build();
 					}
 				}
 			}
 		}
-		// Report
-		$report = new Result($this);
-		$report = $report->build();
-		// Output
-		$this->output->fileDirection($this->config->getOutput());
-		$this->output->json($report->json());
-		return $report;
+		$result = $this->result($this);
+		return $result;
 	}
 
 	public function crawl(Url $url) {
@@ -94,6 +93,21 @@ class Webspider
 		if ($webpage->getHeader()) {$requestTime = $webpage->getHeader()->getTransferTime()."ms";} else {$requestTime = null;}
 		$message = $this->output->echoColor("--- (".$counter."/".$max_counter.") URL: [".$url->getUrl()."] ".$requestTime." ---", "white");
 		$this->output->progressBar($counter, $max_counter, $message);
-		
+	}
+	
+	/**
+	 * End Report
+	 *
+	 * @param Webspider $webpsider
+	 * @return Result
+	 */
+	private function result(Webspider $webspider): Result {
+		// Report
+		$result = new Result($webspider);
+		$result = $result->build();
+		// Output
+		$this->output->fileDirection($webspider->config->getOutput());
+		$this->output->json($result->json());
+		return $result;
 	}
 }

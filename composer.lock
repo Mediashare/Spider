@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "87e44f604d5465fb430eb82f18c4511a",
+    "content-hash": "d7fa223eeead5f0c5024d53d62624434",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -258,21 +258,21 @@
         },
         {
             "name": "mediashare/crawler",
-            "version": "0.0.6",
+            "version": "0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mediashare/crawler.git",
-                "reference": "3019343509064e7b97d45eb1c49c81e7f4852154"
+                "reference": "c78a6b1471a99c6394c383c5b01054fcdffb7ca5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mediashare/crawler/zipball/3019343509064e7b97d45eb1c49c81e7f4852154",
-                "reference": "3019343509064e7b97d45eb1c49c81e7f4852154",
+                "url": "https://api.github.com/repos/Mediashare/crawler/zipball/c78a6b1471a99c6394c383c5b01054fcdffb7ca5",
+                "reference": "c78a6b1471a99c6394c383c5b01054fcdffb7ca5",
                 "shasum": ""
             },
             "require": {
                 "league/climate": "^3.5",
-                "mediashare/scraper": "^0.0.4"
+                "mediashare/scraper": "^0.0.7"
             },
             "require-dev": {
                 "tracy/tracy": "^2.7"
@@ -304,20 +304,20 @@
                 "scraper",
                 "scraping"
             ],
-            "time": "2019-12-23T04:45:56+00:00"
+            "time": "2019-12-23T15:37:55+00:00"
         },
         {
             "name": "mediashare/modules-provider",
-            "version": "0.0.1",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mediashare/modules-provider.git",
-                "reference": "59bb19091b8c98700f4484826c4f101bfa1bebc0"
+                "reference": "08927f57ca6c38c4eaaf0ffbfaf38b882f80f3c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mediashare/modules-provider/zipball/59bb19091b8c98700f4484826c4f101bfa1bebc0",
-                "reference": "59bb19091b8c98700f4484826c4f101bfa1bebc0",
+                "url": "https://api.github.com/repos/Mediashare/modules-provider/zipball/08927f57ca6c38c4eaaf0ffbfaf38b882f80f3c1",
+                "reference": "08927f57ca6c38c4eaaf0ffbfaf38b882f80f3c1",
                 "shasum": ""
             },
             "require-dev": {
@@ -340,20 +340,20 @@
                 }
             ],
             "description": "Modules provider is an object autoloader for automating and simplifying some code inclusion in different projects.",
-            "time": "2019-12-23T02:59:55+00:00"
+            "time": "2019-12-23T07:57:09+00:00"
         },
         {
             "name": "mediashare/scraper",
-            "version": "0.0.4",
+            "version": "0.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mediashare/scraper.git",
-                "reference": "a62af09a64b31a7bfd1501ce8023cf80fbb8242d"
+                "reference": "63aba006ff0bdb1056bc19bb3e95678e1705243f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mediashare/scraper/zipball/a62af09a64b31a7bfd1501ce8023cf80fbb8242d",
-                "reference": "a62af09a64b31a7bfd1501ce8023cf80fbb8242d",
+                "url": "https://api.github.com/repos/Mediashare/scraper/zipball/63aba006ff0bdb1056bc19bb3e95678e1705243f",
+                "reference": "63aba006ff0bdb1056bc19bb3e95678e1705243f",
                 "shasum": ""
             },
             "require": {
@@ -381,7 +381,15 @@
                 }
             ],
             "description": "Scrapes the information from the targeted page and provides a DomCrawler",
-            "time": "2019-12-22T20:30:09+00:00"
+            "keywords": [
+                "crawler",
+                "dom",
+                "domcrawler",
+                "scrape",
+                "scraper",
+                "scraping"
+            ],
+            "time": "2019-12-23T15:32:06+00:00"
         },
         {
             "name": "psr/http-message",

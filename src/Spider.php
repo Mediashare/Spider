@@ -5,6 +5,9 @@ use Mediashare\Spider\Entity\Url;
 use Mediashare\Spider\Entity\Config;
 use Mediashare\Spider\Controller\Webspider;
 
+/**
+ * Interface with Webspider
+ */
 class Spider
 {
     public $url;

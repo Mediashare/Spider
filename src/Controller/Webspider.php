@@ -79,7 +79,7 @@ class Webspider
 					endif;
 				endif;
 			}
-			$data->webpage->getBody()->setContent("");
+			$data->webpage->getBody()->setContent(""); // Reset body content for memory optimization.
 		}
 		return $results;
 	}

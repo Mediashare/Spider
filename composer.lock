@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9b2648b9fb52dcee271003dce90f8f34",
+    "content-hash": "87e44f604d5465fb430eb82f18c4511a",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -258,16 +258,16 @@
         },
         {
             "name": "mediashare/crawler",
-            "version": "0.0.3",
+            "version": "0.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mediashare/crawler.git",
-                "reference": "87a299976a250360bba05158e3b942b70c3b6b63"
+                "reference": "3019343509064e7b97d45eb1c49c81e7f4852154"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mediashare/crawler/zipball/87a299976a250360bba05158e3b942b70c3b6b63",
-                "reference": "87a299976a250360bba05158e3b942b70c3b6b63",
+                "url": "https://api.github.com/repos/Mediashare/crawler/zipball/3019343509064e7b97d45eb1c49c81e7f4852154",
+                "reference": "3019343509064e7b97d45eb1c49c81e7f4852154",
                 "shasum": ""
             },
             "require": {
@@ -294,7 +294,17 @@
                 }
             ],
             "description": "Crawl urls from a webpage and provide a DomCrawler with Scraper Library",
-            "time": "2019-12-22T22:55:25+00:00"
+            "keywords": [
+                "crawl",
+                "crawler",
+                "crawling",
+                "dom",
+                "domcrawler",
+                "scrape",
+                "scraper",
+                "scraping"
+            ],
+            "time": "2019-12-23T04:45:56+00:00"
         },
         {
             "name": "mediashare/modules-provider",

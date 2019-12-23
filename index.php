@@ -9,8 +9,8 @@ $config = new \Mediashare\Spider\Entity\Config(); // Website Config
 // $config->setRequires(['/projet']); // Path requires
 // // $config->setExceptions(['/contact']); // Path exceptions
 // // Directories
-// $config->setReportsDir(__DIR__.'/reports/'); // Default reports path
-// $config->setModulesDir(__DIR__.'/modules/'); // Default modules path
+$config->setReportsDir(__DIR__.'/reports/'); // Default reports path
+$config->setModulesDir(__DIR__.'/modules/'); // Default modules path
 // // Prompt Console / Dump
 $config->setVerbose(true); // Prompt verbose output
 // $config->setJson(true); // Prompt json output
@@ -20,7 +20,7 @@ $config->setVerbose(true); // Prompt verbose output
 // $config->addVariables(['Search' => ['ces deux exchanges']]); // Inject this variables in modules 
 
 // Url
-$url = new \Mediashare\Spider\Entity\Url('https://slote.me');
+$url = new \Mediashare\Spider\Entity\Url('http://marquand.pro');
 
 // Spider
 $spider = new \Mediashare\Spider\Spider($url, $config);

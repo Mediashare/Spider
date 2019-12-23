@@ -1,11 +1,9 @@
 <?php
-
 namespace Mediashare\Spider\Entity;
 
 use Zumba\JsonSerializer\JsonSerializer;
 use Mediashare\Spider\Service\FileSystem;
 use Mediashare\Spider\Controller\Webspider;
-
 
 class Result
 {

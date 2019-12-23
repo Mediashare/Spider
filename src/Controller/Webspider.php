@@ -29,16 +29,18 @@ class Webspider
 	}
 
 	public function run() {
+		// Banner
 		$this->output->banner();
+		// Crawler
 		$this->crawler = $this->crawl();
+		// Modules
 		$this->modules = $this->modules($this->crawler);
-		
 		// Result
 		$result = new Result($this);
 		$result->build();
-		$json = $result->json($this);
-
+		
 		// Output
+		$json = $result->json($this);
 		$this->output->json($json);
 		$this->output->fileDirection($this->config->getOutput());
 		
@@ -60,8 +62,9 @@ class Webspider
 	 * @return array
 	 */
 	public function modules(Crawler $crawler) {
+		$results = [];
 		$config = new ModuleConfig();
-		$config->setModulesDir(__DIR__."/../../modules/");
+		$config->setModulesDir($this->config->getModulesDir());
 		$config->setNamespace("Mediashare\\Modules\\");
 		$modules = new Modules($config);
 		$modules = $modules->getModules();

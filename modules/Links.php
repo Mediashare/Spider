@@ -1,15 +1,15 @@
 <?php
-namespace Mediashare\Spider\Modules;
+namespace Mediashare\Modules;
 
 /**
  * Links
  * Get all links in webpage
  */
 class Links {
+    public $dom;
     public function run() { 
-        $source = $this->url->getUrl();
         $links = [];
-        foreach($this->crawler->filter('a') as $link) {
+        foreach($this->dom->filter('a') as $link) {
             if (!empty($link)) {
                 $href = rtrim(ltrim($link->getAttribute('href')));
                 if ($href) {

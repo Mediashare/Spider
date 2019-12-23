@@ -1,15 +1,16 @@
 <?php
-namespace Mediashare\Spider\Modules;
+namespace Mediashare\Modules;
 
 class PhpError {
+	public $url;
+	public $body;
     public function run() {
-    	$html = $this->url->getWebpage()->getBody()->getContent();
     	$errors[] = "/Applications/MAMP/htdocs/";
     	foreach ($errors as $error):
-    		if (strpos($html, $error)):
+    		if (strpos($this->body, $error)):
 				$error = [
 					'Error' => true,
-					'url' => $this->url->getWebpage()->getUrl()->getUrl()
+					'url' => $this->url
 				];
 				$this->errors = $error;
 				return $error;

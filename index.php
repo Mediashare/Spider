@@ -13,7 +13,7 @@ $config = new \Mediashare\Spider\Entity\Config(); // Website Config
 // $config->setModulesDir(__DIR__.'/modules/'); // Default modules path
 // // Prompt Console / Dump
 $config->setVerbose(true); // Prompt verbose output
-// $config->setJson(false); // Prompt json output
+// $config->setJson(true); // Prompt json output
 // // Modules Activation
 // $config->enableAllModule(false); // Enable all modules
 // $config->addModules(['Links', 'Search', 'Metadata']);// Select one or more modules to use with class name

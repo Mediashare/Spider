@@ -1,16 +1,15 @@
 <?php
-namespace Mediashare\Spider\Modules;
-
-use Mediashare\Spider\Entity\Url;
+namespace Mediashare\Modules;
 
 /**
  * Images
  * Get all Images metadata & attributes
  */
 class Images {    
+    public $dom;
     public function run() { 
         $images = [];
-        foreach($this->crawler->filter('img') as $image) {
+        foreach($this->dom->filter('img') as $image) {
             if (!empty($image)) {
                 $src = $this->setSource($image->getAttribute('src'));
                 $alt = rtrim(ltrim($image->getAttribute('alt')));
@@ -35,7 +34,7 @@ class Images {
     public function setSource(string $url) {
         $url = rtrim(ltrim($url));
         if (!filter_var($url, FILTER_VALIDATE_URL)) { 
-            $url = $this->url->getUrl().$url;
+            $url = $this->url.$url;
         }
         return $url;
     }

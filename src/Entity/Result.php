@@ -2,26 +2,23 @@
 
 namespace Mediashare\Spider\Entity;
 
+use Zumba\JsonSerializer\JsonSerializer;
 use Mediashare\Spider\Service\FileSystem;
 use Mediashare\Spider\Controller\Webspider;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 
 class Result
 {
     public $id;
     public $config;
-    public $website;
+    public $crawler;
     public $modules = [];
     public $errors = [];
     public function __construct(Webspider $webspider) {
         $this->id = $webspider->config->getId();
         $this->config = $webspider->config;
-        $this->modules = $webspider->modules->results;
-        $this->website = $webspider->url->getWebsite();
+        $this->crawler = $webspider->crawler;
+        $this->modules = $webspider->modules;
         $this->errors = $webspider->errors;
     }
 
@@ -31,23 +28,16 @@ class Result
      * @return self
      */
     public function build(): self {
-        $json = $this->json();
+        $json = $this->json($this);
         $output = $this->config->getOutput();
         $fileSystem = new FileSystem();
         $fileSystem->createJsonFile($json, $output);
         return $this;
     }
  
-    public function json(): string {
-        // Serialize
-        $encoders = [new XmlEncoder(), new JsonEncoder()];
-        $normalizers = new ObjectNormalizer();
-        $serializer = new Serializer([$normalizers], $encoders);
-        $json = $serializer->serialize($this, 'json', [
-            'circular_reference_handler' => function ($object) {
-                return $object->getId();
-            }
-        ]);
+    public function json($object): string {
+        $serializer = new JsonSerializer();
+        $json = $serializer->serialize($object);
         return $json;
     }
 }

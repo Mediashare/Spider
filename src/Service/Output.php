@@ -76,7 +76,7 @@ class Output {
 
     public function json($json) {
         if ($this->config->getJson()) {
-            header('Content-Type: application/json');
+            // header('Content-Type: application/json');
             echo $json;
         }
     }

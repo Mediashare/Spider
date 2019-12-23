@@ -71,7 +71,7 @@ DomCrawler is symfony component for DOM navigation for HTML and XML documents. Y
 ```php
 <?php
 // ./modules/Links.php
-namespace Mediashare\Spider\Modules;
+namespace Mediashare\Modules;
 
 class Links {
     public $config; // Spider Config

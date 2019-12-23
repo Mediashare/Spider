@@ -1,11 +1,12 @@
 <?php
-namespace Mediashare\Spider\Modules;
+namespace Mediashare\Modules;
 
 /**
  * Metadata
  * Get all metadata from a webpage.
  */
 class Metadata {    
+    public $dom;
     public function run() { 
         // Get Title
         $results['title'] = $this->getTitle();
@@ -15,21 +16,21 @@ class Metadata {
     }
 
     private function getTitle() {
-        $title = $this->crawler->filterXpath("//title");
+        $title = $this->dom->filterXpath("//title");
         if ($title->count()) {
             return $title->text();
         } else {
             $this->errors = [
                 'type' => 'SEO',
                 'message' => 'Title not found!',
-                'url' => (string) $this->url->getUrl(),
+                'url' => (string) $this->url,
             ];
         }
     }
 
     private function getOtherMeta() {
         $result = null;
-        $metaBalises = $this->crawler->filterXpath("//meta")->extract(array('name','property','content'));
+        $metaBalises = $this->dom->filterXpath("//meta")->extract(array('name','property','content'));
         foreach ($metaBalises as $meta) {
             $type = null;
             if ($meta[0]) {

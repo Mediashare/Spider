@@ -1,17 +1,18 @@
 <?php
-namespace Mediashare\Spider\Modules;
+namespace Mediashare\Modules;
 
 class SitemapChecker {    
+    public $body;
     public function run() {
-        $webpage = $this->url->getWebpage()->getBody()->getContent();
-        $urls = $this->getUrls($webpage);
+        $body = $this->body;
+        $urls = $this->getUrls($body);
         $results = $this->getHttpResponse($urls);
         return $results;
     }
 
-    private function getUrls($webpage) {
+    private function getUrls($body) {
         $matches = [];
-        $searchUrl = preg_match_all('/<loc>(.*?)\<\/loc>/s', $webpage, $matches);
+        $searchUrl = preg_match_all('/<loc>(.*?)\<\/loc>/s', $body, $matches);
         $urls = [];
 
         foreach ((array) $matches[0] as $url) {
@@ -26,7 +27,7 @@ class SitemapChecker {
     }
 
     private function getHttpResponse(array $urls) {
-        echo "\n";
+        // echo "\n";
         $total = count($urls);
         $responses = [];
         foreach ($urls as $counter => $url) {
@@ -35,7 +36,7 @@ class SitemapChecker {
             if ($response['httpCode'] === 0) {$response['httpCode'] = 'Curl Fail Request';} // Curl's request is still fail!
 
             // Save Result
-            echo ($counter + 1) . '/' . $total . ' | (' . $response['httpCode'] . ') ' . $url . "\n";
+            // echo ($counter + 1) . '/' . $total . ' | (' . $response['httpCode'] . ') ' . $url . "\n";
             $responses[$response['httpCode']][] = [
                 'url' => $url,
                 'httpCode' => $response['httpCode'],

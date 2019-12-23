@@ -1,5 +1,5 @@
 <?php
-namespace Mediashare\Spider\Modules;
+namespace Mediashare\Modules;
 
 /**
  * Hello
@@ -7,7 +7,8 @@ namespace Mediashare\Spider\Modules;
  * @return string 
  */
 class Hello {
+    public $url;
     public function run() { 
-        return "Hello World! From [".$this->url->getUrl()."]";
+        return "Hello World! From [".$this->url."]";
     }
 }

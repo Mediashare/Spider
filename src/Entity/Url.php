@@ -24,8 +24,6 @@ class Url
         $this->setUrl($url);
         $website = new Website($this);
         $this->setWebsite($website);
-        $webpage = new Webpage($this);
-        $this->setWebpage($webpage);
     }
 
     public function getId(): ?string

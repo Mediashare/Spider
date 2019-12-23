@@ -1,13 +1,16 @@
 <?php
-namespace Mediashare\Spider\Modules;
+namespace Mediashare\Modules;
 
 /**
  * FileDownload
  */
 class FileDownload {
+    public $url;
+    public $config;
+    public $links;
     public function run() {
         $this->createFolder();
-        $urls = $this->url->getWebpage()->getLinks();
+        $urls = $this->links;
         foreach ($urls as $url) {
             $file = $this->getFile($url);
             if ($file): 
@@ -23,7 +26,7 @@ class FileDownload {
     }
     public function createFolder() {
         // File directory
-        $domain = parse_url($this->url->getUrl())['host'];
+        $domain = parse_url((string) $this->url)['host'];
         if (!\file_exists($this->config->getReportsDir())):
             \mkdir($this->config->getReportsDir());
         endif;

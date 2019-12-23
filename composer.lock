@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d7fa223eeead5f0c5024d53d62624434",
+    "content-hash": "4323f423b86eed5afde399a5c2febc05",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -308,16 +308,16 @@
         },
         {
             "name": "mediashare/modules-provider",
-            "version": "0.2.0",
+            "version": "0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mediashare/modules-provider.git",
-                "reference": "08927f57ca6c38c4eaaf0ffbfaf38b882f80f3c1"
+                "reference": "f725bd9a3c0ecc3d1b4edf5ae69c78f1da1789c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mediashare/modules-provider/zipball/08927f57ca6c38c4eaaf0ffbfaf38b882f80f3c1",
-                "reference": "08927f57ca6c38c4eaaf0ffbfaf38b882f80f3c1",
+                "url": "https://api.github.com/repos/Mediashare/modules-provider/zipball/f725bd9a3c0ecc3d1b4edf5ae69c78f1da1789c2",
+                "reference": "f725bd9a3c0ecc3d1b4edf5ae69c78f1da1789c2",
                 "shasum": ""
             },
             "require-dev": {
@@ -340,7 +340,7 @@
                 }
             ],
             "description": "Modules provider is an object autoloader for automating and simplifying some code inclusion in different projects.",
-            "time": "2019-12-23T07:57:09+00:00"
+            "time": "2019-12-23T18:01:34+00:00"
         },
         {
             "name": "mediashare/scraper",
@@ -1035,7 +1035,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "alpha",
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,

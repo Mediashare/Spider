@@ -11,13 +11,13 @@
             "email": "mediashare.supp@gmail.com"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "alpha",
     "require": {
         "league/climate": "^3.5",
         "symfony/finder": "^5.0",
         "symfony/filesystem": "^5.0",
-        "mediashare/crawler": "0.1.*",
-        "mediashare/modules-provider": "0.2.*",
+        "mediashare/crawler": "*",
+        "mediashare/modules-provider": "^0.2",
         "zumba/json-serializer": "^2.2"
     },
     "autoload": {

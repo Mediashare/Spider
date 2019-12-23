@@ -79,6 +79,7 @@ class Webspider
 					endif;
 				endif;
 			}
+			$data->webpage->getBody()->setContent("");
 		}
 		return $results;
 	}

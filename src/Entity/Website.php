@@ -8,7 +8,6 @@ class Website
 {
     public $id;
     public $domain;
-    public $urls;
 
     public function __toString() {
         return $this->getDomain();
@@ -18,7 +17,6 @@ class Website
         $this->url = $url;
         $this->setDomain((string) $url->getHost());
         $this->setScheme((string) $url->getScheme());
-        $this->addUrl($url);
     }
 
     public function getId(): ?string

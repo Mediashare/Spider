@@ -20,7 +20,7 @@ $config->setVerbose(true); // Prompt verbose output
 // $config->addVariables(['Search' => ['ces deux exchanges']]); // Inject this variables in modules 
 
 // Url
-$url = new \Mediashare\Spider\Entity\Url('http://marquand.pro');
+$url = new \Mediashare\Spider\Entity\Url('https://slote.me');
 
 // Spider
 $spider = new \Mediashare\Spider\Spider($url, $config);

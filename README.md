@@ -16,7 +16,7 @@ Using a crawler can have several interests:
 ### Features
   - Get all links from website
   - Check HTTP response
-  - Create your own [**Modules**](modules/) (Crawl & execute your PHP code). [More information...]()
+  - Create your own [**Modules**](modules/) (Crawl & execute your PHP code).
   - No database, Pure PHP & Symfony
   - Output json file
 

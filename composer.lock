@@ -308,16 +308,16 @@
         },
         {
             "name": "mediashare/modules-provider",
-            "version": "0.2.1",
+            "version": "0.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mediashare/modules-provider.git",
-                "reference": "f725bd9a3c0ecc3d1b4edf5ae69c78f1da1789c2"
+                "reference": "cb638cda6918025062dc0258a89f8458b05e0869"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mediashare/modules-provider/zipball/f725bd9a3c0ecc3d1b4edf5ae69c78f1da1789c2",
-                "reference": "f725bd9a3c0ecc3d1b4edf5ae69c78f1da1789c2",
+                "url": "https://api.github.com/repos/Mediashare/modules-provider/zipball/cb638cda6918025062dc0258a89f8458b05e0869",
+                "reference": "cb638cda6918025062dc0258a89f8458b05e0869",
                 "shasum": ""
             },
             "require-dev": {
@@ -339,8 +339,8 @@
                     "email": "mediashare.supp@gmail.com"
                 }
             ],
-            "description": "Modules provider is an object autoloader for automating and simplifying some code inclusion in different projects.",
-            "time": "2019-12-23T18:01:34+00:00"
+            "description": "Modules provider is an object autoloader for automating and simplifying some code inclusion in different projects. You can call object(s) from different folders and create a container with multiple objects.",
+            "time": "2019-12-24T14:29:39+00:00"
         },
         {
             "name": "mediashare/scraper",

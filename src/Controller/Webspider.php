@@ -69,16 +69,16 @@ class Webspider
 		$modules = new Modules($config);
 		$modules = $modules->getModules();
 		foreach ($crawler->urls as $url => $data) {
-			foreach ($modules as $classname => $module) {
-				if ($classname != "FileDownload"):
+			foreach ($modules as $module) {
+				if ($module->name != "FileDownload"):
 					$module->url = $url;
 					$module->config = $this->config;
 					$module->dom = $data->dom;
 					$module->links = $data->webpage->links;
 					$module->body = $data->webpage->getBody()->getContent();
-					$results[$classname][$url] = $module->run();
+					$results[$module->name][$url] = $module->run();
 					if (!empty($module->errors)):
-						$this->errors[] = $module->errors;
+						$this->errors[$module->name][] = $module->errors;
 					endif;
 				endif;
 			}

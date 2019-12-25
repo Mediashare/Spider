@@ -5,7 +5,7 @@ require 'vendor/autoload.php';
 
 $config = new \Mediashare\Spider\Entity\Config(); // Website Config
 // $config->setId("Audit_marquand.pro"); // Id|Name report (uniqid() by default)
-// $config->setWebspider(true); // Crawl all website
+$config->setWebspider(true); // Crawl all website
 // $config->setRequires(['/projet']); // Path requires
 // // $config->setExceptions(['/contact']); // Path exceptions
 // // Directories
@@ -20,7 +20,7 @@ $config->setVerbose(true); // Prompt verbose output
 // $config->addVariables(['Search' => ['ces deux exchanges']]); // Inject this variables in modules 
 
 // Url
-$url = new \Mediashare\Spider\Entity\Url('http://marquand.pro');
+$url = new \Mediashare\Spider\Entity\Url('http://slote.me');
 
 // Spider
 $spider = new \Mediashare\Spider\Spider($url, $config);

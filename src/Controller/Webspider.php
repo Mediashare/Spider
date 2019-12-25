@@ -1,14 +1,15 @@
 <?php
 namespace Mediashare\Spider\Controller;
 
+use League\CLImate\CLImate;
+use Mediashare\Crawler\Crawler;
 use Mediashare\Spider\Entity\Url;
 use Mediashare\Spider\Entity\Config;
 use Mediashare\Spider\Entity\Result;
 use Mediashare\Spider\Service\Output;
 use Mediashare\ModulesProvider\Modules;
-use Mediashare\ModulesProvider\Config as ModuleConfig;
-use Mediashare\Crawler\Crawler;
 use Mediashare\Crawler\Config as CrawlerConfig;
+use Mediashare\ModulesProvider\Config as ModuleConfig;
 
 
 /**
@@ -68,9 +69,10 @@ class Webspider
 		$config->setNamespace("Mediashare\\Modules\\");
 		$modules = new Modules($config);
 		$modules = $modules->getModules();
-		foreach ($crawler->urls as $url => $data) {
-			foreach ($modules as $module) {
-				if ($module->name != "FileDownload"):
+		foreach ($modules as $index => $module) {
+			if ($module->name != "FileDownload"):
+				$this->output->progressBar($index + 1, count($modules), "[Module Runing] ".$module->name);
+				foreach ($crawler->urls as $url => $data) {
 					$module->url = $url;
 					$module->config = $this->config;
 					$module->dom = $data->dom;
@@ -80,9 +82,9 @@ class Webspider
 					if (!empty($module->errors)):
 						$this->errors[$module->name][] = $module->errors;
 					endif;
-				endif;
-			}
-			$data->webpage->getBody()->setContent(""); // Reset body content for memory optimization.
+					$data->webpage->getBody()->setContent(""); // Reset body content for memory optimization.
+				}
+			endif;
 		}
 		return $results;
 	}

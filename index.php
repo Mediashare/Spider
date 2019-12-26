@@ -7,7 +7,7 @@ $config = new \Mediashare\Spider\Entity\Config(); // Website Config
 // $config->setId("Audit_marquand.pro"); // Id|Name report (uniqid() by default)
 $config->setWebspider(true); // Crawl all website
 // $config->setRequires(['/projet']); // Path requires
-// // $config->setExceptions(['/contact']); // Path exceptions
+// $config->setExceptions(['/contact']); // Path exceptions
 // // Directories
 $config->setReportsDir(__DIR__.'/reports/'); // Default reports path
 $config->setModulesDir(__DIR__.'/modules/'); // Default modules path

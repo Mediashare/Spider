@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4323f423b86eed5afde399a5c2febc05",
+    "content-hash": "055cef59560bc39c26a588b03691f30e",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -305,6 +305,44 @@
                 "scraping"
             ],
             "time": "2019-12-23T15:37:55+00:00"
+        },
+        {
+            "name": "mediashare/kernel",
+            "version": "0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Mediashare/kernel.git",
+                "reference": "da184103d09384577a114ed627f45ceb7213c089"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Mediashare/kernel/zipball/da184103d09384577a114ed627f45ceb7213c089",
+                "reference": "da184103d09384577a114ed627f45ceb7213c089",
+                "shasum": ""
+            },
+            "require": {
+                "mediashare/modules-provider": "^0.2.2"
+            },
+            "require-dev": {
+                "tracy/tracy": "^2.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mediashare\\Kernel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mediashare",
+                    "email": "mediashare.supp@gmail.com"
+                }
+            ],
+            "time": "2019-12-26T14:44:02+00:00"
         },
         {
             "name": "mediashare/modules-provider",

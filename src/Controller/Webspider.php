@@ -2,14 +2,13 @@
 namespace Mediashare\Spider\Controller;
 
 use League\CLImate\CLImate;
+use Mediashare\Kernel\Kernel;
 use Mediashare\Crawler\Crawler;
 use Mediashare\Spider\Entity\Url;
 use Mediashare\Spider\Entity\Config;
 use Mediashare\Spider\Entity\Result;
 use Mediashare\Spider\Service\Output;
-use Mediashare\ModulesProvider\Modules;
 use Mediashare\Crawler\Config as CrawlerConfig;
-use Mediashare\ModulesProvider\Config as ModuleConfig;
 
 
 /**
@@ -64,11 +63,9 @@ class Webspider
 	 */
 	public function modules(Crawler $crawler) {
 		$results = [];
-		$config = new ModuleConfig();
-		$config->setModulesDir($this->config->getModulesDir());
-		$config->setNamespace("Mediashare\\Modules\\");
-		$modules = new Modules($config);
-		$modules = $modules->getModules();
+		$kernel = new Kernel();
+		$kernel->run();
+		$modules = $kernel->modules['SEO'];
 		foreach ($modules as $index => $module) {
 			if ($module->name != "FileDownload"):
 				$this->output->progressBar($index + 1, count($modules), "[Module Runing] ".$module->name);

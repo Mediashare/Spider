@@ -69,7 +69,8 @@ class Webspider
 		$counter = 0;
 		foreach ($modules as $name => $module) {
 			if ($name != "FileDownload"):
-				$this->output->progressBar($counter++, count($modules) -1, "[Module Runing] ".$module->name);
+				$counter++;
+				$this->output->progressBar($counter, count($modules) -1, "[Module Runing] ".$module->name);
 				foreach ($crawler->urls as $url => $data) {
 					$module->url = $url;
 					$module->config = $this->config;

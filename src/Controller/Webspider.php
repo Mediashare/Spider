@@ -65,10 +65,11 @@ class Webspider
 		$results = [];
 		$kernel = new Kernel();
 		$kernel->run();
-		$modules = $kernel->modules['SEO'];
-		foreach ($modules as $index => $module) {
-			if ($module->name != "FileDownload"):
-				$this->output->progressBar($index + 1, count($modules), "[Module Runing] ".$module->name);
+		$modules = $kernel->getContainer("SEO");
+		$counter = 0;
+		foreach ($modules as $name => $module) {
+			if ($name != "FileDownload"):
+				$this->output->progressBar($counter++, count($modules) -1, "[Module Runing] ".$module->name);
 				foreach ($crawler->urls as $url => $data) {
 					$module->url = $url;
 					$module->config = $this->config;

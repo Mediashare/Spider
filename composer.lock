@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "055cef59560bc39c26a588b03691f30e",
+    "content-hash": "00f711cfbcf04a4a22f279d6c642269f",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -258,21 +258,21 @@
         },
         {
             "name": "mediashare/crawler",
-            "version": "0.1.0",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mediashare/crawler.git",
-                "reference": "c78a6b1471a99c6394c383c5b01054fcdffb7ca5"
+                "reference": "d25af2a7920078627d6b32589c311c775ac1de88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mediashare/crawler/zipball/c78a6b1471a99c6394c383c5b01054fcdffb7ca5",
-                "reference": "c78a6b1471a99c6394c383c5b01054fcdffb7ca5",
+                "url": "https://api.github.com/repos/Mediashare/crawler/zipball/d25af2a7920078627d6b32589c311c775ac1de88",
+                "reference": "d25af2a7920078627d6b32589c311c775ac1de88",
                 "shasum": ""
             },
             "require": {
                 "league/climate": "^3.5",
-                "mediashare/scraper": "^0.0.7"
+                "mediashare/scraper": "*"
             },
             "require-dev": {
                 "tracy/tracy": "^2.7"
@@ -304,20 +304,20 @@
                 "scraper",
                 "scraping"
             ],
-            "time": "2019-12-23T15:37:55+00:00"
+            "time": "2019-12-23T18:19:08+00:00"
         },
         {
             "name": "mediashare/kernel",
-            "version": "0.0.0",
+            "version": "0.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mediashare/kernel.git",
-                "reference": "da184103d09384577a114ed627f45ceb7213c089"
+                "reference": "30e3b75f138f52346a53475495018c76298ff022"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mediashare/kernel/zipball/da184103d09384577a114ed627f45ceb7213c089",
-                "reference": "da184103d09384577a114ed627f45ceb7213c089",
+                "url": "https://api.github.com/repos/Mediashare/kernel/zipball/30e3b75f138f52346a53475495018c76298ff022",
+                "reference": "30e3b75f138f52346a53475495018c76298ff022",
                 "shasum": ""
             },
             "require": {
@@ -342,7 +342,8 @@
                     "email": "mediashare.supp@gmail.com"
                 }
             ],
-            "time": "2019-12-26T14:44:02+00:00"
+            "description": "Mediashare Kernel with all public modules provided.",
+            "time": "2019-12-26T15:14:24+00:00"
         },
         {
             "name": "mediashare/modules-provider",
@@ -382,7 +383,7 @@
         },
         {
             "name": "mediashare/scraper",
-            "version": "0.0.7",
+            "version": "0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mediashare/scraper.git",

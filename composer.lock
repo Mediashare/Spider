@@ -258,21 +258,21 @@
         },
         {
             "name": "mediashare/crawler",
-            "version": "0.1.1",
+            "version": "0.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mediashare/crawler.git",
-                "reference": "d25af2a7920078627d6b32589c311c775ac1de88"
+                "reference": "59dc3f6e681304c2cfa17c530f38a1839277bb37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mediashare/crawler/zipball/d25af2a7920078627d6b32589c311c775ac1de88",
-                "reference": "d25af2a7920078627d6b32589c311c775ac1de88",
+                "url": "https://api.github.com/repos/Mediashare/crawler/zipball/59dc3f6e681304c2cfa17c530f38a1839277bb37",
+                "reference": "59dc3f6e681304c2cfa17c530f38a1839277bb37",
                 "shasum": ""
             },
             "require": {
                 "league/climate": "^3.5",
-                "mediashare/scraper": "*"
+                "mediashare/scraper": "^0.1"
             },
             "require-dev": {
                 "tracy/tracy": "^2.7"
@@ -304,7 +304,7 @@
                 "scraper",
                 "scraping"
             ],
-            "time": "2019-12-23T18:19:08+00:00"
+            "time": "2019-12-27T19:53:35+00:00"
         },
         {
             "name": "mediashare/kernel",
@@ -383,16 +383,16 @@
         },
         {
             "name": "mediashare/scraper",
-            "version": "0.1.0",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mediashare/scraper.git",
-                "reference": "63aba006ff0bdb1056bc19bb3e95678e1705243f"
+                "reference": "4fbe22ca9cf6de6b9560f1873ebbd4de8f8fe673"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mediashare/scraper/zipball/63aba006ff0bdb1056bc19bb3e95678e1705243f",
-                "reference": "63aba006ff0bdb1056bc19bb3e95678e1705243f",
+                "url": "https://api.github.com/repos/Mediashare/scraper/zipball/4fbe22ca9cf6de6b9560f1873ebbd4de8f8fe673",
+                "reference": "4fbe22ca9cf6de6b9560f1873ebbd4de8f8fe673",
                 "shasum": ""
             },
             "require": {
@@ -428,7 +428,7 @@
                 "scraper",
                 "scraping"
             ],
-            "time": "2019-12-23T15:32:06+00:00"
+            "time": "2019-12-27T19:51:11+00:00"
         },
         {
             "name": "psr/http-message",

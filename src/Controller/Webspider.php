@@ -49,6 +49,7 @@ class Webspider
 
 	public function crawl() {
 		$config = new CrawlerConfig();
+		$config->setWebspider($this->config->getWebspider());
 		$config->setVerbose($this->config->getVerbose());
 		$crawler = new Crawler((string) $this->url, $config);
 		$crawler->run();

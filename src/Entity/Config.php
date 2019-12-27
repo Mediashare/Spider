@@ -207,7 +207,7 @@ class Config
     {
         if (!$this->output):
             $domain = $this->getUrl()->getHost();
-            $this->setOutput(__DIR__.'/../../reports/'.$domain.'/'.$this->getId().'.json');
+            $this->setOutput($this->getReportsDir().$domain.'/'.$this->getId().'.json');
         endif;
         return $this->output;
     }

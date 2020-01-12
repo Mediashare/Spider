@@ -18,7 +18,7 @@
         "symfony/filesystem": "^5.0",
         "mediashare/crawler": "^0.1",
         "zumba/json-serializer": "^2.2",
-        "mediashare/kernel": "^0.0"
+        "mediashare/kernel": "*"
     },
     "autoload": {
         "psr-4": {

@@ -308,19 +308,20 @@
         },
         {
             "name": "mediashare/kernel",
-            "version": "0.0.4",
+            "version": "0.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mediashare/kernel.git",
-                "reference": "56aaf3e9c9331fa41d8c68ea33498904b41752ff"
+                "reference": "e28d6082e389b0903e7848e0978d875d4017d8ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mediashare/kernel/zipball/56aaf3e9c9331fa41d8c68ea33498904b41752ff",
-                "reference": "56aaf3e9c9331fa41d8c68ea33498904b41752ff",
+                "url": "https://api.github.com/repos/Mediashare/kernel/zipball/e28d6082e389b0903e7848e0978d875d4017d8ef",
+                "reference": "e28d6082e389b0903e7848e0978d875d4017d8ef",
                 "shasum": ""
             },
             "require": {
+                "league/climate": "^3.5",
                 "mediashare/modules-provider": "^0.2.2"
             },
             "require-dev": {
@@ -343,21 +344,24 @@
                 }
             ],
             "description": "Mediashare Kernel with all public modules provided.",
-            "time": "2019-12-26T20:23:36+00:00"
+            "time": "2020-01-02T21:40:05+00:00"
         },
         {
             "name": "mediashare/modules-provider",
-            "version": "0.2.2",
+            "version": "0.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mediashare/modules-provider.git",
-                "reference": "cb638cda6918025062dc0258a89f8458b05e0869"
+                "reference": "41821b065abeb35ec3d5943d59486a096c7fabad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mediashare/modules-provider/zipball/cb638cda6918025062dc0258a89f8458b05e0869",
-                "reference": "cb638cda6918025062dc0258a89f8458b05e0869",
+                "url": "https://api.github.com/repos/Mediashare/modules-provider/zipball/41821b065abeb35ec3d5943d59486a096c7fabad",
+                "reference": "41821b065abeb35ec3d5943d59486a096c7fabad",
                 "shasum": ""
+            },
+            "require": {
+                "league/climate": "^3.5"
             },
             "require-dev": {
                 "tracy/tracy": "^2.7"
@@ -379,7 +383,7 @@
                 }
             ],
             "description": "Modules provider is an object autoloader for automating and simplifying some code inclusion in different projects. You can call object(s) from different folders and create a container with multiple objects.",
-            "time": "2019-12-24T14:29:39+00:00"
+            "time": "2020-01-06T22:35:53+00:00"
         },
         {
             "name": "mediashare/scraper",

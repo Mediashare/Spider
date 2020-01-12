@@ -15,7 +15,7 @@ class Config
     public $json = false; // Prompt json output
     public $variables = []; // Variables Injected to modules
     public $modules = []; // Select one or more modules to use
-    public $enableModules = true; // Enable all modules
+    public $enableDefaultModules = true; // Enable all modules
     public $modulesDir;
     public $reportsDir;
     public $output;
@@ -162,9 +162,9 @@ class Config
         }
     }
 
-    public function enableAllModule(bool $enable): self
+    public function enableDefaultModule(bool $enable): self
     {
-        $this->enableModules = $enable;
+        $this->enableDefaultModules = $enable;
         return $this;
     }
 

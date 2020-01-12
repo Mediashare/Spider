@@ -16,7 +16,7 @@ Using a crawler can have several interests:
 ### Features
   - Get all links from website
   - Check HTTP response
-  - Create your own [**Modules**](modules/) (Crawl & execute your PHP code).
+  - Create your own [**Modules**](##modules) (Crawl & execute your PHP code).
   - No database, Pure PHP & Symfony
   - Output json file
 
@@ -54,8 +54,7 @@ $config->setModulesDir(__DIR__.'/modules/'); // Default modules path
 $config->setVerbose(true); // Prompt verbose output
 $config->setJson(false); // Prompt json output
 // Modules Activation
-$config->enableAllModule(true); // Enable all modules
-// $config->addModules(['Links', 'Search']);// Select one or more modules to use with class name
+$config->enableDefaultModule(true); // Enable default SEO kernel modules
 
 // Url
 $url = new Url('http://marquand.pro');
@@ -75,26 +74,21 @@ DomCrawler is symfony component for DOM navigation for HTML and XML documents. Y
 ### Create own module to execute actions when the crawler scraps a webpage. 
 ```php
 <?php
-// ./modules/Links.php
+// ./modules/LinksTest.php
 namespace Mediashare\Modules;
 
-class Links {
-    public $config; // Spider Config
-    public $url; // Url with Headers & Body
-    public $crawler; // DomCrawler
-    public $errors; // Output errors
-    
+class LinksTest {
+    public $dom;
     public function run() { 
-        $source = $this->url->getUrl();
         $links = [];
         foreach($this->dom->filter('a') as $link) {
             if (!empty($link)) {
                 $href = rtrim(ltrim($link->getAttribute('href')));
                 if ($href) {
                     if (isset($links[$href])) {
-                        $links[$href]++;
+                        $links[$href]['counter']++;
                     } else {
-                        $links[$href] = 1;
+                        $links[$href]['counter'] = 1;
                     }
                 }
             }
@@ -114,7 +108,7 @@ php index.php
 -*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*
 ```
 
-## [Modules](modules/)
+## [Modules](https://packagist.org/packages/mediashare/modules-provider)
 Modules are tools created by the community to add features when crawling a website.
 Adding a module to a crawler allows the automation of code execution on one or more pages of a website. Modules are executed when crawling a page.
-[More information...](modules/)
+[More information...](https://packagist.org/packages/mediashare/modules-provider)

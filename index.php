@@ -16,10 +16,10 @@ $config->setVerbose(true); // Prompt verbose output
 // $config->setJson(true); // Prompt json output
 
 // Modules Activation
-$config->enableDefaultModule(false); // Enable default SEO kernel modules
+$config->enableDefaultModule(true); // Enable default SEO kernel modules
 
 // Url
-$url = new \Mediashare\Spider\Entity\Url('https://www.exacompare.fr/');
+$url = new \Mediashare\Spider\Entity\Url('https://mediashare.fr/');
 
 // Spider
 $spider = new \Mediashare\Spider\Spider($url, $config);

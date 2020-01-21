@@ -23,7 +23,7 @@ Using a crawler can have several interests:
 ### Libraries
   - Autoloader php class for code integration easily. [mediashare/modules-provider](https://packagist.org/packages/mediashare/modules-provider)
   - Website bot crawler. [mediashare/crawler](https://packagist.org/packages/mediashare/crawler)
-  - Scraper with DomCrawler integration.[mediashare/scraper](https://packagist.org/packages/mediashare/scraper)
+  - Scraper with DomCrawler integration. [mediashare/scraper](https://packagist.org/packages/mediashare/scraper)
 
 I would be happy to receive your ideas and contributions to the project :smiley:
 

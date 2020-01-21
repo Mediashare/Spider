@@ -2,6 +2,7 @@
 
 namespace Mediashare\Spider\Entity;
 
+use Mediashare\Kernel\Kernel;
 use Mediashare\Spider\Entity\Url;
 
 class Config
@@ -119,33 +120,31 @@ class Config
     public function addModules(?array $modules): self
     {
         foreach ((array) $modules as $module) {
-            if (!isset($this->modules[$module])):
-                $this->modules[$module] = $module;
+            if (!isset($this->modules[$module->name])):
+                $this->modules[$module->name] = $module;
             endif;
         }
 
         return $this;
     }
 
-    public function addModule(Module $module): self
+    public function removeModule(string $module): self
     {
-        if (!isset($this->modules[$module->name])):
-            $this->modules[$module->name] = $url;
+        if (isset($this->modules[$module])):
+            unset($this->modules[$module]);
         endif;
-     
+
         return $this;
     }
 
-    public function removeModule(Module $module): self
+    public function enableDefaultModule(bool $enable): self
     {
-        if (isset($this->modules[$module->getModule()])):
-            unset($this->modules[$module->getModule()]);
-            // set the owning side to null (unless already changed)
-            if ($module->getConfig() === $this) {
-                $module->setConfig(null);
-            }
+        $this->enableDefaultModules = $enable;
+        if ($this->enableDefaultModules):
+            $kernel = new Kernel();
+            $kernel->run();
+            $this->addModules($kernel->getContainer("SEO"));
         endif;
-
         return $this;
     }
 
@@ -160,12 +159,6 @@ class Config
                 $this->variables[$module_name] = $variables;
             }
         }
-    }
-
-    public function enableDefaultModule(bool $enable): self
-    {
-        $this->enableDefaultModules = $enable;
-        return $this;
     }
 
     public function setReportsDir(string $reportsDir): self

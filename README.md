@@ -55,13 +55,14 @@ $config->setVerbose(true); // Prompt verbose output
 $config->setJson(false); // Prompt json output
 // Modules Activation
 $config->enableDefaultModule(true); // Enable default SEO kernel modules
+$config->removeModule('FileDownload'); // Disable Module
 
 // Url
-$url = new Url('http://marquand.pro');
-// Spider
+$url = new Url('https://mediashare.fr');
+
+// Run Spider
 $spider = new Spider($url, $config);
 $result = $spider->run();
-// dump($result);
 ```
 
 ## Modules

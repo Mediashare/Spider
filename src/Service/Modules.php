@@ -44,13 +44,8 @@ class Modules {
 	 * Init Modules
 	 */
 	public function initModules() {
-        // Default Modules
-        if ($this->config->enableDefaultModules):
-            $kernel = new Kernel();
-            $kernel->run();
-            $this->modules = $kernel->getContainer("SEO");
-        endif;
-        
+        // Default Modules (Kernel SEO)
+        $this->modules = $this->config->getModules(); 
         // Another Modules
         $config = new configModules();
         $config->setModulesDir($this->config->getModulesDir());

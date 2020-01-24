@@ -4,7 +4,7 @@ use Tracy\Debugger;
 Debugger::enable();
 
 $config = new \Mediashare\Spider\Entity\Config(); // Website Config
-// $config->setId("Audit_marquand.pro"); // Id|Name report (uniqid() by default)
+// $config->setId("Audit_mediashare.fr"); // Id|Name report (uniqid() by default)
 $config->setWebspider(true); // Crawl all website
 
 // Directories

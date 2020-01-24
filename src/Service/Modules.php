@@ -32,7 +32,7 @@ class Modules {
                 $module->body = $data->webpage->getBody()->getContent();
                 $results[$module->name][$url] = $module->run();
                 if (!empty($module->errors)):
-                    $this->errors[$module->name][] = $module->errors;
+                    $this->errors[$module->name][$url] = $module->errors;
                 endif;
                 $data->webpage->getBody()->setContent(""); // Reset body content for memory optimization.
             }

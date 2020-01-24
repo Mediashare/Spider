@@ -34,7 +34,8 @@ class Webspider
 		$this->crawler = $this->crawl();
 		// Modules
 		$modules = new Modules($this->crawler, $this->config);
-		$this->modules = $modules->run();
+		$this->modules['results'] = $modules->run();
+		$this->modules['errors'] = $modules->errors;
 		// Result
 		$result = new Result($this);
 		$result->build();

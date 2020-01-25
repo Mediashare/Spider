@@ -16,7 +16,7 @@ $config->setVerbose(true); // Prompt verbose output
 // $config->setJson(true); // Prompt json output
 
 // Modules Activation
-$config->enableDefaultModule(false); // Enable default SEO kernel modules
+$config->enableDefaultModule(true); // Enable default SEO kernel modules
 $config->removeModule('FileDownload'); // Disable Module
 
 // Url

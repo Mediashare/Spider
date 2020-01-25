@@ -16,8 +16,8 @@
         "league/climate": "^3.5",
         "symfony/finder": "^5.0",
         "symfony/filesystem": "^5.0",
-        "mediashare/crawler": "^0.1",
         "zumba/json-serializer": "^2.2",
+        "mediashare/crawler": "*",
         "mediashare/kernel": "*"
     },
     "autoload": {

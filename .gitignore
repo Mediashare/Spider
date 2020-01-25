@@ -1,4 +1,5 @@
 vendor/
 reports/
 var/
+.time-tracking/
 .DS_STORE

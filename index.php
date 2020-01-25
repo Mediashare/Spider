@@ -1,7 +1,7 @@
 <?php
 require 'vendor/autoload.php';
-use Tracy\Debugger;
-Debugger::enable();
+// use Tracy\Debugger;
+// Debugger::enable();
 
 $config = new \Mediashare\Spider\Entity\Config(); // Website Config
 // $config->setId("Audit_mediashare.fr"); // Id|Name report (uniqid() by default)
@@ -16,7 +16,7 @@ $config->setVerbose(true); // Prompt verbose output
 // $config->setJson(true); // Prompt json output
 
 // Modules Activation
-$config->enableDefaultModule(true); // Enable default SEO kernel modules
+$config->enableDefaultModule(false); // Enable default SEO kernel modules
 $config->removeModule('FileDownload'); // Disable Module
 
 // Url

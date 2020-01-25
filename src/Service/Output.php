@@ -22,8 +22,8 @@ class Output {
         if ($this->verbose) {
             echo $this->echoColor("\n______________________________________________\n", 'white');
             echo $this->echoColor("|                                             |\n", 'white');
-            echo $this->echoColor("|                  ", 'white').$this->echoColor("WebSpider").$this->echoColor("                  |\n", 'white');
-            echo $this->echoColor("|                   -------                   |\n", 'white');
+            echo $this->echoColor("|                    ", 'white').$this->echoColor("Spider").$this->echoColor("                   |\n", 'white');
+            echo $this->echoColor("|                   --------                  |\n", 'white');
             echo $this->echoColor("|_____________________________________________|\n", 'white');
             echo $this->echoColor("                                   | by ", 'white').$this->echoColor("Slote").$this->echoColor(" |\n", 'white');
             echo $this->echoColor("                                   |__________/\n", 'white');

@@ -35,7 +35,9 @@ class Webspider
 		// Modules
 		$modules = new Modules($this->crawler, $this->config);
 		$this->modules['results'] = $modules->run();
-		$this->modules['errors'] = $modules->errors;
+		if (!empty($modules->errors)):
+			$this->modules['errors'] = $modules->errors;
+		endif;
 		// Result
 		$result = new Result($this);
 		$result->build();

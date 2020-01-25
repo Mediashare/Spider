@@ -5,7 +5,7 @@ require 'vendor/autoload.php';
 
 $config = new \Mediashare\Spider\Entity\Config(); // Website Config
 // $config->setId("Audit_mediashare.fr"); // Id|Name report (uniqid() by default)
-$config->setWebspider(true); // Crawl all website
+$config->setWebspider(false); // Crawl all website
 
 // Directories
 $config->setReportsDir(__DIR__.'/reports/'); // Default reports path

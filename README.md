@@ -64,6 +64,16 @@ $url = new Url('https://mediashare.fr');
 $spider = new Spider($url, $config);
 $result = $spider->run();
 ```
+### Execute the code from the console.
+```bash
+php index.php
+```
+#### Output
+```sh
+-*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*
+* Output file result: /home/slote/Bureau/Spider/var/reports/marquand.pro/5dfaf1c0147c6.json
+-*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*
+```
 
 ## Modules
 ### Requierements
@@ -98,17 +108,6 @@ class LinksTest {
     }
 }
 ```
-### Execute the code from the console.
-```bash
-php index.php
-```
-#### Output
-```sh
--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*
-* Output file result: /home/slote/Bureau/Spider/var/reports/marquand.pro/5dfaf1c0147c6.json
--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*
-```
-
 ## [Modules](https://packagist.org/packages/mediashare/modules-provider)
 Modules are tools created by the community to add features when crawling a website.
 Adding a module to a crawler allows the automation of code execution on one or more pages of a website. Modules are executed when crawling a page.

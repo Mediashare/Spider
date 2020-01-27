@@ -16,7 +16,7 @@ Using a crawler can have several interests:
 ### Features
   - Get all links from website
   - Check HTTP response
-  - Create your own [**Modules**](##modules) (Crawl & execute your PHP code).
+  - Create your own [**Modules**](#modules) (Crawl & execute your PHP code).
   - No database, Pure PHP & Symfony
   - Output json file
 
@@ -79,10 +79,9 @@ php index.php
 ### Requierements
 - The name of your class needs to be the same as the name of the .php file.
 - The entry point for executing modules is the run() function, so it is mandatory to have a run() function in your module.
-Spider executes the run() function public when the webpage has just been crawled. So you can use the [DomCrawler](https://symfony.com/doc/current/components/dom_crawler.html#usage).
 ### Documentation
 DomCrawler is symfony component for DOM navigation for HTML and XML documents. You can retrieve [Documentation Here](https://symfony.com/doc/current/components/dom_crawler.html#usage).
-### Create own module to execute actions when the crawler scraps a webpage. 
+### Create own module to execute actions with data scraped. 
 ```php
 <?php
 // ./modules/LinksTest.php
@@ -110,5 +109,5 @@ class LinksTest {
 ```
 ## [Modules](https://packagist.org/packages/mediashare/modules-provider)
 Modules are tools created by the community to add features when crawling a website.
-Adding a module to a crawler allows the automation of code execution on one or more pages of a website. Modules are executed when crawling a page.
+Adding a module to a crawler allows the automation of code execution on one or more pages of a website.
 [More information...](https://packagist.org/packages/mediashare/modules-provider)

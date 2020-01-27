@@ -1,0 +1,9 @@
+{
+    "alias": "spider.phar",
+    "chmod": "0777",
+    "directories": ["bin", "src", "vendor"],
+    "git-version": "2.0.0",
+    "main": "bin/console",
+    "output": "spider.phar",
+    "stub": true
+}

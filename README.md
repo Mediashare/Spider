@@ -31,13 +31,11 @@ I would be happy to receive your ideas and contributions to the project :smiley:
 ## Getting started
 ### Installation
 #### [Composer Usage](https://packagist.org/packages/Mediashare\Spider/spider)
-Use Spider library in your project & create your own modules. 
+Use Spider library in your project & create your own modules.
 ```bash
 composer require mediashare/spider
 ```
-
-## Usage
-### Create index.php file and init the config.
+##### Usage
 ```php
 <?php
 // ./index.php
@@ -67,15 +65,24 @@ $url = new Url('https://mediashare.fr');
 $spider = new Spider($url, $config);
 $result = $spider->run();
 ```
-### Execute the code from the console.
+#### Github
 ```bash
-php index.php
+git clone https://github.com/Mediashare/Spider
+cd Spider
+composer install
 ```
-#### Output
-```sh
--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*
-* Output file result: /home/slote/Bureau/Spider/var/reports/marquand.pro/5dfaf1c0147c6.json
--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*
+##### Execute the code from the console.
+```bash
+bin/console spider:run https://mediashare.fr
+```
+#### Binary file
+```bash
+curl -O https://raw.githubusercontent.com/Mediashare/Spider/master/spider.phar
+chmod 755 spider.phar
+```
+##### Execute the code from the console.
+```bash
+./spider.phar spider:run https://mediashare.fr
 ```
 
 ## Modules

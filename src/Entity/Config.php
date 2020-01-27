@@ -10,8 +10,8 @@ class Config
     public $id; // Id|Name report
     public $url = "http://marquand.pro";
     public $webspider = true; // Crawl all website
-    public $requires = []; // Path required
-    public $exceptions = []; // Path exceptions
+    public $pathRequires = []; // Path required
+    public $pathExceptions = []; // Path exceptions
     public $verbose = false; // Prompt ouput (verbose & debug mode)
     public $json = false; // Prompt json output
     public $variables = []; // Variables Injected to modules
@@ -63,26 +63,26 @@ class Config
         return $this;
     }
 
-    public function getRequires(): ?array
+    public function getPathRequires(): ?array
     {
-        return $this->requires;
+        return $this->pathRequires;
     }
 
-    public function setRequires(?array $requires): self
+    public function setPathRequires(?array $pathRequires): self
     {
-        $this->requires = $requires;
+        $this->pathRequires = $pathRequires;
 
         return $this;
     }
 
-    public function getExceptions(): ?array
+    public function getPathExceptions(): ?array
     {
-        return $this->exceptions;
+        return $this->pathExceptions;
     }
 
-    public function setExceptions(?array $exceptions): self
+    public function setPathExceptions(?array $pathExceptions): self
     {
-        $this->exceptions = $exceptions;
+        $this->pathExceptions = $pathExceptions;
 
         return $this;
     }

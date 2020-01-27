@@ -53,6 +53,8 @@ class Webspider
 		$config = new CrawlerConfig();
 		$config->setWebspider($this->config->getWebspider());
 		$config->setVerbose($this->config->getVerbose());
+		$config->setPathRequires($this->config->getPathRequires());
+		$config->setPathExceptions($this->config->getPathExceptions());
 		$crawler = new Crawler((string) $this->url, $config);
 		$crawler->run();
 		return $crawler;

@@ -1,28 +1,26 @@
 <?php
 require 'vendor/autoload.php';
-// use Tracy\Debugger;
-// Debugger::enable();
+use Mediashare\Spider\Entity\Config;
+use Mediashare\Spider\Entity\Url;
+use Mediashare\Spider\Spider;
 
-$config = new \Mediashare\Spider\Entity\Config(); // Website Config
-// $config->setId("Audit_mediashare.fr"); // Id|Name report (uniqid() by default)
+// Website Config
+$config = new Config();
 $config->setWebspider(true); // Crawl all website
-
-// Directories
+$config->setPathRequires(['/Kernel/']); // Not crawl other path
+$config->setPathExceptions(['/CodeSnippet/']); // Not crawl this path
+// Modules
 $config->setReportsDir(__DIR__.'/reports/'); // Default reports path
 $config->setModulesDir(__DIR__.'/modules/'); // Default modules path
-
-// Prompt Console / Dump
-$config->setVerbose(true); // Prompt verbose output
-// $config->setJson(true); // Prompt json output
-
-// Modules Activation
 $config->enableDefaultModule(true); // Enable default SEO kernel modules
 $config->removeModule('FileDownload'); // Disable Module
+// Prompt Console / Dump
+$config->setVerbose(true); // Prompt verbose output
+$config->setJson(false); // Prompt json output
 
 // Url
-$url = new \Mediashare\Spider\Entity\Url('https://mediashare.fr/');
+$url = new Url('https://mediashare.fr');
 
-// Spider
-$spider = new \Mediashare\Spider\Spider($url, $config);
+// Run Spider
+$spider = new Spider($url, $config);
 $result = $spider->run();
-// dump($result);

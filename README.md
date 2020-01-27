@@ -49,14 +49,16 @@ use Mediashare\Spider\Spider;
 // Website Config
 $config = new Config();
 $config->setWebspider(true); // Crawl all website
+$config->setPathRequires(['/Kernel/']); // Not crawl other path
+$config->setPathExceptions(['/CodeSnippet/']); // Not crawl this path
+// Modules
 $config->setReportsDir(__DIR__.'/reports/'); // Default reports path
 $config->setModulesDir(__DIR__.'/modules/'); // Default modules path
+$config->enableDefaultModule(true); // Enable default SEO kernel modules
+$config->removeModule('FileDownload'); // Disable Module
 // Prompt Console / Dump
 $config->setVerbose(true); // Prompt verbose output
 $config->setJson(false); // Prompt json output
-// Modules Activation
-$config->enableDefaultModule(true); // Enable default SEO kernel modules
-$config->removeModule('FileDownload'); // Disable Module
 
 // Url
 $url = new Url('https://mediashare.fr');

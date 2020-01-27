@@ -16,9 +16,10 @@ Using a crawler can have several interests:
 ### Features
   - Get all links from website
   - Check HTTP response
-  - Create your own [**Modules**](#modules) (Crawl & execute your PHP code).
-  - No database, Pure PHP & Symfony
+  - Create your own [**Modules**](#modules) (Crawl & execute your PHP code)
+  - No database, Pure PHP
   - Output json file
+  - Use default modules from the kernel for basic SEO audit. (Metadata, Images, HttpCode, Links...)
 
 ### Libraries
   - Autoloader php class for code integration easily. [mediashare/modules-provider](https://packagist.org/packages/mediashare/modules-provider)

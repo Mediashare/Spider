@@ -1,7 +1,21 @@
 {
     "alias": "spider.phar",
     "chmod": "0777",
-    "directories": ["bin", "src", "vendor"],
+    "finder": [
+        {
+            "notName": "/LICENSE|.*\\.md|.*\\.dist|Makefile|composer\\.json|composer\\.lock/",
+            "exclude": [
+                "doc",
+                "test",
+                "test_old",
+                "tests",
+                "Tests",
+                "vendor-bin",
+                "reports"
+            ],
+            "in": "."
+        }
+    ],
     "git-version": "2.0.0",
     "main": "bin/console",
     "output": "spider.phar",

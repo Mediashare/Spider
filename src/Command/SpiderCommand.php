@@ -1,14 +1,15 @@
 <?php
 namespace Mediashare\Spider\Command;
 
+use Phar;
+use Mediashare\Spider\Spider;
+use Mediashare\Spider\Entity\Url;
+use Mediashare\Spider\Entity\Config;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Mediashare\Spider\Entity\Config;
-use Mediashare\Spider\Entity\Url;
-use Mediashare\Spider\Spider;
 
 class SpiderCommand extends Command
 {
@@ -22,15 +23,18 @@ class SpiderCommand extends Command
             ->setHelp('Spider is crawler used for scraping informations.')
             // Arguments & options
             ->addArgument('url', InputArgument::REQUIRED, 'The url of entrypoint for crawler.')
-            ->addOption('webspider', 'w', InputOption::VALUE_OPTIONAL, 'Crawl one page', true)
+            ->addOption('webspider', 'w', InputOption::VALUE_NONE, 'Crawl one page')
             ->addOption('pathRequires', 'r', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Path requires', [])
             ->addOption('pathExceptions', 'e', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Path exceptions', [])
-            ->addOption('reportsDir', 'R', InputOption::VALUE_REQUIRED, 'Reports directory', __DIR__.'/../../reports/')
-            ->addOption('modulesDir', 'm', InputOption::VALUE_REQUIRED, 'Modules directory', __DIR__.'/../../modules/')
-            ->addOption('kernelModules', 'k', InputOption::VALUE_OPTIONAL, 'Disable kernel modules', true)
+            ->addOption('reportsDir', 'R', InputOption::VALUE_REQUIRED, 'Reports directory', './reports/')
+            ->addOption('modulesDir', 'm', InputOption::VALUE_REQUIRED, 'Modules directory', './modules/')
             ->addOption('removeModule', 'rm', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Remove module(s)', [])
-            ->addOption('json', 'j', InputOption::VALUE_OPTIONAL, 'Json output', false)
+            ->addOption('json', 'j', InputOption::VALUE_NONE, 'Json output')
         ;
+
+        if (empty(Phar::running())): // Disable Kernel module SEO for .phar
+            $this->addOption('kernelModules', 'k', InputOption::VALUE_NONE, 'Disable kernel modules. (disabled by default for .phar running)');
+        endif;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -38,17 +42,21 @@ class SpiderCommand extends Command
         // Get Inputs
         $url = $input->getArgument('url');
         $webspider = $input->getOption('webspider');
-        if ($webspider !== true): $webspider = false; endif;
+        if (empty($webspider)): $webspider = true; else: $webspider = false; endif;
         $pathRequires = $input->getOption('pathRequires');
         $pathExceptions = $input->getOption('pathExceptions');
         $json = $input->getOption('json');
-        if ($json !== false): $json = true; endif;
+        if (empty($json)): $json = false; else: $json = true; endif;
         $reportsDir = $input->getOption('reportsDir');
         $modulesDir = $input->getOption('modulesDir');
-        $kernelModules = $input->getOption('kernelModules');
-        if ($kernelModules !== true): $kernelModules = false; endif;
         $removeModule = $input->getOption('removeModule');
-        
+        if (empty(Phar::running())):
+            $kernelModules = $input->getOption('kernelModules');
+            if (empty($kernelModules)): $kernelModules = true; else: $kernelModules = false; endif;
+        else:
+            // Disable Kernel module SEO for .phar
+            $kernelModules = false;
+        endif;
 
         // Config
         $config = new Config();

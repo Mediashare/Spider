@@ -94,10 +94,10 @@ DomCrawler is symfony component for DOM navigation for HTML and XML documents. Y
 ### Create own module to execute actions with data scraped. 
 ```php
 <?php
-// ./modules/LinksTest.php
+// ./modules/Href.php
 namespace Mediashare\Modules;
 
-class LinksTest {
+class Href {
     public $dom;
     public function run() { 
         $links = [];

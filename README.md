@@ -86,12 +86,18 @@ chmod 755 spider.phar
 ```
 
 ## Modules
+Modules are tools created by the community to add features when crawling a website.
+Adding a module to a crawler allows the automation of code execution on one or more pages of a website.
+[More information...](https://packagist.org/packages/mediashare/modules-provider)
 ### Requierements
 - The name of your class needs to be the same as the name of the .php file.
 - The entry point for executing modules is the run() function, so it is mandatory to have a run() function in your module.
 ### Documentation
 DomCrawler is symfony component for DOM navigation for HTML and XML documents. You can retrieve [Documentation Here](https://symfony.com/doc/current/components/dom_crawler.html#usage).
 ### Create own module to execute actions with data scraped. 
+```bash
+bin/console spider:module Href
+```
 ```php
 <?php
 // ./modules/Href.php
@@ -117,7 +123,3 @@ class Href {
     }
 }
 ```
-## [Modules](https://packagist.org/packages/mediashare/modules-provider)
-Modules are tools created by the community to add features when crawling a website.
-Adding a module to a crawler allows the automation of code execution on one or more pages of a website.
-[More information...](https://packagist.org/packages/mediashare/modules-provider)

@@ -50,8 +50,8 @@ $config->setWebspider(true); // Crawl all website
 $config->setPathRequires(['/Kernel/']); // Not crawl other path
 $config->setPathExceptions(['/CodeSnippet/']); // Not crawl this path
 // Modules
-$config->setReportsDir(__DIR__.'/reports/'); // Default reports path
-$config->setModulesDir(__DIR__.'/modules/'); // Default modules path
+$config->setReportsDir(__DIR__.'/reports/'); // Reports path
+$config->setModulesDir(__DIR__.'/modules/'); // Modules path
 $config->enableDefaultModule(true); // Enable default SEO kernel modules
 $config->removeModule('FileDownload'); // Disable Module
 // Prompt Console / Dump

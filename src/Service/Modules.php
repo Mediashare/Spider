@@ -2,40 +2,37 @@
 namespace Mediashare\Spider\Service;
 
 use Mediashare\Kernel\Kernel;
-use Mediashare\Crawler\Crawler;
+use Mediashare\Scraper\Scraper;
 use Mediashare\Spider\Entity\Config;
 use Mediashare\Spider\Service\Output;
-use Mediashare\ModulesProvider\Modules as AnotherModules;
 use Mediashare\ModulesProvider\Config as configModules;
+use Mediashare\ModulesProvider\Modules as AnotherModules;
 
 class Modules {
-    public $crawler;
     public $modules = [];
-    public function __construct(Crawler $crawler, Config $config) {
-        $this->crawler = $crawler;
+    public function __construct(Config $config) {
         $this->config = $config;
         $this->output = new Output($config);
         $this->initModules();
     }
 
-    public function run() {
+    public function run(Scraper $scraper) {
         $results = [];
-		$counter = 0;
+        $counter = 0;
+        $url = (string) $scraper->webpage->getUrl();
 		foreach ($this->modules as $name => $module) {
             $counter++;
             $this->output->progressBar($counter, count($this->modules), "[Module Runing] ".$module->name);
-            foreach ($this->crawler->urls as $url => $data) {
-                $module->url = $url;
-                $module->config = $this->config;
-                $module->dom = $data->dom;
-                $module->links = $data->webpage->links;
-                $module->body = $data->webpage->getBody()->getContent();
-                $results[$module->name][$url] = $module->run();
-                if (!empty($module->errors)):
-                    $this->errors[$module->name][$url] = $module->errors;
-                endif;
-                $data->webpage->getBody()->setContent(""); // Reset body content for memory optimization.
-            }
+            $module->url = $url;
+            $module->config = $this->config;
+            $module->dom = $scraper->dom;
+            $module->links = $scraper->webpage->links;
+            $module->body = $scraper->webpage->getBody()->getContent();
+            $results[$module->name][$url] = $module->run();
+            if (!empty($module->errors)):
+                $this->errors[$module->name][$url] = $module->errors;
+            endif;
+            $scraper->webpage->getBody()->setContent(""); // Reset body content for memory optimization.
 		}
 		return $results;
     }
@@ -45,7 +42,9 @@ class Modules {
 	 */
 	public function initModules() {
         // Default Modules (Kernel SEO)
-        $this->modules = $this->config->getModules(); 
+        if ($this->config->enableDefaultModules):
+            $this->modules = $this->config->getModules(); 
+        endif;
         // Another Modules
         $config = new configModules();
         $config->setModulesDir($this->config->getModulesDir());

@@ -12,7 +12,7 @@ $config->setWebspider(true); // Crawl all website
 // Modules
 $config->setReportsDir(__DIR__.'/reports/'); // Default reports path
 $config->setModulesDir(__DIR__.'/modules/'); // Default modules path
-$config->enableDefaultModule(true); // Enable default SEO kernel modules
+$config->enableDefaultModule(false); // Enable default SEO kernel modules
 $config->removeModule('FileDownload'); // Disable Module
 // Prompt Console / Dump
 $config->setVerbose(true); // Prompt verbose output

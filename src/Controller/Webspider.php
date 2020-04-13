@@ -32,12 +32,6 @@ class Webspider
 		$this->output->banner();
 		// Crawler
 		$this->crawler = $this->crawl();
-		// Modules
-		$modules = new Modules($this->crawler, $this->config);
-		$this->modules['results'] = $modules->run();
-		if (!empty($modules->errors)):
-			$this->modules['errors'] = $modules->errors;
-		endif;
 		// Result
 		$result = new Result($this);
 		$result->build();
@@ -55,6 +49,7 @@ class Webspider
 		$config->setVerbose($this->config->getVerbose());
 		$config->setPathRequires($this->config->getPathRequires());
 		$config->setPathExceptions($this->config->getPathExceptions());
+		$config->setModules(new Modules($this->config));
 		$crawler = new Crawler((string) $this->url, $config);
 		$crawler->run();
 		return $crawler;

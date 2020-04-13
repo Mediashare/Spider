@@ -258,16 +258,16 @@
         },
         {
             "name": "mediashare/crawler",
-            "version": "0.1.6",
+            "version": "0.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mediashare/crawler.git",
-                "reference": "725ff48474a43b84cd722393ab2061c4711b12d7"
+                "reference": "084301e5e81c17edbe8259581501a7954eb7e469"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mediashare/crawler/zipball/725ff48474a43b84cd722393ab2061c4711b12d7",
-                "reference": "725ff48474a43b84cd722393ab2061c4711b12d7",
+                "url": "https://api.github.com/repos/Mediashare/crawler/zipball/084301e5e81c17edbe8259581501a7954eb7e469",
+                "reference": "084301e5e81c17edbe8259581501a7954eb7e469",
                 "shasum": ""
             },
             "require": {
@@ -304,7 +304,7 @@
                 "scraper",
                 "scraping"
             ],
-            "time": "2020-01-27T12:58:29+00:00"
+            "time": "2020-04-13T06:37:48+00:00"
         },
         {
             "name": "mediashare/kernel",

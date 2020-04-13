@@ -16,7 +16,8 @@ class Result
         $this->id = $webspider->config->getId();
         $this->config = $webspider->config;
         $this->crawler = $webspider->crawler;
-        $this->modules = $webspider->modules;
+        $this->modules = $webspider->crawler->modules;
+        unset($webspider->crawler->modules);
         $this->errors = $webspider->errors;
     }
 

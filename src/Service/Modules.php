@@ -28,9 +28,9 @@ class Modules {
             $module->dom = $scraper->dom;
             $module->links = $scraper->webpage->links;
             $module->body = $scraper->webpage->getBody()->getContent();
-            $results[$module->name][$url] = $module->run();
+            $results[$module->name][] = $module->run();
             if (!empty($module->errors)):
-                $this->errors[$module->name][$url] = $module->errors;
+                $this->errors[$module->name][] = $module->errors;
             endif;
             $scraper->webpage->getBody()->setContent(""); // Reset body content for memory optimization.
 		}

@@ -513,16 +513,16 @@
         },
         {
             "name": "mediashare/crawler",
-            "version": "0.2.5",
+            "version": "0.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mediashare/crawler.git",
-                "reference": "25fe899cc3f852b248a739e586e066124426dc7a"
+                "reference": "c268c7b9f47d56ab26034459417cf359c255a2f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mediashare/crawler/zipball/25fe899cc3f852b248a739e586e066124426dc7a",
-                "reference": "25fe899cc3f852b248a739e586e066124426dc7a",
+                "url": "https://api.github.com/repos/Mediashare/crawler/zipball/c268c7b9f47d56ab26034459417cf359c255a2f2",
+                "reference": "c268c7b9f47d56ab26034459417cf359c255a2f2",
                 "shasum": ""
             },
             "require": {
@@ -559,7 +559,7 @@
                 "scraper",
                 "scraping"
             ],
-            "time": "2020-10-02T15:27:12+00:00"
+            "time": "2020-10-03T22:31:10+00:00"
         },
         {
             "name": "mediashare/kernel",
@@ -644,16 +644,16 @@
         },
         {
             "name": "mediashare/scraper",
-            "version": "0.1.3",
+            "version": "0.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mediashare/scraper.git",
-                "reference": "2da5bab79ff5a72c7a4128637f7906ee1da997c6"
+                "reference": "a07a228ca29fbc3be99e7cb563bf6367d4bedc52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mediashare/scraper/zipball/2da5bab79ff5a72c7a4128637f7906ee1da997c6",
-                "reference": "2da5bab79ff5a72c7a4128637f7906ee1da997c6",
+                "url": "https://api.github.com/repos/Mediashare/scraper/zipball/a07a228ca29fbc3be99e7cb563bf6367d4bedc52",
+                "reference": "a07a228ca29fbc3be99e7cb563bf6367d4bedc52",
                 "shasum": ""
             },
             "require": {
@@ -689,7 +689,7 @@
                 "scraper",
                 "scraping"
             ],
-            "time": "2020-10-02T14:44:57+00:00"
+            "time": "2020-10-03T22:25:06+00:00"
         },
         {
             "name": "myclabs/php-enum",

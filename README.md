@@ -1,4 +1,6 @@
 # Spider
+**[DEPRECATED] Go to [Gitlab Project](https://gitlab.marquand.pro/MarquandT/spider)**
+
 :dizzy: Spider is a PHP library with easily module integration for crawling website that allows you to scrape informations.
 
 Spider is a crawler of website modulable write in PHP.

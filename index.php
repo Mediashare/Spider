@@ -19,7 +19,7 @@ $config->setVerbose(true); // Prompt verbose output
 $config->setJson(false); // Prompt json output
 
 // Url
-$url = new Url('https://www.onetime-mail.com/');
+$url = new Url('https://marquand.pro');
 
 // Run Spider
 $spider = new Spider($url, $config);

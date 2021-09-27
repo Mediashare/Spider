@@ -28,6 +28,7 @@ class Modules {
             $module->dom = $scraper->dom;
             $module->links = $scraper->webpage->links;
             $module->body = $scraper->webpage->getBody()->getContent();
+            $module->header = $scraper->webpage->getHeader();
             $results[$module->name][] = $module->run();
             if (!empty($module->errors)):
                 $this->errors[$module->name][] = $module->errors;

@@ -17,8 +17,13 @@ class Result
         $this->config = $webspider->config;
         $this->crawler = $webspider->crawler;
         $this->modules = $webspider->crawler->modules;
-        unset($webspider->crawler->modules);
         $this->errors = $webspider->errors;
+        foreach ($this->modules ?? [] as $modules):
+            foreach ($modules ?? [] as $module):
+                $this->errors = array_merge($this->errors, $module['errors'] ?? []);
+            endforeach;
+        endforeach;
+        unset($webspider->crawler->modules);
     }
 
     /**

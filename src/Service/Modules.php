@@ -31,7 +31,7 @@ class Modules {
             $module->header = $scraper->webpage->getHeader();
             $results[$module->name][] = $module->run();
             if (!empty($module->errors)):
-                $this->errors[$module->name][] = $module->errors;
+                $results[$module->name]['errors'] = array_merge($results['errors'] ?? [], $module->errors ?? []);
             endif;
             $scraper->webpage->getBody()->setContent(""); // Reset body content for memory optimization.
 		}
